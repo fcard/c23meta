@@ -1,0 +1,16 @@
+{
+  "files.associations": {
+    "*.hsl": "javascript",
+    "stdio.h": "c",
+    "vector.h": "c",
+    "is_odd.h": "c",
+    "util.h": "c",
+    "cmp.h": "c",
+    "sqrt.h": "c",
+    "sign.h": "c",
+    "convert.h": "c",
+    "normalize.h": "c",
+    "mulshift32.h": "c",
+    "log2.h": "c"
+  }
+}

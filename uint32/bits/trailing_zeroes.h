@@ -1,0 +1,62 @@
+#ifndef C23META_U32_CTZ
+#define C23META_U32_CTZ
+#include "../../util.h"
+
+#define U32_CTZ(X) _U32_CTZ(X)
+#define _U32_CTZ(X) _U32_CTZ_EVAL(DEFER(_U32_CTZ_X) X)
+#define _U32_CTZ_EVAL(X) _U32_CTZ_EVAL1(_U32_CTZ_EVAL1(_U32_CTZ_EVAL1(_U32_CTZ_EVAL1(X))))
+#define _U32_CTZ_EVAL1(X) _U32_CTZ_EVAL2(_U32_CTZ_EVAL2(_U32_CTZ_EVAL2(_U32_CTZ_EVAL2(X))))
+#define _U32_CTZ_EVAL2(X) _U32_CTZ_EVAL3(_U32_CTZ_EVAL3(_U32_CTZ_EVAL3(_U32_CTZ_EVAL3(X))))
+#define _U32_CTZ_EVAL3(X) X
+
+#define _U32_CTZ_X(A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,\
+                    A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,\
+                    A21,A22,A23,A24,A25,A26,A27,A28,A29,A30,A31)\
+                      BITCTZ(0,\
+                             A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,\
+                             A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,\
+                             A21,A22,A23,A24,A25,A26,A27,A28,A29,A30,A31)
+
+#define BITCTZ(N,...) BITCTZX_ ## __VA_OPT__(X(N,__VA_ARGS__) IGNORE) (N)
+#define BITCTZX_(N) CAT(U32_, N)
+#define BITCTZX_X(N,A,...) DEFER(BITCTZY_ ## A)(N,__VA_ARGS__)
+#define BITCTZY_0(N,...) BITCTZZ_ ## __VA_OPT__(Z(OBSTRUCT(BITCTZ_I)()(BITCTZ_INC(N),__VA_ARGS__)) IGNORE) (0)
+#define BITCTZY_1(N,...) CAT(U32_, N)
+#define BITCTZZ_Z(X) X
+#define BITCTZZ_(X) X
+#define BITCTZ_I() BITCTZ
+
+#define BITCTZ_INC(N) BITCTZ_INC ## N
+#define BITCTZ_INC0 1
+#define BITCTZ_INC1 2
+#define BITCTZ_INC2 3
+#define BITCTZ_INC3 4
+#define BITCTZ_INC4 5
+#define BITCTZ_INC5 6
+#define BITCTZ_INC6 7
+#define BITCTZ_INC7 8
+#define BITCTZ_INC8 9
+#define BITCTZ_INC9 10
+#define BITCTZ_INC10 11
+#define BITCTZ_INC11 12
+#define BITCTZ_INC12 13
+#define BITCTZ_INC13 14
+#define BITCTZ_INC14 15
+#define BITCTZ_INC15 16
+#define BITCTZ_INC16 17
+#define BITCTZ_INC17 18
+#define BITCTZ_INC18 19
+#define BITCTZ_INC19 20
+#define BITCTZ_INC20 21
+#define BITCTZ_INC21 22
+#define BITCTZ_INC22 23
+#define BITCTZ_INC23 24
+#define BITCTZ_INC24 25
+#define BITCTZ_INC25 26
+#define BITCTZ_INC26 27
+#define BITCTZ_INC27 28
+#define BITCTZ_INC28 29
+#define BITCTZ_INC29 30
+#define BITCTZ_INC30 31
+
+#endif
