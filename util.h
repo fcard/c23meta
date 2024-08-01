@@ -6,6 +6,25 @@
 #define CALL(F,...) F(__VA_ARGS__)
 #define UNWRAP_CALL(F,X) F X
 
+#define ARGCOUNT(...) _ARGCOUNT ## __VA_OPT__(1(__VA_ARGS__) IGNORE) (0)
+#define _ARGCOUNT(N) N
+#define _ARGCOUNT1(X,...) _ARGCOUNT ## __VA_OPT__(2(__VA_ARGS__) IGNORE) (1)
+#define _ARGCOUNT2(X,...) _ARGCOUNT ## __VA_OPT__(3(__VA_ARGS__) IGNORE) (2)
+#define _ARGCOUNT3(X,...) _ARGCOUNT ## __VA_OPT__(4(__VA_ARGS__) IGNORE) (3)
+#define _ARGCOUNT4(X,...) _ARGCOUNT ## __VA_OPT__(5(__VA_ARGS__) IGNORE) (4)
+#define _ARGCOUNT5(X,...) _ARGCOUNT ## __VA_OPT__(6(__VA_ARGS__) IGNORE) (5)
+#define _ARGCOUNT6(X,...) _ARGCOUNT ## __VA_OPT__(7(__VA_ARGS__) IGNORE) (6)
+#define _ARGCOUNT7(X,...) _ARGCOUNT ## __VA_OPT__(8(__VA_ARGS__) IGNORE) (7)
+#define _ARGCOUNT8(X,...) _ARGCOUNT ## __VA_OPT__(9(__VA_ARGS__) IGNORE) (8)
+#define _ARGCOUNT9(X,...) _ARGCOUNT ## __VA_OPT__(10(__VA_ARGS__) IGNORE) (9)
+#define _ARGCOUNT10(X,...) _ARGCOUNT ## __VA_OPT__(11(__VA_ARGS__) IGNORE) (10)
+#define _ARGCOUNT11(X,...) _ARGCOUNT ## __VA_OPT__(12(__VA_ARGS__) IGNORE) (11)
+#define _ARGCOUNT12(X,...) _ARGCOUNT ## __VA_OPT__(13(__VA_ARGS__) IGNORE) (12)
+#define _ARGCOUNT13(X,...) _ARGCOUNT ## __VA_OPT__(14(__VA_ARGS__) IGNORE) (13)
+#define _ARGCOUNT14(X,...) _ARGCOUNT ## __VA_OPT__(15(__VA_ARGS__) IGNORE) (14)
+#define _ARGCOUNT15(X,...) _ARGCOUNT ## __VA_OPT__(16(__VA_ARGS__) IGNORE) (15)
+#define _ARGCOUNT16(X,...) 16
+
 #define ID(...) __VA_ARGS__
 #define IGNORE(...)
 #define IGNORE_THEN_ID(...) ID

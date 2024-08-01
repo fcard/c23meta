@@ -1,0 +1,8 @@
+#ifndef C23META_PAIR_FIRST
+#define C23META_PAIR_FIRST
+
+#define PAIR_FIRST(X) _PAIR_FIRST_EVAL(_PAIR_FIRST X)
+#define _PAIR_FIRST_EVAL(X) X
+#define _PAIR_FIRST(X,Y) X
+
+#endif

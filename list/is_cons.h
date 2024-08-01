@@ -1,0 +1,11 @@
+#ifndef C23META_LIST_IS_CONS
+#define C23META_LIST_IS_CONS
+
+#define LIST_IS_CONS(X) _LIST_IS_CONS_EVAL(_LIST_IS_CONS X)
+#define _LIST_IS_CONS_EVAL(X) X
+
+#define _LIST_IS_CONS(...) _LIST_IS_CONS_X ## __VA_OPT__(1)
+#define _LIST_IS_CONS_X  0
+#define _LIST_IS_CONS_X1 1
+
+#endif

@@ -1,0 +1,20 @@
+#ifndef C23META_PAIR_IS_PAIR
+#define C23META_PAIR_IS_PAIR
+
+#define IS_PAIR(X) _PAIR_IS_PAIR_EVAL(DEFER(_PAIR_IS_PAIR)(_PAIR_IS_PAIR_PROBE X))
+#define _PAIR_IS_PAIR_EVAL(X) _PAIR_IS_PAIR_EVAL1(_PAIR_IS_PAIR_EVAL1(_PAIR_IS_PAIR_EVAL1(_PAIR_IS_PAIR_EVAL1(X))))
+#define _PAIR_IS_PAIR_EVAL1(X) X
+
+#define _PAIR_IS_PAIR_PROBE(...) (__VA_ARGS__),~
+#define _PAIR_IS_PAIR(X,...) _PAIR_IS_PAIR_X ## __VA_OPT__(1)(X)
+#define _PAIR_IS_PAIR_X1(X) _PAIR_IS_PAIR_Y X
+#define _PAIR_IS_PAIR_X(X) 0
+#define _PAIR_IS_PAIR_Y(...) _PAIR_IS_PAIR_Z ## __VA_OPT__(1(__VA_ARGS__))
+#define _PAIR_IS_PAIR_Z1(X,...) _PAIR_IS_PAIR_Z ## __VA_OPT__(2(__VA_ARGS__))
+#define _PAIR_IS_PAIR_Z2(X,...) _PAIR_IS_PAIR_W ## __VA_OPT__(3)
+#define _PAIR_IS_PAIR_W 1
+#define _PAIR_IS_PAIR_W3 0
+#define _PAIR_IS_PAIR_Z 0
+
+
+#endif

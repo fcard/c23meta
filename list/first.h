@@ -1,0 +1,10 @@
+#ifndef C23META_LIST_FIRST
+#define C23META_LIST_FIRST
+
+#define LIST_FIRST(X) _LIST_FIRST_EVAL(_LIST_FIRST X)
+#define _LIST_FIRST_EVAL(X) X
+#define _LIST_FIRST(...) _LIST_FIRST_X ## __VA_OPT__(1(__VA_ARGS__))
+#define _LIST_FIRST_X LIST_NIL
+#define _LIST_FIRST_X1(X,Y) X
+
+#endif
