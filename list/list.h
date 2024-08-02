@@ -36,6 +36,7 @@
 #include "insert.h"
 #include "push.h"
 #include "enumerate.h"
+#include "sort.h"
 #include "range.h"
 #include "take.h"
 #include "take_while.h"

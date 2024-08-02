@@ -233,6 +233,7 @@ int main(void) {
 #define _EQB10() 0
 #define _EQB01() 0
 #define _EQB11() 1
+#define EQB(X,Y) _EQB_EVAL(DEFER(CAT(CAT(_EQB,X),Y))())
 
 #define CONS0(X) (0,(X,LIST_NIL))
 
@@ -288,6 +289,9 @@ int main(void) {
   printf("walk(F,[[1,2],3]): %s\n",              STRING(LIST_WALK(F,LIST(LIST(1,2),3))));
   printf("range(1,5): %s\n",                     STRING(LIST_MAP(U32_PRINT, LIST_RANGE(U32_1, U32_5))));
   printf("range(5,1,-1): %s\n",                  STRING(LIST_MAP(U32_PRINT, LIST_RANGE(U32_5, U32_1, I32_N1))));
+  printf("sort(u32_lt, [3,1,2]): %s\n",          STRING(LIST_MAP(U32_PRINT, LIST_SORT(U32_LT, LIST(U32_3, U32_1, I32_2)))));
+  printf("sort(u32_lt, [3,2,1]): %s\n",          STRING(LIST_MAP(U32_PRINT, LIST_SORT(U32_LT, LIST(U32_3, U32_2, I32_1)))));
+  printf("sort(u32_lt, [1,2,3]): %s\n",          STRING(LIST_MAP(U32_PRINT, LIST_SORT(U32_LT, LIST(U32_1, U32_2, I32_3)))));
   printf("last([1,2,3,4,5]): %d\n",              LIST_LAST(LIST(1,2,3,4,5)));
 
   LIST_AS_DATA(list,  LIST(1,2,3), int);
