@@ -6,6 +6,16 @@
 #define CALL(F,...) F(__VA_ARGS__)
 #define UNWRAP_CALL(F,X) F X
 
+#define COMMA_IF_BOTH(X,Y) CAT(CAT(_COMMA_IF_BOTH_X, _COMMA_IF_BOTH(X)), _COMMA_IF_BOTH(Y))
+#define _COMMA_IF_BOTH(X) _COMMA_IF_BOTH_Y X
+#define _COMMA_IF_BOTH_X00
+#define _COMMA_IF_BOTH_X10
+#define _COMMA_IF_BOTH_X01
+#define _COMMA_IF_BOTH_X11 ,
+#define _COMMA_IF_BOTH_Y(...) _COMMA_IF_BOTH_Z ## __VA_OPT__(1)
+#define _COMMA_IF_BOTH_Z1 1
+#define _COMMA_IF_BOTH_Z  0
+
 #define ARGCOUNT(...) _ARGCOUNT ## __VA_OPT__(1(__VA_ARGS__) IGNORE) (0)
 #define _ARGCOUNT(N) N
 #define _ARGCOUNT1(X,...) _ARGCOUNT ## __VA_OPT__(2(__VA_ARGS__) IGNORE) (1)
@@ -30,12 +40,6 @@
 #define IGNORE_THEN_ID(...) ID
 #define ID_THEN_IGNORE(...) __VA_ARGS__ IGNORE
 #define IGNORE_THEN_ID_THEN_IGNORE(X) ID_THEN_IGNORE
-
-#define ID2(...) __VA_ARGS__
-#define IGNORE2(...)
-#define IGNORE_THEN_ID2(...) ID
-#define ID_THEN_IGNORE2(...) __VA_ARGS__ IGNORE
-#define IGNORE_THEN_ID_THEN_IGNORE2(X) ID_THEN_IGNORE
 
 #define EMPTY()
 #define DEFER(F) F EMPTY()
@@ -73,9 +77,8 @@
 
 #define OBSTRUCT(...) __VA_ARGS__ DEFER(EMPTY)()
 
-#define PICK(F,G,X,...) _PICK_ ## __VA_OPT__(REST(G(__VA_ARGS__))) (F(X))
-#define _PICK_REST(X) X IGNORE
-#define _PICK_(X) X
+#define PICK(F,G,X,...) _PICK __VA_OPT__((G(__VA_ARGS__)) IGNORE) (F(X))
+#define _PICK(X) X
 
 #define PRIMITIVE_CAT(X,...) X ## __VA_OPT__(__VA_ARGS__)
 #define CAT(...) PRIMITIVE_CAT(__VA_ARGS__)

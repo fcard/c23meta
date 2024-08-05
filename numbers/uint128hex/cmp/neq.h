@@ -1,0 +1,8 @@
+#ifndef C23META_U128H_NEQ
+#define C23META_U128H_NEQ
+
+#define U128H_NEQ(X,Y) CAT(_U128H_NEQ, U128H_EQ(X,Y))
+#define _U128H_NEQ0 1
+#define _U128H_NEQ1 0
+
+#endif

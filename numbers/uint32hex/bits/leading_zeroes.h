@@ -1,0 +1,63 @@
+#ifndef C23META_U32H_CLZ
+#define C23META_U32H_CLZ
+
+#define U32H_CLZ(X) _U32H_CLZ(U32H_BITS(X))
+#define _U32H_CLZ(X) _U32H_CLZ_EVAL(DEFER(_U32H_CLZ_X) X)
+#define _U32H_CLZ_EVAL(X) _U32H_CLZ_EVAL1(_U32H_CLZ_EVAL1(_U32H_CLZ_EVAL1(_U32H_CLZ_EVAL1(X))))
+#define _U32H_CLZ_EVAL1(X) _U32H_CLZ_EVAL2(_U32H_CLZ_EVAL2(_U32H_CLZ_EVAL2(_U32H_CLZ_EVAL2(X))))
+#define _U32H_CLZ_EVAL2(X) _U32H_CLZ_EVAL3(_U32H_CLZ_EVAL3(_U32H_CLZ_EVAL3(_U32H_CLZ_EVAL3(X))))
+#define _U32H_CLZ_EVAL3(X) X
+
+#define _U32H_CLZ_X(A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,\
+                    A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,\
+                    A21,A22,A23,A24,A25,A26,A27,A28,A29,A30,A31)\
+                      BITHCLZ(0,\
+                             A31,A30,A29,A28,A27,A26,A25,\
+                             A24,A23,A22,A21,A20,A19,A18,\
+                             A17,A16,A15,A14,A13,A12,A11,\
+                             A10,A9,A8,A7,A6,A5,A4,A3,A2,\
+                             A1,A0)\
+
+#define BITHCLZ(N,...) BITHCLZX_ ## __VA_OPT__(X(N,__VA_ARGS__) IGNORE) (N)
+#define BITHCLZX_(N) CAT(U32H_, N)
+#define BITHCLZX_X(N,A,...) DEFER(BITHCLZY_ ## A)(N,__VA_ARGS__)
+#define BITHCLZY_0(N,...) BITHCLZZ_ ## __VA_OPT__(Z(OBSTRUCT(BITHCLZ_I)()(BITHCLZ_INC(N),__VA_ARGS__)) IGNORE) (0)
+#define BITHCLZY_1(N,...) CAT(U32H_, N)
+#define BITHCLZZ_Z(X) X
+#define BITHCLZZ_(X) X
+#define BITHCLZ_I() BITHCLZ
+
+#define BITHCLZ_INC(N) BITHCLZ_INC ## N
+#define BITHCLZ_INC0 1
+#define BITHCLZ_INC1 2
+#define BITHCLZ_INC2 3
+#define BITHCLZ_INC3 4
+#define BITHCLZ_INC4 5
+#define BITHCLZ_INC5 6
+#define BITHCLZ_INC6 7
+#define BITHCLZ_INC7 8
+#define BITHCLZ_INC8 9
+#define BITHCLZ_INC9 10
+#define BITHCLZ_INC10 11
+#define BITHCLZ_INC11 12
+#define BITHCLZ_INC12 13
+#define BITHCLZ_INC13 14
+#define BITHCLZ_INC14 15
+#define BITHCLZ_INC15 16
+#define BITHCLZ_INC16 17
+#define BITHCLZ_INC17 18
+#define BITHCLZ_INC18 19
+#define BITHCLZ_INC19 20
+#define BITHCLZ_INC20 21
+#define BITHCLZ_INC21 22
+#define BITHCLZ_INC22 23
+#define BITHCLZ_INC23 24
+#define BITHCLZ_INC24 25
+#define BITHCLZ_INC25 26
+#define BITHCLZ_INC26 27
+#define BITHCLZ_INC27 28
+#define BITHCLZ_INC28 29
+#define BITHCLZ_INC29 30
+#define BITHCLZ_INC30 31
+
+#endif

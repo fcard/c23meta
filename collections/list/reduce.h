@@ -1,0 +1,5 @@
+#ifndef C23META_LIST_REDUCE
+#define C23META_LIST_REDUCE
+
+#define LIST_REDUCE(...) LIST_FOLDL(__VA_ARGS__)
+#endif

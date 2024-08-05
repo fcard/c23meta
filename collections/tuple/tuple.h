@@ -1,0 +1,62 @@
+#ifndef C23META_TUPLE_TUPLE
+#define C23META_TUPLE_TUPLE
+
+#include "../../util.h"
+#include "../../numbers/uint32/uint32.h"
+
+#include "comma_if.h"
+
+#include "type.h"
+#include "as_data.h"
+#include "get.h"
+
+#include "is_tuple.h"
+#include "is_empty.h"
+#include "first.h"
+#include "last.h"
+#include "rest.h"
+#include "nth.h"
+#include "length.h"
+#include "push.h"
+#include "push_first.h"
+#include "insert.h"
+#include "concat.h"
+#include "reverse.h"
+#include "map.h"
+#include "map2.h"
+#include "mapcat.h"
+#include "foreach.h"
+#include "reduce.h"
+#include "foldl.h"
+#include "foldr.h"
+#include "walk.h"
+#include "find_first.h"
+#include "find_index.h"
+#include "filter.h"
+#include "remove.h"
+#include "every.h"
+#include "none.h"
+#include "flatten.h"
+#include "split.h"
+#include "split_all.h"
+#include "split_at.h"
+#include "enumerate.h"
+#include "zip.h"
+#include "range.h"
+#include "sort.h"
+#include "interpose.h"
+#include "take.h"
+#include "take_while.h"
+#include "take_nth.h"
+#include "take_last.h"
+#include "drop.h"
+#include "drop_while.h"
+#include "drop_nth.h"
+#include "drop_last.h"
+#include "apply.h"
+#include "csum.h"
+
+
+#define TUPLE(...) (__VA_ARGS__)
+
+#endif

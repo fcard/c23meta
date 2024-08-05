@@ -1,0 +1,6 @@
+#ifndef C23META_TUPLE_REVERSE
+#define C23META_TUPLE_REVERSE
+
+#define TUPLE_REVERSE(X) REVERSE X
+
+#endif

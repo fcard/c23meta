@@ -1,29 +1,15 @@
-#include "uint64/math/mulshift32.h"
-#include "uint64/to_u32.h"
-#include "float32/parse.h"
-#include "float32/bits/bits.h"
-#include "float32/cmp/cmp.h"
-#include "float32/float32.h"
-#include "float32/convert.h"
-#include "float32/math/abs.h"
-#include "float32/math/neg.h"
-#include "float32/math/add.h"
-#include "float32/math/mul.h"
-#include "int32/math/math.h"
-#include "int32/cmp/cmp.h"
-#include "int32/convert.h"
-#include "int32/int32.h"
-#include "uint32/math/math.h"
-#include "uint32/cmp/cmp.h"
-#include "uint32/convert.h"
-#include "uint32/parse.h"
-#include "uint32/print.h"
-#include "uint32/uint32.h"
-#include "uint32/bits/bits.h"
+#include "numbers/float32/float32.h"
+#include "numbers/int32/int32.h"
+#include "numbers/uint32/uint32.h"
+#include "numbers/uint32hex/uint32hex.h"
+#include "numbers/uint64/uint64.h"
+#include "numbers/uint64/to_u32.h"
+#include "numbers/uint128hex/uint128hex.h"
 
-#include "list/list.h"
-#include "tuple/tuple.h"
-#include "pair/pair.h"
+
+#include "collections/list/list.h"
+#include "collections/tuple/tuple.h"
+#include "collections/pair/pair.h"
 
 #include <stdio.h>
 
@@ -31,7 +17,6 @@
 int main(void) {
 #ifdef NUMBER_DEBUG
   printf("UNSIGNED 32\n\n");
-  printf("reverse(a,b,c,d): %s\n", STRING(REVERSE(A,B,C,D)));
   printf("16 + 8 + 4: %d\n", U32_CONVERT(U32_ADD(U32_16, U32_ADD(U32_8, U32_4))));
   printf("16 - 8: %d\n", U32_CONVERT(U32_SUB(U32_16, U32_8)));
   printf("16 * 8: %d\n", U32_CONVERT(U32_MUL(U32_16, U32_8)));
@@ -49,7 +34,7 @@ int main(void) {
   printf("ctz(16): %d\n", U32_CONVERT(U32_CTZ(U32_16)));
   printf("log2(32): %d\n", U32_CONVERT(U32_LOG2(U32_32)));
   printf("uint32p(7 2 4 5 0 8 2): %d\n", U32_CONVERT(U32P(7 2 4 5 0 8 2)));
-  printf("7^4: %d\n", U32_CONVERT(U32_EXP(U32_7, U32_4)));
+  printf("7^4: %d\n", U32_CONVERT(U32_POW(U32_7, U32_4)));
   printf("sqrt(49): %d\n", U32_CONVERT(U32_SQRT(U32_49)));
   printf("is_odd(14): %d\n", U32_IS_ODD(U32_14));
   printf("is_even(14): %d\n", U32_IS_EVEN(U32_14));
@@ -146,14 +131,14 @@ int main(void) {
   printf("min(200,-32):  %d\n", I32_CONVERT(I32_MIN(I32_200, I32_N32)));
   printf("min(-200,-32): %d\n", I32_CONVERT(I32_MIN(I32_N200, I32_N32)));
 
-  printf("10^3:       %d\n", I32_CONVERT(I32_EXP(I32_10,  I32_3)));
-  printf("10^(-3):    %d\n", I32_CONVERT(I32_EXP(I32_10,  I32_N3)));
-  printf("(-10)^3:    %d\n", I32_CONVERT(I32_EXP(I32_N10, I32_3)));
-  printf("(-10)^(-3): %d\n", I32_CONVERT(I32_EXP(I32_N10, I32_N3)));
+  printf("10^3:       %d\n", I32_CONVERT(I32_POW(I32_10,  I32_3)));
+  printf("10^(-3):    %d\n", I32_CONVERT(I32_POW(I32_10,  I32_N3)));
+  printf("(-10)^3:    %d\n", I32_CONVERT(I32_POW(I32_N10, I32_3)));
+  printf("(-10)^(-3): %d\n", I32_CONVERT(I32_POW(I32_N10, I32_N3)));
  
-  printf("-2^0: %d\n", I32_CONVERT(I32_EXP(I32_N2,  I32_0)));
-  printf("2^0: %d\n", I32_CONVERT(I32_EXP(I32_2,  I32_0)));
-  printf("0^0: %d\n", I32_CONVERT(I32_EXP(I32_0,  I32_0)));
+  printf("-2^0: %d\n", I32_CONVERT(I32_POW(I32_N2,  I32_0)));
+  printf("2^0: %d\n", I32_CONVERT(I32_POW(I32_2,  I32_0)));
+  printf("0^0: %d\n", I32_CONVERT(I32_POW(I32_0,  I32_0)));
 
   printf("sqrt(0): %d\n", I32_CONVERT(I32_SQRT(I32_0)));
   printf("sqrt(16): %d\n", I32_CONVERT(I32_SQRT(I32_16)));
@@ -213,12 +198,34 @@ int main(void) {
   printf("2.0 * 2.0: %.1f\n", FP32_CONVERT(FP32_MUL(FP32_2, FP32_2)));
   printf("15.0 * 5.0: %.1f\n", FP32_CONVERT(FP32_MUL(FP32_15, FP32_5)));
   printf("1024.0 * 2048.0: %.1f\n", FP32_CONVERT(FP32_MUL(FP32P(1 0 2 4), FP32P(2 0 4 8))));
+  printf("32.0 / 4.0: %.1f\n", FP32_CONVERT(FP32_DIV(FP32_32, FP32_4)));
+  printf("2.0 / 4.0: %.1f\n", FP32_CONVERT(FP32_DIV(FP32_2, FP32_4)));
+  printf("27.0 / 3.0: %.1f\n", FP32_CONVERT(FP32_DIV(FP32_27, FP32_3)));
+  printf("1.0 / 3.0: %.2f\n", FP32_CONVERT(FP32_DIV(FP32_1, FP32_3)));
+  printf("sqrt(32.0): %.2f\n", FP32_CONVERT(FP32_SQRT(FP32_32)));
+  printf("fp32_from_u32(0): %.1f\n", FP32_CONVERT(FP32_FROM_U32(U32_0)));
+  printf("fp32_from_u32(10): %.1f\n", FP32_CONVERT(FP32_FROM_U32(U32_10)));
+  printf("fp32_from_u32(32): %.1f\n", FP32_CONVERT(FP32_FROM_U32(U32_32)));
+  printf("fp32_to_u32(0): %d\n", U32_CONVERT(FP32_TO_U32(FP32_0)));
+  printf("fp32_to_u32(10): %d\n", U32_CONVERT(FP32_TO_U32(FP32_10)));
+  printf("fp32_to_u32(32): %d\n", U32_CONVERT(FP32_TO_U32(FP32_32)));
+  printf("log2(5.0): %.4f\n", FP32_CONVERT(FP32_LOG2(FP32_5)));
+  printf("log2(32.0): %.4f\n", FP32_CONVERT(FP32_LOG2(FP32_32)));
+  printf("log2(36.0): %.4f\n", FP32_CONVERT(FP32_LOG2(FP32_36)));
+  printf("log(125.0, 5.0): %.4f\n", FP32_CONVERT(FP32_LOG(FP32_125, FP32_5)));
+  printf("fract(sqrt(32)): %.4f\n", FP32_CONVERT(FP32_FRACT(FP32_SQRT(FP32_32))));
+  printf("trunc(sqrt(32)): %.4f\n", FP32_CONVERT(FP32_TRUNC(FP32_SQRT(FP32_32))));
 #endif
+  //printf("powi(125.0, 0): %.4f\n", FP32_CONVERT(FP32_POW_I(FP32_125, U32_0)));
+  printf("exp(1.5): %.4f\n", FP32_CONVERT(FP32_EXP(FP32_ADD(FP32_1, FP32_1L2))));
+  printf("exp(1.5): %.4f\n", FP32_CONVERT(FP32_EXP(FP32_ADD(FP32_1, FP32_1L2))));
 
 #define EQZ(X) _EQZ_EVAL(DEFER(CAT(_EQZ,X))())
 #define _EQZ_EVAL(X) X
 #define _EQZ0() 1
 #define _EQZ1() 0
+#define _EQZ2() 0
+#define _EQZ3() 0
 
 #define NEQZ(X) _NEQZ_EVAL(DEFER(CAT(_NEQZ,X))())
 #define _NEQZ_EVAL(X) X
@@ -233,7 +240,6 @@ int main(void) {
 #define _EQB10() 0
 #define _EQB01() 0
 #define _EQB11() 1
-#define EQB(X,Y) _EQB_EVAL(DEFER(CAT(CAT(_EQB,X),Y))())
 
 #define CONS0(X) (0,(X,LIST_NIL))
 
@@ -257,7 +263,8 @@ int main(void) {
   printf("find_first(neq0,[0,0,3,2,1]): %d\n",   LIST_FIND_FIRST(NEQZ,LIST(0,0,3,2,1)));
   printf("split(eq0,[1,1,0,1,1,1]): %s\n",       STRING(LIST_SPLIT(EQZ,LIST(1,1,0,1,1,1))));
   printf("split_all(eq0,[1,0,1,1,1,0,1]): %s\n", STRING(LIST_SPLIT_ALL(EQZ,LIST(1,0,1,1,1,0,1))));
-  printf("flatten([[1,0],[1,1],[1,0]]): %s\n",   STRING(LIST_FLATTEN(LIST(LIST(1,0),LIST(1,1),LIST(1,0)))));
+  printf("split_at([1,0,1,1,1,0,1],3): %s\n",    STRING(LIST_SPLIT_AT(LIST(1,0,1,1,1,0,1), U32_3)));
+  printf("flatten([[[1,0],1],1,[1,0]]): %s\n",   STRING(LIST_FLATTEN(LIST(LIST(LIST(1,0),1),1,LIST(1,0)))));
   printf("contains(eq0,[1,0,1]): %d\n",          LIST_CONTAINS(EQZ,LIST(1,0,1)));
   printf("contains(eq0,[1,1,1]): %d\n",          LIST_CONTAINS(EQZ,LIST(1,1,1)));
   printf("nth([1,2,3],1): %d\n",                 LIST_NTH(LIST(1,2,3), U32_1));
@@ -292,6 +299,7 @@ int main(void) {
   printf("sort(u32_lt, [3,1,2]): %s\n",          STRING(LIST_MAP(U32_PRINT, LIST_SORT(U32_LT, LIST(U32_3, U32_1, I32_2)))));
   printf("sort(u32_lt, [3,2,1]): %s\n",          STRING(LIST_MAP(U32_PRINT, LIST_SORT(U32_LT, LIST(U32_3, U32_2, I32_1)))));
   printf("sort(u32_lt, [1,2,3]): %s\n",          STRING(LIST_MAP(U32_PRINT, LIST_SORT(U32_LT, LIST(U32_1, U32_2, I32_3)))));
+  printf("zip([1,2,3],[4,5,6]): %s\n",           STRING(LIST_ZIP(LIST(1,2,3),LIST(4,5,6))));
   printf("last([1,2,3,4,5]): %d\n",              LIST_LAST(LIST(1,2,3,4,5)));
 
   LIST_AS_DATA(list,  LIST(1,2,3), int);
@@ -314,12 +322,69 @@ int main(void) {
     TUPLE_GET(tuple,1), TUPLE_GET(tuple,2), TUPLE_GET(tuple,3));
 
   TUPLE_AS_DATA(tuple2, ((char*)"def", (int*)((int[3]){1,2,3}), 1));
-  printf("as_tuple([\"def\",{1,2,3},1]): (\"%s\", {%d,%d,%d}, %d)\n",
+  printf("as_data((\"def\",{1,2,3},1)): (\"%s\", {%d,%d,%d}, %d)\n",
    TUPLE_GET(tuple2, U32_1),
    TUPLE_GET(tuple2, 2)[0],
    TUPLE_GET(tuple2, 2)[1],
    TUPLE_GET(tuple2, 2)[2],
    TUPLE_GET(tuple2, 3));
+
+  #define ADD3(A,B,C) ((A)+(B)+(C))
+  #define PAIR0(X) (0,X)
+
+  printf("is_tuple(0): %d\n", IS_TUPLE(0));
+  printf("is_tuple(()): %d\n", IS_TUPLE(()));
+  printf("is_tuple((1,2,3)): %d\n", IS_TUPLE((1,2,3)));
+  printf("is_empty(()): %d\n", TUPLE_IS_EMPTY(()));
+  printf("is_empty((1,2,3)): %d\n", TUPLE_IS_EMPTY((1,2,3)));
+  printf("first((1,2,3)): %d\n", TUPLE_FIRST((1,2,3)));
+  printf("last((1,2,3)): %d\n", TUPLE_LAST((1,2,3)));
+  printf("nth((1,2,3),1): %s\n", STRING(TUPLE_NTH((1,2,3),U32_1)));
+  printf("apply(add3,(1,2,3)): %d\n", TUPLE_APPLY(ADD3,(1,2,3)));
+  printf("length(()): %d\n", U32_CONVERT(TUPLE_LENGTH(())));
+  printf("length((1,2,3)): %d\n", U32_CONVERT(TUPLE_LENGTH((1,2,3))));
+  printf("push((1,2,3),4): %s\n", STRING(TUPLE_PUSH((1,2,3),4)));
+  printf("concat((1,2,3),(4,5,6)): %s\n", STRING(TUPLE_CONCAT((1,2,3),(4,5,6))));
+  printf("reverse((1,2,3)): %s\n", STRING(TUPLE_REVERSE((1,2,3))));
+  printf("map(F,(1,2,3)): %s\n", STRING(TUPLE_MAP(F,(1,2,3))));
+  printf("map2(F,(1,2,3),(4,5,6)): %s\n", STRING(TUPLE_MAP2(F,(1,2,3),(4,5,6))));
+  printf("reduce(f,(1,2,3),0): %s\n", STRING(TUPLE_REDUCE(F,(1,2,3),0)));
+  printf("foldl(f,(1,2,3),0): %s\n", STRING(TUPLE_FOLDL(F,(1,2,3),0)));
+  printf("foldr(f,(1,2,3),0): %s\n", STRING(TUPLE_FOLDR(F,(1,2,3),0)));
+  printf("reduce(f,(1,2,3)): %s\n", STRING(TUPLE_REDUCE(F,(1,2,3))));
+  printf("foldl(f,(1,2,3)): %s\n", STRING(TUPLE_FOLDL(F,(1,2,3))));
+  printf("foldr(f,(1,2,3)): %s\n", STRING(TUPLE_FOLDR(F,(1,2,3))));
+  printf("walk(f,((1,2),3)): %s\n", STRING(TUPLE_WALK(F,((1,2),3))));
+  printf("flatten(((1,2),3)): %s\n", STRING(TUPLE_FLATTEN(((1,2),3))));
+  printf("split((1,1,0,1)): %s\n", STRING(TUPLE_SPLIT(EQZ,(1,1,0,1))));
+  printf("split_all((1,1,0,1,0,1,1)): %s\n", STRING(TUPLE_SPLIT_ALL(EQZ,(1,1,0,1,0,1,1))));
+  printf("take((1,2,3,4),2): %s\n", STRING(TUPLE_TAKE((1,2,3,4),U32_2)));
+  printf("take_while(neq0,(1,2,0,2,1)): %s\n", STRING(TUPLE_TAKE_WHILE(NEQZ,(1,2,0,2,1))));
+  printf("take_nth((1,2,3,4,5,6),2): %s\n", STRING(TUPLE_TAKE_NTH((1,2,3,4,5,6),U32_2)));
+  printf("take_last((1,2,3,4,5,6),2): %s\n", STRING(TUPLE_TAKE_LAST((1,2,3,4,5,6),U32_2)));
+  printf("drop((1,2,3,4),2): %s\n", STRING(TUPLE_DROP((1,2,3,4),U32_2)));
+  printf("drop_while(neq0,(1,2,0,2,1)): %s\n", STRING(TUPLE_DROP_WHILE(NEQZ,(1,2,0,2,1))));
+  printf("drop_nth((1,2,3,4,5,6),2): %s\n", STRING(TUPLE_DROP_NTH((1,2,3,4,5,6),U32_2)));
+  printf("drop_last((1,2,3,4,5,6),2): %s\n", STRING(TUPLE_DROP_LAST((1,2,3,4,5,6),U32_2)));
+  printf("sort(u32_lt, (3,1,2)): %s\n", STRING(TUPLE_MAP(U32_PRINT, TUPLE_SORT(U32_LT, (U32_3, U32_1, U32_2)))));
+  printf("sort(u32_lt, (3,2,1)): %s\n", STRING(TUPLE_MAP(U32_PRINT, TUPLE_SORT(U32_LT, (U32_3, U32_2, U32_1)))));
+  printf("sort(u32_lt, (1,2,3)): %s\n", STRING(TUPLE_MAP(U32_PRINT, TUPLE_SORT(U32_LT, (U32_1, U32_2, U32_3)))));
+  printf("enumerate((a,b,c)): %s\n", STRING(TUPLE_ENUMERATE((a,b,c))));
+  printf("filter(neq0,(1,0,2,0,3,0)): %s\n", STRING(TUPLE_FILTER(NEQZ, (1,0,2,0,3,0))));
+  printf("remove(neq0,(1,0,2,0,3,0)): %s\n", STRING(TUPLE_REMOVE(NEQZ, (1,0,2,0,3,0))));
+  printf("every(neq0,(1,2,3)): %s\n", STRING(TUPLE_EVERY(NEQZ, (1,2,3))));
+  printf("every(neq0,(1,0,2,3)): %s\n", STRING(TUPLE_EVERY(NEQZ, (1,0,2,3))));
+  printf("none(eq0,(1,2,3)): %s\n", STRING(TUPLE_NONE(EQZ, (1,2,3))));
+  printf("none(eq0,(1,0,2,3)): %s\n", STRING(TUPLE_NONE(EQZ, (1,0,2,3))));
+  printf("insert((1,3,4),2,1): %s\n", STRING(TUPLE_INSERT((1,3,4), 2, U32_1)));
+  printf("find_first(neq0,(0,0,3,2,1)): %s\n", STRING(TUPLE_FIND_FIRST(NEQZ, (0,0,3,2,1))));
+  printf("find_index(neq0,(0,0,3,2,1)): %d\n", U32_CONVERT(TUPLE_FIND_INDEX(NEQZ,(0,0,3,2,1))));
+  printf("mapcat(pair0,(1,2,3)): %s\n", STRING(TUPLE_MAPCAT(PAIR0, (1,2,3))));
+  printf("range(1,5): %s\n", STRING(TUPLE_MAP(U32_PRINT, TUPLE_RANGE(U32_1, U32_5))));
+  printf("range(5,1,-1): %s\n", STRING(TUPLE_MAP(U32_PRINT, TUPLE_RANGE(U32_5, U32_1, I32_N1))));
+  printf("csum((1,2,3)): %d\n", TUPLE_CSUM((1,2,3)));
+  printf("interpose((1,2,3),0): %s\n", STRING(TUPLE_INTERPOSE((1,2,3),0)));
+  printf("split_at((1,0,1,1,1,0,1),3): %s\n", STRING(TUPLE_SPLIT_AT((1,0,1,1,1,0,1), U32_3)));
 
   printf("pair(1,2): %s\n", STRING(PAIR(1,2)));
   printf("first((1,2)): %d\n", PAIR_FIRST(PAIR(1,2)));
@@ -333,4 +398,73 @@ int main(void) {
     STRING(LIST_MAP(U32_PRINT, LIST_MAP(PAIR_FIRST, LIST_ENUMERATE(LIST(1,2,3))))));
 #endif
 
+#ifdef HEX_DEBUG
+  printf("0xff: %d\n", U32H_CONVERT(U32H(F F)));
+  printf("244 + 100: %d\n", U32H_CONVERT(U32H_ADD(U32H_244, U32H_100)));
+  printf("244 - 100: %d\n", U32H_CONVERT(U32H_SUB(U32H_244, U32H_100)));
+  printf("244 * 100: %d\n", U32H_CONVERT(U32H_MUL(U32H_244, U32H_100)));
+  printf("244 == 100: %d\n", U32H_EQ(U32H_244, U32H_100));
+  printf("100 == 100: %d\n", U32H_EQ(U32H_100, U32H_100));
+  printf("100 == 100: %d\n", U32H_EQ(U32H_100, U32H_100));
+  printf("100 < 100: %d\n", U32H_LT(U32H_100, U32H_100));
+  printf("100 < 101: %d\n", U32H_LT(U32H_100, U32H_101));
+  printf("101 < 100: %d\n", U32H_LT(U32H_101, U32H_100));
+  printf("100 >= 100: %d\n", U32H_GEQ(U32H_100, U32H_100));
+  printf("100 >= 101: %d\n", U32H_GEQ(U32H_100, U32H_101));
+  printf("101 >= 100: %d\n", U32H_GEQ(U32H_101, U32H_100));
+  printf("16 / 4: %d\n", U32H_CONVERT(U32H_DIV(U32H_16, U32H_4)));
+  printf("16 %% 4: %d\n", U32H_CONVERT(U32H_REM(U32H_18, U32H_4)));
+  printf("23 %% 4: %d\n", U32H_CONVERT(U32H_REM(U32H_23, U32H_4)));
+  printf("32 >> 1: %d\n", U32H_CONVERT(U32H_RSH1(U32H_32)));
+  printf("32 << 1: %d\n", U32H_CONVERT(U32H_LSH1(U32H_32)));
+  printf("32 ^ 4: %d\n", U32H_CONVERT(U32H_POW(U32H_32, U32H_4)));
+  printf("9 ^ 9: %d\n", U32H_CONVERT(U32H_POW(U32H_9, U32H_9)));
+  printf("sqrt(16): %d\n", U32H_CONVERT(U32H_SQRT(U32H_16)));
+  printf("sqrt(28): %d\n", U32H_CONVERT(U32H_SQRT(U32H_28)));
+  printf("sqrt(0x800): %d\n", U32H_CONVERT(U32H_SQRT(U32H(8 0 0))));
+  printf("log2(32): %d\n", U32H_CONVERT(U32H_LOG2(U32H_32)));
+  printf("log(125,5): %d\n", U32H_CONVERT(U32H_LOG(U32H_125, U32H_5)));
+  printf("41 | 27: %d\n", U32H_CONVERT(U32H_OR(U32H_41, U32H_27)));
+  printf("41 & 27: %d\n", U32H_CONVERT(U32H_AND(U32H_41, U32H_27)));
+  printf("41 $ 27: %d\n", U32H_CONVERT(U32H_XOR(U32H_41, U32H_27)));
+
+  printf("244 + 100: %zu\n", (uint64_t)U128H_CONVERT(U128H_ADD(U128H_244, U128H_100)));
+  printf("244 - 100: %zu\n", (uint64_t)U128H_CONVERT(U128H_SUB(U128H_244, U128H_100)));
+  printf("244 * 100: %zu\n", (uint64_t)U128H_CONVERT(U128H_MUL(U128H_244, U128H_100)));
+  printf("100 == 100: %d\n", U128H_EQ(U128H_100, U128H_100));
+  printf("101 == 100: %d\n", U128H_EQ(U128H_101, U128H_100));
+  printf("100 < 100: %d\n", U128H_LT(U128H_100, U128H_100));
+  printf("101 < 100: %d\n", U128H_LT(U128H_101, U128H_100));
+  printf("100 < 101: %d\n", U128H_LT(U128H_100, U128H_101));
+  printf("100 > 100: %d\n", U128H_GT(U128H_100, U128H_100));
+  printf("101 > 100: %d\n", U128H_GT(U128H_101, U128H_100));
+  printf("100 > 101: %d\n", U128H_GT(U128H_100, U128H_101));
+  printf("100 <= 100: %d\n", U128H_LEQ(U128H_100, U128H_100));
+  printf("101 <= 100: %d\n", U128H_LEQ(U128H_101, U128H_100));
+  printf("100 <= 101: %d\n", U128H_LEQ(U128H_100, U128H_101));
+  printf("100 >= 100: %d\n", U128H_GEQ(U128H_100, U128H_100));
+  printf("101 >= 100: %d\n", U128H_GEQ(U128H_101, U128H_100));
+  printf("100 >= 101: %d\n", U128H_GEQ(U128H_100, U128H_101));
+  printf("32 / 4: %zu\n", (uint64_t)U128H_CONVERT(U128H_DIV(U128H_32, U128H_4)));
+  printf("34 %% 4: %zu\n", (uint64_t)U128H_CONVERT(U128H_REM(U128H_34, U128H_4)));
+  printf("100 << 1: %zu\n", (uint64_t)U128H_CONVERT(U128H_LSH1(U128H_100)));
+  printf("100 << 2: %zu\n", (uint64_t)U128H_CONVERT(U128H_LSH2(U128H_100)));
+  printf("100 << 3: %zu\n", (uint64_t)U128H_CONVERT(U128H_LSH3(U128H_100)));
+  printf("100 << 46: %zu\n", (uint64_t)U128H_CONVERT(U128H_LSH46(U128H_100)));
+  printf("100 >> 1: %zu\n", (uint64_t)U128H_CONVERT(U128H_RSH1(U128H_100)));
+  printf("100 >> 2: %zu\n", (uint64_t)U128H_CONVERT(U128H_RSH2(U128H_100)));
+  printf("100 >> 3: %zu\n", (uint64_t)U128H_CONVERT(U128H_RSH3(U128H_100)));
+  printf("70368744177664 >> 23: %zu\n", (uint64_t)U128H_CONVERT(U128H_RSH23(U128H_70368744177664)));
+  printf("32 ^ 4: %zu\n", (uint64_t)U128H_CONVERT(U128H_POW(U128H_32, U128H_4)));
+  printf("9 ^ 9: %zu\n", (uint64_t)U128H_CONVERT(U128H_POW(U128H_9, U128H_9)));
+  printf("sqrt(16): %zu\n", (uint64_t)U128H_CONVERT(U128H_SQRT(U128H_16)));
+  printf("sqrt(28): %zu\n", (uint64_t)U128H_CONVERT(U128H_SQRT(U128H_28)));
+  printf("sqrt(0x800): %zu\n", (uint64_t)U128H_CONVERT(U128H_SQRT(U128H(8 0 0))));
+  printf("log2(32): %zu\n", (uint64_t)U128H_CONVERT(U128H_LOG2(U128H_32)));
+  printf("log(125,5): %zu\n", (uint64_t)U128H_CONVERT(U128H_LOG(U128H_125, U128H_5)));
+  printf("41 | 27: %zu\n", (uint64_t)U128H_CONVERT(U128H_OR(U128H_41, U128H_27)));
+  printf("41 & 27: %zu\n", (uint64_t)U128H_CONVERT(U128H_AND(U128H_41, U128H_27)));
+  printf("41 $ 27: %zu\n", (uint64_t)U128H_CONVERT(U128H_XOR(U128H_41, U128H_27)));
+
+#endif
 }

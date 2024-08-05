@@ -1,0 +1,6 @@
+#ifndef C23META_U32H_LOG2
+#define C23META_U32H_LOG2
+
+#define U32H_LOG2(X) U32H_FROM_BITS(U32_LOG2(U32H_BITS(X)))
+
+#endif

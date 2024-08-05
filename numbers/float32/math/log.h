@@ -1,0 +1,6 @@
+#ifndef C23META_FP32_LOG
+#define C23META_FP32_LOG
+
+#define FP32_LOG(X,B) FP32_DIV(FP32_LOG2(X), FP32_LOG2(B))
+
+#endif

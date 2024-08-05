@@ -1,0 +1,10 @@
+#ifndef C23META_TUPLE_IS_EMPTY
+#define C23META_TUPLE_IS_EMPTY
+
+#define TUPLE_IS_EMPTY(X) _TUPLE_IS_EMPTY X
+
+#define _TUPLE_IS_EMPTY(...) _TUPLE_IS_EMPTY_X ## __VA_OPT__(1)()
+#define _TUPLE_IS_EMPTY_X1() 0
+#define _TUPLE_IS_EMPTY_X() 1
+
+#endif

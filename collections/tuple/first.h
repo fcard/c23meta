@@ -1,0 +1,7 @@
+#ifndef C23META_TUPLE_FIRST
+#define C23META_TUPLE_FIRST
+
+#define TUPLE_FIRST(X) _TUPLE_FIRST X
+#define _TUPLE_FIRST(X,...) X
+
+#endif

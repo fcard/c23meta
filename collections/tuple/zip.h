@@ -1,0 +1,6 @@
+#ifndef C23META_TUPLE_ZIP
+#define C23META_TUPLE_ZIP
+
+#define TUPLE_ZIP(X,Y) TUPLE_MAP2(PAIR, X, Y)
+
+#endif

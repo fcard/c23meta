@@ -1,0 +1,6 @@
+#ifndef C23META_TUPLE_APPLY
+#define C23META_TUPLE_APPLY
+
+#define TUPLE_APPLY(F,X) F X
+
+#endif

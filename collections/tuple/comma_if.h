@@ -1,0 +1,7 @@
+#ifndef C23META_TUPLE_COMMA_IF
+#define C23META_TUPLE_COMMA_IF
+
+#define TUPLE_COMMA_IF(X) _TUPLE_COMMA_IF X
+#define _TUPLE_COMMA_IF(...) __VA_OPT__(,)
+
+#endif

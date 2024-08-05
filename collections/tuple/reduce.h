@@ -1,0 +1,5 @@
+#ifndef C23META_TUPLE_REDUCE
+#define C23META_TUPLE_REDUCE
+
+#define TUPLE_REDUCE(...) TUPLE_FOLDL(__VA_ARGS__)
+#endif
