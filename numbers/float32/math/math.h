@@ -16,6 +16,7 @@
 #include "sqrt.h"
 #include "fract.h"
 #include "trunc.h"
+#include "with_sign.h"
 #include "from_u32.h"
 #include "to_u32.h"
 /*

@@ -13,6 +13,8 @@
 #define COLLECTION_DEBUG
 #define COL_FOREACH_DEBUG
 #define HEX_DEBUG
+#define FP32_WITH_SIGN_DEBUG
+#define FP32_TRUNC_NEGATIVE_DEBUG
 #endif
 
 int main(void) {
@@ -519,5 +521,14 @@ int main(void) {
   printf("41 & 27: %zu\n", (uint64_t)U128H_CONVERT(U128H_AND(U128H_41, U128H_27)));
   printf("41 $ 27: %zu\n", (uint64_t)U128H_CONVERT(U128H_XOR(U128H_41, U128H_27)));
 
+#endif
+
+#ifdef FP32_WITH_SIGN_DEBUG
+  printf("with_sign(32,0): %f\n", FP32_CONVERT(FP32_WITH_SIGN(FP32_32, 0)));
+  printf("with_sign(32,1): %f\n", FP32_CONVERT(FP32_WITH_SIGN(FP32_32, 1)));
+#endif
+
+#ifdef FP32_TRUNC_NEGATIVE_DEBUG
+  printf("trunc(-sqrt(32)): %f\n", FP32_CONVERT(FP32_TRUNC(FP32_NEG(FP32_SQRT(FP32_32)))));
 #endif
 }
