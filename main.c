@@ -7,6 +7,13 @@
 
 #include <stdio.h>
 
+#ifdef ALL_DEBUG
+#define NUMBER_DEBUG
+#define NUMBER_SPECIAL_DEBUG
+#define COLLECTION_DEBUG
+#define COL_FOREACH_DEBUG
+#define HEX_DEBUG
+#endif
 
 int main(void) {
 #ifdef NUMBER_DEBUG
@@ -283,7 +290,7 @@ int main(void) {
 
 #define CONS0(X) (0,(X,LIST_NIL))
 
-#ifdef LIST_DEBUG
+#ifdef COLLECTION_DEBUG
   printf("list(1,2,3): %s\n",                    STRING(LIST(1,2,3)));
   printf("first([1,2,3]): %s\n",                 STRING(LIST_FIRST(LIST(1,2,3))));
   printf("rest([1,2,3]): %s\n",                  STRING(LIST_REST(LIST(1,2,3))));
@@ -436,6 +443,12 @@ int main(void) {
   printf("is_pair([1,2,3]): %d\n", IS_PAIR(LIST(1,2,3)));
   printf("map(first, enumerate([1,2,3])): %s\n",
     STRING(LIST_MAP(U32_PRINT, LIST_MAP(PAIR_FIRST, LIST_ENUMERATE(LIST(1,2,3))))));
+#endif
+
+#ifdef COL_FOREACH_DEBUG
+#define PRINT_INT(X) printf("%d ", X);
+  LIST_FOREACH(PRINT_INT, LIST(1,2,3,4));
+  TUPLE_FOREACH(PRINT_INT, (1,2,3,4));
 #endif
 
 #ifdef HEX_DEBUG
