@@ -11,6 +11,7 @@
 #define NUMBER_DEBUG
 #define NUMBER_SPECIAL_DEBUG
 #define COLLECTION_DEBUG
+#define COL_FLATTEN_DEBUG
 #define COL_FOREACH_DEBUG
 #define HEX_DEBUG
 #define FP32_WITH_SIGN_DEBUG
@@ -269,21 +270,21 @@ int main(void) {
 
 #endif
 
-#define EQZ(X) _EQZ_EVAL(DEFER(CAT(_EQZ,X))())
+#define EQZ(X) _EQZ_EVAL(CAT(_EQZ,X)())
 #define _EQZ_EVAL(X) X
 #define _EQZ0() 1
 #define _EQZ1() 0
 #define _EQZ2() 0
 #define _EQZ3() 0
 
-#define NEQZ(X) _NEQZ_EVAL(DEFER(CAT(_NEQZ,X))())
+#define NEQZ(X) _NEQZ_EVAL(CAT(_NEQZ,X)())
 #define _NEQZ_EVAL(X) X
 #define _NEQZ0() 0
 #define _NEQZ1() 1
 #define _NEQZ2() 1
 #define _NEQZ3() 1
 
-#define EQB(X,Y) _EQB_EVAL(DEFER(CAT(CAT(_EQB,X),Y))())
+#define EQB(X,Y) _EQB_EVAL(CAT(CAT(_EQB,X),Y))()
 #define _EQB_EVAL(X) X
 #define _EQB00() 1
 #define _EQB10() 0
@@ -445,6 +446,11 @@ int main(void) {
   printf("is_pair([1,2,3]): %d\n", IS_PAIR(LIST(1,2,3)));
   printf("map(first, enumerate([1,2,3])): %s\n",
     STRING(LIST_MAP(U32_PRINT, LIST_MAP(PAIR_FIRST, LIST_ENUMERATE(LIST(1,2,3))))));
+#endif
+
+#ifdef COL_FLATTEN_DEBUG
+  printf("flatten([[[1,0],1],1,[1,0]]): %s\n",   STRING(LIST_FLATTEN(LIST(LIST(LIST(1,0),1),1,LIST(1,0)))));
+  printf("flatten(((1,2),3)): %s\n", STRING(TUPLE_FLATTEN(((1,2),3))));
 #endif
 
 #ifdef COL_FOREACH_DEBUG

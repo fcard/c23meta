@@ -1,6 +1,7 @@
 #ifndef C23META_LIST_IS_EMPTY
 #define C23META_LIST_IS_EMPTY
 
-#define LIST_IS_EMPTY(X) LIST_IS_NIL(X)
+#define LIST_IS_EMPTY(X) _LIST_IS_EMPTY_C(X)
+#define _LIST_IS_EMPTY_C(X) LIST_IS_NIL(X)
 
 #endif

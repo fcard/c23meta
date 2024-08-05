@@ -14,18 +14,18 @@
 #define _U32H_REM_X(A0,A1,A2,A3,A4,A5,A6,A7,B)\
   HEXREM_PREAMBLE(U32H_EQ(B,U32H_0),B,A7,A6,A5,A4,A3,A2,A1,A0)
 
-#define HEXREM_PREAMBLE(EQ0,D,...) DEFER(CAT(HEXREM_P,EQ0))(U32H_0, D __VA_OPT__(,) __VA_ARGS__)
+#define HEXREM_PREAMBLE(EQ0,D,...) CAT(HEXREM_P,EQ0)(U32H_0, D __VA_OPT__(,) __VA_ARGS__)
 #define HEXREM_P0(...) HEXREM(__VA_ARGS__)
 #define HEXREM_P1(...)  U32H_0 _Pragma("GCC error \"Division by Zero\"")
 
 #define HEXREM(R,D,A,...) HEXREMX(U32H_LSHIFTREP1(A,R), D __VA_OPT__(,) __VA_ARGS__)
 #define HEXREMX(R,D,...) HEXREMY(U32H_GEQ(R,D), R, D __VA_OPT__(,) __VA_ARGS__)
-#define HEXREMY(G,R,...) DEFER(CAT(HEXREMZ_,G))(R,__VA_ARGS__)
+#define HEXREMY(G,R,...) CAT(HEXREMZ_,G)(R,__VA_ARGS__)
 #define HEXREMZ_0(R,D,...) HEXREMU_ ## __VA_OPT__(U(R,D,__VA_ARGS__) IGNORE) (R,D)
 #define HEXREMZ_1(R,D,...) DEFER(HEXREM_I2)()(U32H_SUB(R,D), D __VA_OPT__(,) __VA_ARGS__)
 #define HEXREMU_U(R,D,...) DEFER(HEXREM_I)()(R,D,__VA_ARGS__)
 #define HEXREMU_(R,D) HEXREMV(U32H_GEQ(R,D),R,D)
-#define HEXREMV(G,R,D) DEFER(CAT(HEXREMW_,G))(R,D)
+#define HEXREMV(G,R,D) CAT(HEXREMW_,G)(R,D)
 #define HEXREMW_0(R,D) R
 #define HEXREMW_1(R,D) DEFER(HEXREM_I3)()(U32H_SUB(R,D),D)
 #define HEXREM_I() HEXREM

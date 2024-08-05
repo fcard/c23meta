@@ -14,13 +14,13 @@
 #define _U32H_DIV_X(A0,A1,A2,A3,A4,A5,A6,A7,B)\
   HEXDIV_PREAMBLE(U32H_EQ(B,U32H_0),B,A7,A6,A5,A4,A3,A2,A1,A0)
 
-#define HEXDIV_PREAMBLE(EQ0,D,...) (DEFER(CAT(HEXDIV_P,EQ0))(U32H_0, D __VA_OPT__(,) __VA_ARGS__))
+#define HEXDIV_PREAMBLE(EQ0,D,...) (CAT(HEXDIV_P,EQ0)(U32H_0, D __VA_OPT__(,) __VA_ARGS__))
 #define HEXDIV_P0(...) HEXDIV(__VA_ARGS__)
 #define HEXDIV_P1(...) U32H_0 _Pragma("GCC error \"Division by Zero\"")
 
 #define HEXDIV(R,D,A,...) HEXDIVX(U32H_LSHIFTREP1(A,R), 0, D __VA_OPT__(,) __VA_ARGS__)
 #define HEXDIVX(R,N,D,...) HEXDIVY(U32H_GEQ(R,D), R, N, D __VA_OPT__(,) __VA_ARGS__)
-#define HEXDIVY(G,R,N,...) DEFER(CAT(HEXDIVZ_,G))(R,N,__VA_ARGS__)
+#define HEXDIVY(G,R,N,...) CAT(HEXDIVZ_,G)(R,N,__VA_ARGS__)
 #define HEXDIVZ_0(R,N,D,...) __VA_OPT__(DEFER(HEXDIV_I)()(R,D,__VA_ARGS__),) N
 #define HEXDIVZ_1(R,N,D,...) DEFER(HEXDIV_I2)()(U32H_SUB(R,D), _HEXDIV_INC(N), D __VA_OPT__(,) __VA_ARGS__)
 #define HEXDIV_I() HEXDIV

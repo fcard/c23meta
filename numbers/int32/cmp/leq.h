@@ -3,10 +3,11 @@
 #include "../bits/sign.h"
 #include "../../uint32/cmp/leq.h"
 
-#define I32_LEQ(X,Y) I32_LEQ_EVAL(_I32_LEQ(I32_CMP_SIGN(X,Y),X,Y))
+#define I32_LEQ(X,Y) _I32_LEQ_C(X,Y)
+#define _I32_LEQ_C(X,Y) I32_LEQ_EVAL(_I32_LEQ(I32_CMP_SIGN(X,Y),X,Y))
 #define I32_LEQ_EVAL(X) X
 
-#define _I32_LEQ(S,X,Y) DEFER(CAT(_I32_LEQ_X_,S))(X,Y)
+#define _I32_LEQ(S,X,Y) CAT(_I32_LEQ_X_,S)(X,Y)
 #define _I32_LEQ_X_POS_POS(X,Y) U32_LEQ(X,Y)
 #define _I32_LEQ_X_NEG_NEG(X,Y) U32_LEQ(X,Y)
 #define _I32_LEQ_X_POS_NEG(X,Y) 0

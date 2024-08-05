@@ -19,18 +19,18 @@
                              A20,A19,A18,A17,A16,A15,A14,A13,A12,A11,A10,\
                              A9,A8,A7,A6,A5,A4,A3,A2,A1,A0)\
 
-#define BITREM_PREAMBLE(EQ0,D,...) DEFER(CAT(BITREM_P,EQ0))(U32_0, D __VA_OPT__(,) __VA_ARGS__)
+#define BITREM_PREAMBLE(EQ0,D,...) CAT(BITREM_P,EQ0)(U32_0, D __VA_OPT__(,) __VA_ARGS__)
 #define BITREM_P0(...) BITREM(__VA_ARGS__)
 #define BITREM_P1(...)  U32_0 _Pragma("GCC error \"Division by Zero\"")
 
 #define BITREM(R,D,A,...) BITREMX(U32_LSHIFTREP1(A,R), D __VA_OPT__(,) __VA_ARGS__)
 #define BITREMX(R,D,...) BITREMY(U32_GEQ(R,D), R, D __VA_OPT__(,) __VA_ARGS__)
-#define BITREMY(G,R,...) DEFER(CAT(BITREMZ_,G))(R,__VA_ARGS__)
+#define BITREMY(G,R,...) CAT(BITREMZ_,G)(R,__VA_ARGS__)
 #define BITREMZ_0(R,D,...) BITREMU_ ## __VA_OPT__(U(R,D,__VA_ARGS__) IGNORE) (R,D)
 #define BITREMZ_1(R,D,...) BITREMU_ ## __VA_OPT__(U(U32_SUB(R,D), D, __VA_ARGS__) IGNORE) (R,D)
-#define BITREMU_U(R,D,...) OBSTRUCT(BITREM_I)()(R,D,__VA_ARGS__)
+#define BITREMU_U(R,D,...) DEFER(BITREM_I)()(R,D,__VA_ARGS__)
 #define BITREMU_(R,D) BITREMV(U32_GEQ(R,D),R,D)
-#define BITREMV(G,R,D) DEFER(CAT(BITREMW_,G))(R,D)
+#define BITREMV(G,R,D) CAT(BITREMW_,G)(R,D)
 #define BITREMW_0(R,D) R
 #define BITREMW_1(R,D) U32_SUB(R,D)
 #define BITREM_I() BITREM

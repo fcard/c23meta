@@ -20,15 +20,15 @@
                           A9,A8,A7,A6,A5,A4,A3,A2,A1,A0)\
 
 
-#define BITDIV_PREAMBLE(EQ0,D,...) (DEFER(CAT(BITDIV_P,EQ0))(U32_0, D __VA_OPT__(,) __VA_ARGS__))
+#define BITDIV_PREAMBLE(EQ0,D,...) (CAT(BITDIV_P,EQ0)(U32_0, D __VA_OPT__(,) __VA_ARGS__))
 #define BITDIV_P0(...) BITDIV(__VA_ARGS__)
 #define BITDIV_P1(...) U32_0 _Pragma("GCC error \"Division by Zero\"")
 
 #define BITDIV(R,D,A,...) BITDIVX(U32_LSHIFTREP1(A,R), D __VA_OPT__(,) __VA_ARGS__)
 #define BITDIVX(R,D,...) BITDIVY(U32_GEQ(R,D), R, D __VA_OPT__(,) __VA_ARGS__)
-#define BITDIVY(G,R,...) DEFER(CAT(BITDIVZ_,G))(R,__VA_ARGS__) // MESSAGE(R)
-#define BITDIVZ_0(R,D,...) __VA_OPT__(OBSTRUCT(BITDIV_I)()(R,D,__VA_ARGS__),) 0
-#define BITDIVZ_1(R,D,...) __VA_OPT__(OBSTRUCT(BITDIV_I)()(U32_SUB(R,D), D, __VA_ARGS__),) 1
+#define BITDIVY(G,R,...) CAT(BITDIVZ_,G)(R,__VA_ARGS__) // MESSAGE(R)
+#define BITDIVZ_0(R,D,...) __VA_OPT__(DEFER(BITDIV_I)()(R,D,__VA_ARGS__),) 0
+#define BITDIVZ_1(R,D,...) __VA_OPT__(DEFER(BITDIV_I)()(U32_SUB(R,D), D, __VA_ARGS__),) 1
 #define BITDIV_I() BITDIV
 
 #define U32_LSHIFTREP1(R,X)\

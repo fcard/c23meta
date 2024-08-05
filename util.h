@@ -63,7 +63,7 @@
 
 #define REVERSE(...) (REV_EVAL(_REV(__VA_ARGS__)))
 #define _REV(...) __VA_OPT__(_REVX(__VA_ARGS__))
-#define _REVX(X,...) __VA_OPT__(OBSTRUCT(_REVX_I)()(__VA_ARGS__),)X
+#define _REVX(X,...) __VA_OPT__(DEFER(_REVX_I)()(__VA_ARGS__),)X
 #define _REVX_I() _REVX
 
 #define STRING(X) _STR(X)
