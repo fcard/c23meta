@@ -1,5 +1,5 @@
-#ifndef C23META_U32_MATH
-#define C23META_U32_MATH
+#ifndef C23META_U64_MATH
+#define C23META_U64_MATH
 
 #include "add.h"
 #include "mul32.h"

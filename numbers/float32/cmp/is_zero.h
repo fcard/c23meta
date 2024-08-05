@@ -1,0 +1,6 @@
+#ifndef C23META_FP32_IS_ZERO
+#define C23META_FP32_IS_ZERO
+
+#define FP32_IS_ZERO(X) BOOL_OR(U32_EQ(X,FP32_0), U32_EQ(X,FP32_N0))
+
+#endif

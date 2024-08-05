@@ -69,6 +69,9 @@
 #define STRING(X) _STR(X)
 #define _STR(X) #X
 
+#define STRING_CAT(X,Y) _STR_CAT(X,Y)
+#define _STR_CAT(X,Y) X Y
+
 #define EVALX(...)  EVALX2(EVALX2(EVALX2(__VA_ARGS__)))
 #define EVALX2(...) EVALX3(EVALX3(EVALX3(__VA_ARGS__)))
 #define EVALX3(...) EVALX4(EVALX4(EVALX4(__VA_ARGS__)))
@@ -94,13 +97,13 @@
         C17 ## C18 ## C19 ## C20 ## C21 ## C22 ## C23 ## C24 ## C25 ## C26 ## C27 ## C28 ## C29 ## C30 ## C31
 
 
-#define CAT_ALL(X,...)  DEFER(CAT)(X __VA_OPT__(, CAT_ALL2(__VA_ARGS__)))
-#define CAT_ALL2(X,...) DEFER(CAT)(X __VA_OPT__(, CAT_ALL3(__VA_ARGS__)))
-#define CAT_ALL3(X,...) DEFER(CAT)(X __VA_OPT__(, CAT_ALL4(__VA_ARGS__)))
-#define CAT_ALL4(X,...) DEFER(CAT)(X __VA_OPT__(, CAT_ALL5(__VA_ARGS__)))
-#define CAT_ALL5(X,...) DEFER(CAT)(X __VA_OPT__(, CAT_ALL6(__VA_ARGS__)))
-#define CAT_ALL6(X,...) DEFER(CAT)(X __VA_OPT__(, CAT_ALL7(__VA_ARGS__)))
-#define CAT_ALL7(X,...) DEFER(CAT)(X __VA_OPT__(, CAT_ALL8(__VA_ARGS__)))
+#define CAT_ALL(X,...)  CAT(X __VA_OPT__(, CAT_ALL2(__VA_ARGS__)))
+#define CAT_ALL2(X,...) CAT(X __VA_OPT__(, CAT_ALL3(__VA_ARGS__)))
+#define CAT_ALL3(X,...) CAT(X __VA_OPT__(, CAT_ALL4(__VA_ARGS__)))
+#define CAT_ALL4(X,...) CAT(X __VA_OPT__(, CAT_ALL5(__VA_ARGS__)))
+#define CAT_ALL5(X,...) CAT(X __VA_OPT__(, CAT_ALL6(__VA_ARGS__)))
+#define CAT_ALL6(X,...) CAT(X __VA_OPT__(, CAT_ALL7(__VA_ARGS__)))
+#define CAT_ALL7(X,...) CAT(X __VA_OPT__(, CAT_ALL8(__VA_ARGS__)))
 #define CAT_ALL8(X,...) X
 
 #endif

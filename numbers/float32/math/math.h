@@ -1,6 +1,7 @@
 #ifndef C23META_FP32_MATH
 #define C23META_FP32_MATH
 
+#include "abs.h"
 #include "add.h"
 #include "sub.h"
 #include "mul.h"
@@ -9,6 +10,7 @@
 #include "min.h"
 #include "pow.h"
 #include "exp.h"
+#include "neg.h"
 #include "log.h"
 #include "log2.h"
 #include "sqrt.h"

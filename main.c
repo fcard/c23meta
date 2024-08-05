@@ -1,10 +1,4 @@
-#include "numbers/float32/float32.h"
-#include "numbers/int32/int32.h"
-#include "numbers/uint32/uint32.h"
-#include "numbers/uint32hex/uint32hex.h"
-#include "numbers/uint64/uint64.h"
-#include "numbers/uint64/to_u32.h"
-#include "numbers/uint128hex/uint128hex.h"
+#include "numbers/numbers.h"
 
 
 #include "collections/list/list.h"
@@ -215,10 +209,56 @@ int main(void) {
   printf("log(125.0, 5.0): %.4f\n", FP32_CONVERT(FP32_LOG(FP32_125, FP32_5)));
   printf("fract(sqrt(32)): %.4f\n", FP32_CONVERT(FP32_FRACT(FP32_SQRT(FP32_32))));
   printf("trunc(sqrt(32)): %.4f\n", FP32_CONVERT(FP32_TRUNC(FP32_SQRT(FP32_32))));
+  printf("powi(125.0, 0): %.4f\n", FP32_CONVERT(FP32_POW_I(FP32_125, U32_0)));
+  printf("exp(1.5): %.4f\n", FP32_CONVERT(FP32_EXP(FP32_ADD(FP32_1, FP32_1L2))));
+  printf("exp(1.5): %.4f\n", FP32_CONVERT(FP32_EXP(FP32_ADD(FP32_1, FP32_1L2))));
+
 #endif
-  //printf("powi(125.0, 0): %.4f\n", FP32_CONVERT(FP32_POW_I(FP32_125, U32_0)));
-  printf("exp(1.5): %.4f\n", FP32_CONVERT(FP32_EXP(FP32_ADD(FP32_1, FP32_1L2))));
-  printf("exp(1.5): %.4f\n", FP32_CONVERT(FP32_EXP(FP32_ADD(FP32_1, FP32_1L2))));
+
+#ifdef NUMBER_SPECIAL_DEBUG
+  printf("is_nan(0): %d\n", FP32_IS_NAN(FP32_0));
+  printf("is_nan(NaN): %d\n", FP32_IS_NAN(FP32_NAN));
+  printf("is_nan(Inf): %d\n", FP32_IS_NAN(FP32_INF));
+
+  printf("is_inf(0): %d\n", FP32_IS_INF(FP32_0));
+  printf("is_inf(NaN): %d\n", FP32_IS_INF(FP32_NAN));
+  printf("is_inf(Inf): %d\n", FP32_IS_INF(FP32_INF));
+
+  printf("is_zero(0): %d\n", FP32_IS_ZERO(FP32_0));
+  printf("is_zero(NaN): %d\n", FP32_IS_ZERO(FP32_NAN));
+  printf("is_zero(Inf): %d\n", FP32_IS_ZERO(FP32_INF));
+
+#define FP_SPECIAL_TEST(F)\
+  do {\
+    printf(STRING_CAT(STRING(F(nan, nan):)," %.1f\n"), FP32_CONVERT(CAT(FP32_,F)(FP32_NAN, FP32_NAN)));\
+    printf(STRING_CAT(STRING(F(nan, 0.0):)," %.1f\n"), FP32_CONVERT(CAT(FP32_,F)(FP32_NAN, FP32_0)));\
+    printf(STRING_CAT(STRING(F(nan, 1.0):)," %.1f\n"), FP32_CONVERT(CAT(FP32_,F)(FP32_NAN, FP32_1)));\
+    printf(STRING_CAT(STRING(F(nan, inf):)," %.1f\n"), FP32_CONVERT(CAT(FP32_,F)(FP32_NAN, FP32_INF)));\
+    printf(STRING_CAT(STRING(F(0.0, nan):)," %.1f\n"), FP32_CONVERT(CAT(FP32_,F)(FP32_0, FP32_NAN)));\
+    printf(STRING_CAT(STRING(F(0.0, 0.0):)," %.1f\n"), FP32_CONVERT(CAT(FP32_,F)(FP32_0, FP32_0)));\
+    printf(STRING_CAT(STRING(F(0.0, 1.0):)," %.1f\n"), FP32_CONVERT(CAT(FP32_,F)(FP32_0, FP32_1)));\
+    printf(STRING_CAT(STRING(F(0.0, inf):)," %.1f\n"), FP32_CONVERT(CAT(FP32_,F)(FP32_0, FP32_INF)));\
+    printf(STRING_CAT(STRING(F(1.0, nan):)," %.1f\n"), FP32_CONVERT(CAT(FP32_,F)(FP32_1, FP32_NAN)));\
+    printf(STRING_CAT(STRING(F(1.0, 0.0):)," %.1f\n"), FP32_CONVERT(CAT(FP32_,F)(FP32_1, FP32_0)));\
+    printf(STRING_CAT(STRING(F(1.0, 1.0):)," %.1f\n"), FP32_CONVERT(CAT(FP32_,F)(FP32_1, FP32_1)));\
+    printf(STRING_CAT(STRING(F(1.0, inf):)," %.1f\n"), FP32_CONVERT(CAT(FP32_,F)(FP32_1, FP32_INF)));\
+    printf(STRING_CAT(STRING(F(inf, nan):)," %.1f\n"), FP32_CONVERT(CAT(FP32_,F)(FP32_INF, FP32_NAN)));\
+    printf(STRING_CAT(STRING(F(inf, 0.0):)," %.1f\n"), FP32_CONVERT(CAT(FP32_,F)(FP32_INF, FP32_0)));\
+    printf(STRING_CAT(STRING(F(inf, 1.0):)," %.1f\n"), FP32_CONVERT(CAT(FP32_,F)(FP32_INF, FP32_1)));\
+    printf(STRING_CAT(STRING(F(inf, inf):)," %.1f\n"), FP32_CONVERT(CAT(FP32_,F)(FP32_INF, FP32_INF)));\
+  } while(0);
+  LIST_FOREACH(FP_SPECIAL_TEST, LIST(ADD,SUB,MUL,DIV,LOG,MAX,MIN))
+
+#define FP_SPECIAL_TEST_SINGLE(F)\
+  do {\
+    printf(STRING_CAT(STRING(F(nan):)," %.1f\n"), FP32_CONVERT(CAT(FP32_,F)(FP32_NAN)));\
+    printf(STRING_CAT(STRING(F(0.0):)," %.1f\n"), FP32_CONVERT(CAT(FP32_,F)(FP32_0)));\
+    printf(STRING_CAT(STRING(F(1.0):)," %.1f\n"), FP32_CONVERT(CAT(FP32_,F)(FP32_1)));\
+    printf(STRING_CAT(STRING(F(inf):)," %.1f\n"), FP32_CONVERT(CAT(FP32_,F)(FP32_INF)));\
+  } while(0);
+  LIST_FOREACH(FP_SPECIAL_TEST_SINGLE, LIST(ABS,FRACT,TRUNC,EXP,LOG2,NEG))
+
+#endif
 
 #define EQZ(X) _EQZ_EVAL(DEFER(CAT(_EQZ,X))())
 #define _EQZ_EVAL(X) X

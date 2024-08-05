@@ -8,6 +8,11 @@
 #include "leq.h"
 #include "lt.h"
 
+#include "classify.h"
+#include "is_nan.h"
+#include "is_inf.h"
+#include "is_zero.h"
+
 #define FP32_CMP(X,Y) _FP32_CMP(FP32_LT(X,Y), FP32_LT(Y,X))
 #define _FP32_CMP(LXY,LYX) _FP32_CMP_X(LXY,LYX)
 #define _FP32_CMP_X(LXY,LYX) _FP32_CMP_Y ## LXY ## LYX
