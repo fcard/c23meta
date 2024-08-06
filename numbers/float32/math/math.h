@@ -13,6 +13,7 @@
 #include "neg.h"
 #include "log.h"
 #include "log2.h"
+#include "ln.h"
 #include "sqrt.h"
 #include "fract.h"
 #include "trunc.h"

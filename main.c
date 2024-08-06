@@ -546,4 +546,11 @@ int main(void) {
   printf("exp(2.5): %f\n", FP32_CONVERT(FP32_EXP(FP32_DIV(FP32_5, FP32_2))));
 #endif
 
+#ifdef FP32_POW_DEBUG
+  printf("2 ^ 1.5: %f\n", FP32_CONVERT(FP32_POW(FP32_2, FP32_DIV(FP32_3, FP32_2))));
+  printf("2 ^ 1.25: %f\n", FP32_CONVERT(FP32_POW(FP32_2, FP32_DIV(FP32_5, FP32_4))));
+  printf("2 ^ 1.75: %f\n", FP32_CONVERT(FP32_POW(FP32_2, FP32_DIV(FP32_7, FP32_4))));
+  printf("2 ^ 1.8: %f\n", FP32_CONVERT(FP32_POW(FP32_2, FP32_DIV(FP32_9, FP32_5))));
+#endif
+
 }

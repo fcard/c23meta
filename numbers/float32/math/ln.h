@@ -1,0 +1,6 @@
+#ifndef C23META_FP32_LN
+#define C23META_FP32_LN
+
+#define FP32_LN(X) FP32_LOG(X,FP32_EULER)
+
+#endif
