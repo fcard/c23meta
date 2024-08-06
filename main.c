@@ -314,16 +314,16 @@ int main(void) {
   printf("filter(eq0,[0,1,0,1]): %s\n",          STRING(LIST_FILTER(EQZ,LIST(0,1,0,1))));
   printf("remove(eq0,[0,1,0,1]): %s\n",          STRING(LIST_REMOVE(EQZ,LIST(0,1,0,1))));
   printf("concat([1,2,3],[4,5,6]): %s\n",        STRING(LIST_CONCAT(LIST(1,2,3), LIST(4,5,6))));
-  printf("find_index(eq0,[1,1,0,1,1]): %d\n",    U32_CONVERT(LIST_FIND_INDEX(EQZ,LIST(1,1,0,1,1))));
+  printf("find_index(eq0,[1,1,0,1,1]): %d\n",    U32H_CONVERT(LIST_FIND_INDEX(EQZ,LIST(1,1,0,1,1))));
   printf("find_first(neq0,[0,0,3,2,1]): %d\n",   LIST_FIND_FIRST(NEQZ,LIST(0,0,3,2,1)));
   printf("split(eq0,[1,1,0,1,1,1]): %s\n",       STRING(LIST_SPLIT(EQZ,LIST(1,1,0,1,1,1))));
   printf("split_all(eq0,[1,0,1,1,1,0,1]): %s\n", STRING(LIST_SPLIT_ALL(EQZ,LIST(1,0,1,1,1,0,1))));
-  printf("split_at([1,0,1,1,1,0,1],3): %s\n",    STRING(LIST_SPLIT_AT(LIST(1,0,1,1,1,0,1), U32_3)));
+  printf("split_at([1,0,1,1,1,0,1],3): %s\n",    STRING(LIST_SPLIT_AT(LIST(1,0,1,1,1,0,1), U32H_3)));
   printf("flatten([[[1,0],1],1,[1,0]]): %s\n",   STRING(LIST_FLATTEN(LIST(LIST(LIST(1,0),1),1,LIST(1,0)))));
   printf("contains(eq0,[1,0,1]): %d\n",          LIST_CONTAINS(EQZ,LIST(1,0,1)));
   printf("contains(eq0,[1,1,1]): %d\n",          LIST_CONTAINS(EQZ,LIST(1,1,1)));
-  printf("nth([1,2,3],1): %d\n",                 LIST_NTH(LIST(1,2,3), U32_1));
-  printf("length([1,2,3]): %d\n",                U32_CONVERT(LIST_LENGTH(LIST(1,2,3))));
+  printf("nth([1,2,3],1): %d\n",                 LIST_NTH(LIST(1,2,3), U32H_1));
+  printf("length([1,2,3]): %d\n",                U32H_CONVERT(LIST_LENGTH(LIST(1,2,3))));
   printf("foreach(F,[1,2,3]): %s\n",             STRING(LIST_FOREACH(F,LIST(1,2,3))));
   printf("csum([1,2,3]): %d\n",                  LIST_CSUM(LIST(1,2,3)));
   printf("eq(eqb,[0,1,1],[0,1,1]): %d\n",        LIST_EQ(EQB,LIST(0,1,1),LIST(0,1,1)));
@@ -331,29 +331,29 @@ int main(void) {
   printf("apply(F,[1,2,3,4,5]): %s\n",           STRING(LIST_APPLY(F,LIST(1,2,3,4,5))));
   printf("mapcat(cons0,[1,1,1,1]): %s\n",        STRING(LIST_MAPCAT(CONS0,LIST(1,1,1,1,1))));
   printf("as_args([1,2,3,4,5]): %s\n",           STRING(LIST_AS_ARGS(LIST(1,2,3,4,5))));
-  printf("take([1,2,3,4,5],3): %s\n",            STRING(LIST_TAKE(LIST(1,2,3,4,5), U32_3)));
+  printf("take([1,2,3,4,5],3): %s\n",            STRING(LIST_TAKE(LIST(1,2,3,4,5), U32H_3)));
   printf("take_while(eq0,[0,0,0,1,1]): %s\n",    STRING(LIST_TAKE_WHILE(EQZ,LIST(0,0,0,1,1))));
-  printf("take_nth([1,2,3,4,5,6],2): %s\n",      STRING(LIST_TAKE_NTH(LIST(1,2,3,4,5,6), U32_2)));
-  printf("take_last([1,2,3,4,5,6],3): %s\n",     STRING(LIST_TAKE_LAST(LIST(1,2,3,4,5,6), U32_3)));
-  printf("drop([1,2,3,4,5],3): %s\n",            STRING(LIST_DROP(LIST(1,2,3,4,5), U32_3)));
+  printf("take_nth([1,2,3,4,5,6],2): %s\n",      STRING(LIST_TAKE_NTH(LIST(1,2,3,4,5,6), U32H_2)));
+  printf("take_last([1,2,3,4,5,6],3): %s\n",     STRING(LIST_TAKE_LAST(LIST(1,2,3,4,5,6), U32H_3)));
+  printf("drop([1,2,3,4,5],3): %s\n",            STRING(LIST_DROP(LIST(1,2,3,4,5), U32H_3)));
   printf("drop_while(eq0,[0,0,0,1,1]): %s\n",    STRING(LIST_DROP_WHILE(EQZ,LIST(0,0,0,1,1))));
-  printf("drop_nth([1,2,3,4,5,6],2): %s\n",      STRING(LIST_DROP_NTH(LIST(1,2,3,4,5,6), U32_2)));
-  printf("drop_last([1,2,3,4,5,6],2): %s\n",     STRING(LIST_DROP_LAST(LIST(1,2,3,4,5,6), U32_2)));
+  printf("drop_nth([1,2,3,4,5,6],2): %s\n",      STRING(LIST_DROP_NTH(LIST(1,2,3,4,5,6), U32H_2)));
+  printf("drop_last([1,2,3,4,5,6],2): %s\n",     STRING(LIST_DROP_LAST(LIST(1,2,3,4,5,6), U32H_2)));
   printf("is_list([1,2,3]): %s\n",               STRING(IS_LIST(LIST(1,2,3))));
   printf("is_list(1): %s\n",                     STRING(IS_LIST(1)));
   printf("every(eq0,[0,0,0,0]): %d\n",           LIST_EVERY(EQZ,LIST(0,0,0,0,0)));
   printf("none(neq0,[0,0,0,0]): %d\n",           LIST_NONE(NEQZ,LIST(0,0,0,0,0)));
   printf("interpose([1,2,3],0): %s\n",           STRING(LIST_INTERPOSE(LIST(1,2,3),0)));
-  printf("insert([1,2,4],3,2): %s\n",            STRING(LIST_INSERT(LIST(1,2,4),3,U32_2)));
+  printf("insert([1,2,4],3,2): %s\n",            STRING(LIST_INSERT(LIST(1,2,4),3,U32H_2)));
   printf("push([1,2,3],4): %s\n",                STRING(LIST_PUSH(LIST(1,2,3),4)));
   printf("enumerate([a,b,c]): %s\n",             STRING(LIST_ENUMERATE(LIST(a,b,c))));
   printf("walk(F,[1,2,3]): %s\n",                STRING(LIST_WALK(F,LIST(1,2,3))));
   printf("walk(F,[[1,2],3]): %s\n",              STRING(LIST_WALK(F,LIST(LIST(1,2),3))));
-  printf("range(1,5): %s\n",                     STRING(LIST_MAP(U32_PRINT, LIST_RANGE(U32_1, U32_5))));
-  printf("range(5,1,-1): %s\n",                  STRING(LIST_MAP(U32_PRINT, LIST_RANGE(U32_5, U32_1, I32_N1))));
-  printf("sort(u32_lt, [3,1,2]): %s\n",          STRING(LIST_MAP(U32_PRINT, LIST_SORT(U32_LT, LIST(U32_3, U32_1, I32_2)))));
-  printf("sort(u32_lt, [3,2,1]): %s\n",          STRING(LIST_MAP(U32_PRINT, LIST_SORT(U32_LT, LIST(U32_3, U32_2, I32_1)))));
-  printf("sort(u32_lt, [1,2,3]): %s\n",          STRING(LIST_MAP(U32_PRINT, LIST_SORT(U32_LT, LIST(U32_1, U32_2, I32_3)))));
+  printf("range(1,5): %s\n",                     STRING(LIST_MAP(U32_PRINT, LIST_RANGE(I32_1, I32_5))));
+  printf("range(5,1,-1): %s\n",                  STRING(LIST_MAP(U32_PRINT, LIST_RANGE(I32_5, I32_1, I32_N1))));
+  printf("sort(u32_lt, [3,1,2]): %s\n",          STRING(LIST_MAP(U32H_PRINT, LIST_SORT(U32H_LT, LIST(U32H_3, U32H_1, U32H_2)))));
+  printf("sort(u32_lt, [3,2,1]): %s\n",          STRING(LIST_MAP(U32H_PRINT, LIST_SORT(U32H_LT, LIST(U32H_3, U32H_2, U32H_1)))));
+  printf("sort(u32_lt, [1,2,3]): %s\n",          STRING(LIST_MAP(U32H_PRINT, LIST_SORT(U32H_LT, LIST(U32H_1, U32H_2, U32H_3)))));
   printf("zip([1,2,3],[4,5,6]): %s\n",           STRING(LIST_ZIP(LIST(1,2,3),LIST(4,5,6))));
   printf("last([1,2,3,4,5]): %d\n",              LIST_LAST(LIST(1,2,3,4,5)));
 
@@ -378,7 +378,7 @@ int main(void) {
 
   TUPLE_AS_DATA(tuple2, ((char*)"def", (int*)((int[3]){1,2,3}), 1));
   printf("as_data((\"def\",{1,2,3},1)): (\"%s\", {%d,%d,%d}, %d)\n",
-   TUPLE_GET(tuple2, U32_1),
+   TUPLE_GET(tuple2, U32H_1),
    TUPLE_GET(tuple2, 2)[0],
    TUPLE_GET(tuple2, 2)[1],
    TUPLE_GET(tuple2, 2)[2],
@@ -394,10 +394,10 @@ int main(void) {
   printf("is_empty((1,2,3)): %d\n", TUPLE_IS_EMPTY((1,2,3)));
   printf("first((1,2,3)): %d\n", TUPLE_FIRST((1,2,3)));
   printf("last((1,2,3)): %d\n", TUPLE_LAST((1,2,3)));
-  printf("nth((1,2,3),1): %s\n", STRING(TUPLE_NTH((1,2,3),U32_1)));
+  printf("nth((1,2,3),1): %s\n", STRING(TUPLE_NTH((1,2,3),U32H_1)));
   printf("apply(add3,(1,2,3)): %d\n", TUPLE_APPLY(ADD3,(1,2,3)));
-  printf("length(()): %d\n", U32_CONVERT(TUPLE_LENGTH(())));
-  printf("length((1,2,3)): %d\n", U32_CONVERT(TUPLE_LENGTH((1,2,3))));
+  printf("length(()): %d\n", U32H_CONVERT(TUPLE_LENGTH(())));
+  printf("length((1,2,3)): %d\n", U32H_CONVERT(TUPLE_LENGTH((1,2,3))));
   printf("push((1,2,3),4): %s\n", STRING(TUPLE_PUSH((1,2,3),4)));
   printf("concat((1,2,3),(4,5,6)): %s\n", STRING(TUPLE_CONCAT((1,2,3),(4,5,6))));
   printf("reverse((1,2,3)): %s\n", STRING(TUPLE_REVERSE((1,2,3))));
@@ -413,17 +413,17 @@ int main(void) {
   printf("flatten(((1,2),3)): %s\n", STRING(TUPLE_FLATTEN(((1,2),3))));
   printf("split((1,1,0,1)): %s\n", STRING(TUPLE_SPLIT(EQZ,(1,1,0,1))));
   printf("split_all((1,1,0,1,0,1,1)): %s\n", STRING(TUPLE_SPLIT_ALL(EQZ,(1,1,0,1,0,1,1))));
-  printf("take((1,2,3,4),2): %s\n", STRING(TUPLE_TAKE((1,2,3,4),U32_2)));
+  printf("take((1,2,3,4),2): %s\n", STRING(TUPLE_TAKE((1,2,3,4),U32H_2)));
   printf("take_while(neq0,(1,2,0,2,1)): %s\n", STRING(TUPLE_TAKE_WHILE(NEQZ,(1,2,0,2,1))));
-  printf("take_nth((1,2,3,4,5,6),2): %s\n", STRING(TUPLE_TAKE_NTH((1,2,3,4,5,6),U32_2)));
-  printf("take_last((1,2,3,4,5,6),2): %s\n", STRING(TUPLE_TAKE_LAST((1,2,3,4,5,6),U32_2)));
-  printf("drop((1,2,3,4),2): %s\n", STRING(TUPLE_DROP((1,2,3,4),U32_2)));
+  printf("take_nth((1,2,3,4,5,6),2): %s\n", STRING(TUPLE_TAKE_NTH((1,2,3,4,5,6),U32H_2)));
+  printf("take_last((1,2,3,4,5,6),2): %s\n", STRING(TUPLE_TAKE_LAST((1,2,3,4,5,6),U32H_2)));
+  printf("drop((1,2,3,4),2): %s\n", STRING(TUPLE_DROP((1,2,3,4),U32H_2)));
   printf("drop_while(neq0,(1,2,0,2,1)): %s\n", STRING(TUPLE_DROP_WHILE(NEQZ,(1,2,0,2,1))));
-  printf("drop_nth((1,2,3,4,5,6),2): %s\n", STRING(TUPLE_DROP_NTH((1,2,3,4,5,6),U32_2)));
-  printf("drop_last((1,2,3,4,5,6),2): %s\n", STRING(TUPLE_DROP_LAST((1,2,3,4,5,6),U32_2)));
-  printf("sort(u32_lt, (3,1,2)): %s\n", STRING(TUPLE_MAP(U32_PRINT, TUPLE_SORT(U32_LT, (U32_3, U32_1, U32_2)))));
-  printf("sort(u32_lt, (3,2,1)): %s\n", STRING(TUPLE_MAP(U32_PRINT, TUPLE_SORT(U32_LT, (U32_3, U32_2, U32_1)))));
-  printf("sort(u32_lt, (1,2,3)): %s\n", STRING(TUPLE_MAP(U32_PRINT, TUPLE_SORT(U32_LT, (U32_1, U32_2, U32_3)))));
+  printf("drop_nth((1,2,3,4,5,6),2): %s\n", STRING(TUPLE_DROP_NTH((1,2,3,4,5,6),U32H_2)));
+  printf("drop_last((1,2,3,4,5,6),2): %s\n", STRING(TUPLE_DROP_LAST((1,2,3,4,5,6),U32H_2)));
+  printf("sort(u32_lt, (3,1,2)): %s\n", STRING(TUPLE_MAP(U32H_PRINT, TUPLE_SORT(U32H_LT, (U32H_3, U32H_1, U32H_2)))));
+  printf("sort(u32_lt, (3,2,1)): %s\n", STRING(TUPLE_MAP(U32H_PRINT, TUPLE_SORT(U32H_LT, (U32H_3, U32H_2, U32H_1)))));
+  printf("sort(u32_lt, (1,2,3)): %s\n", STRING(TUPLE_MAP(U32H_PRINT, TUPLE_SORT(U32H_LT, (U32H_1, U32H_2, U32H_3)))));
   printf("enumerate((a,b,c)): %s\n", STRING(TUPLE_ENUMERATE((a,b,c))));
   printf("filter(neq0,(1,0,2,0,3,0)): %s\n", STRING(TUPLE_FILTER(NEQZ, (1,0,2,0,3,0))));
   printf("remove(neq0,(1,0,2,0,3,0)): %s\n", STRING(TUPLE_REMOVE(NEQZ, (1,0,2,0,3,0))));
@@ -431,15 +431,15 @@ int main(void) {
   printf("every(neq0,(1,0,2,3)): %s\n", STRING(TUPLE_EVERY(NEQZ, (1,0,2,3))));
   printf("none(eq0,(1,2,3)): %s\n", STRING(TUPLE_NONE(EQZ, (1,2,3))));
   printf("none(eq0,(1,0,2,3)): %s\n", STRING(TUPLE_NONE(EQZ, (1,0,2,3))));
-  printf("insert((1,3,4),2,1): %s\n", STRING(TUPLE_INSERT((1,3,4), 2, U32_1)));
+  printf("insert((1,3,4),2,1): %s\n", STRING(TUPLE_INSERT((1,3,4), 2, U32H_1)));
   printf("find_first(neq0,(0,0,3,2,1)): %s\n", STRING(TUPLE_FIND_FIRST(NEQZ, (0,0,3,2,1))));
-  printf("find_index(neq0,(0,0,3,2,1)): %d\n", U32_CONVERT(TUPLE_FIND_INDEX(NEQZ,(0,0,3,2,1))));
+  printf("find_index(neq0,(0,0,3,2,1)): %d\n", U32H_CONVERT(TUPLE_FIND_INDEX(NEQZ,(0,0,3,2,1))));
   printf("mapcat(pair0,(1,2,3)): %s\n", STRING(TUPLE_MAPCAT(PAIR0, (1,2,3))));
-  printf("range(1,5): %s\n", STRING(TUPLE_MAP(U32_PRINT, TUPLE_RANGE(U32_1, U32_5))));
-  printf("range(5,1,-1): %s\n", STRING(TUPLE_MAP(U32_PRINT, TUPLE_RANGE(U32_5, U32_1, I32_N1))));
+  printf("range(1,5): %s\n", STRING(TUPLE_MAP(U32_PRINT, TUPLE_RANGE(I32_1, I32_5))));
+  printf("range(5,1,-1): %s\n", STRING(TUPLE_MAP(U32_PRINT, TUPLE_RANGE(I32_5, U32_1, I32_N1))));
   printf("csum((1,2,3)): %d\n", TUPLE_CSUM((1,2,3)));
   printf("interpose((1,2,3),0): %s\n", STRING(TUPLE_INTERPOSE((1,2,3),0)));
-  printf("split_at((1,0,1,1,1,0,1),3): %s\n", STRING(TUPLE_SPLIT_AT((1,0,1,1,1,0,1), U32_3)));
+  printf("split_at((1,0,1,1,1,0,1),3): %s\n", STRING(TUPLE_SPLIT_AT((1,0,1,1,1,0,1), U32H_3)));
 
   printf("pair(1,2): %s\n", STRING(PAIR(1,2)));
   printf("first((1,2)): %d\n", PAIR_FIRST(PAIR(1,2)));
@@ -450,7 +450,7 @@ int main(void) {
   printf("is_pair((1,2,3)): %d\n", IS_PAIR((1,2,3)));
   printf("is_pair([1,2,3]): %d\n", IS_PAIR(LIST(1,2,3)));
   printf("map(first, enumerate([1,2,3])): %s\n",
-    STRING(LIST_MAP(U32_PRINT, LIST_MAP(PAIR_FIRST, LIST_ENUMERATE(LIST(1,2,3))))));
+    STRING(LIST_MAP(U32H_PRINT, LIST_MAP(PAIR_FIRST, LIST_ENUMERATE(LIST(1,2,3))))));
 #endif
 
 #ifdef COL_FLATTEN_DEBUG

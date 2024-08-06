@@ -7,7 +7,7 @@
 
 #define _TUPLE_GET_PROBE(X,N,...) ~,~
 #define _TUPLE_GET(X,N,_P,...) _TUPLE_GET_X ## __VA_OPT__(1)(X,N)
-#define _TUPLE_GET_X1(X,N) _TUPLE_GET_Y(X, U32_PRINT(N))
+#define _TUPLE_GET_X1(X,N) _TUPLE_GET_Y(X, U32H_PRINT(N))
 #define _TUPLE_GET_X(X,N) _TUPLE_GET_Y(X,N)
 #define _TUPLE_GET_Y(X,N) ((X).CAT(a,N))
 

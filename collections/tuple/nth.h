@@ -8,9 +8,9 @@
 #define _TUPLE_NTH_EVAL2(X) _TUPLE_NTH_EVAL3(_TUPLE_NTH_EVAL3(_TUPLE_NTH_EVAL3(_TUPLE_NTH_EVAL3(X))))
 #define _TUPLE_NTH_EVAL3(X) X
 
-#define _TUPLE_NTH(N,...) CAT(_TUPLE_NTH_X, U32_EQ(N,U32_0))(N __VA_OPT__(,) __VA_ARGS__)
+#define _TUPLE_NTH(N,...) CAT(_TUPLE_NTH_X, U32H_EQ(N,U32H_0))(N __VA_OPT__(,) __VA_ARGS__)
 #define _TUPLE_NTH_X1(N,X,...) X
-#define _TUPLE_NTH_X0(N,X,...) DEFER(_TUPLE_NTH_I)()(U32_SUB(N,U32_1) __VA_OPT__(,) __VA_ARGS__)
+#define _TUPLE_NTH_X0(N,X,...) DEFER(_TUPLE_NTH_I)()(U32H_SUB(N,U32H_1) __VA_OPT__(,) __VA_ARGS__)
 #define _TUPLE_NTH_I() _TUPLE_NTH
 
 #endif
