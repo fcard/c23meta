@@ -16,6 +16,7 @@
 #define HEX_DEBUG
 #define FP32_WITH_SIGN_DEBUG
 #define FP32_TRUNC_NEGATIVE_DEBUG
+#define FP32_POW_I_DEBUG
 #endif
 
 int main(void) {
@@ -221,7 +222,6 @@ int main(void) {
   printf("trunc(sqrt(32)): %.4f\n", FP32_CONVERT(FP32_TRUNC(FP32_SQRT(FP32_32))));
   printf("powi(125.0, 0): %.4f\n", FP32_CONVERT(FP32_POW_I(FP32_125, U32_0)));
   printf("exp(1.5): %.4f\n", FP32_CONVERT(FP32_EXP(FP32_ADD(FP32_1, FP32_1L2))));
-  printf("exp(1.5): %.4f\n", FP32_CONVERT(FP32_EXP(FP32_ADD(FP32_1, FP32_1L2))));
 
 #endif
 
@@ -267,6 +267,7 @@ int main(void) {
     printf(STRING_CAT(STRING(F(inf):)," %.1f\n"), FP32_CONVERT(CAT(FP32_,F)(FP32_INF)));\
   } while(0);
   LIST_FOREACH(FP_SPECIAL_TEST_SINGLE, LIST(ABS,FRACT,TRUNC,EXP,LOG2,NEG))
+
 
 #endif
 
@@ -537,4 +538,12 @@ int main(void) {
 #ifdef FP32_TRUNC_NEGATIVE_DEBUG
   printf("trunc(-sqrt(32)): %f\n", FP32_CONVERT(FP32_TRUNC(FP32_NEG(FP32_SQRT(FP32_32)))));
 #endif
+
+#ifdef FP32_POW_I_DEBUG
+  printf("3 ^ 3: %f\n", FP32_CONVERT(FP32_POW_I(FP32_3, U32_3)));
+  printf("e ^ 2: %f\n", FP32_CONVERT(FP32_POW_I(FP32_EULER, U32_2)));
+  printf("e ^ 5: %f\n", FP32_CONVERT(FP32_POW_I(FP32_EULER, U32_5)));
+  printf("exp(2.5): %f\n", FP32_CONVERT(FP32_EXP(FP32_DIV(FP32_5, FP32_2))));
+#endif
+
 }

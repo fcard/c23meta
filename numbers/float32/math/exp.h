@@ -18,25 +18,22 @@
     _FP32_EXP(FP32_FRACT_UNCHECKED(X))\
   )
 
-#define _FP32_EXP_ADD(X,Y) FP32_ADD_UNCHECKED(X,Y)
-#define _FP32_EXP_DIV(X,Y) FP32_DIV_UNCHECKED(X,Y)
-
 #define _FP32_EXP(X)\
-  _FP32_EXP_ADD(\
+  FP32_ADD(\
     FP32_1,\
-    _FP32_EXP_ADD(\
+    FP32_ADD(\
       X,\
-      _FP32_EXP_ADD(\
-        _FP32_EXP_DIV(FP32_POW_I_UNCHECKED(X,U32_2), FP32_2),\
-        _FP32_EXP_ADD(\
-          _FP32_EXP_ADD(FP32_POW_I_UNCHECKED(X,U32_3), FP32_6),\
-          _FP32_EXP_ADD(\
-            _FP32_EXP_DIV(FP32_POW_I_UNCHECKED(X,U32_4), FP32_24),\
-            _FP32_EXP_ADD(\
-              _FP32_EXP_DIV(FP32_POW_I_UNCHECKED(X,U32_5), FP32_120),\
-              _FP32_EXP_ADD(\
-                 _FP32_EXP_DIV(FP32_POW_I_UNCHECKED(X,U32_6), FP32_720),\
-                 _FP32_EXP_DIV(FP32_POW_I_UNCHECKED(X,U32_5), FP32_5040))))))))
+      FP32_ADD(\
+        FP32_DIV(FP32_POW_I(X,U32_2), FP32_2),\
+        FP32_ADD(\
+          FP32_DIV(FP32_POW_I(X,U32_3), FP32_6),\
+          FP32_ADD(\
+            FP32_DIV(FP32_POW_I(X,U32_4), FP32_24),\
+            FP32_ADD(\
+              FP32_DIV(FP32_POW_I(X,U32_5), FP32_120),\
+              FP32_ADD(\
+                 FP32_DIV(FP32_POW_I(X,U32_6), FP32_720),\
+                 FP32_DIV(FP32_POW_I(X,U32_7), FP32_5040))))))))
 
 
 #define FP32_EULER (0,0,1,0,1,0,1,0,0,0,0,1,1,1,1,1,1,0,1,1,0,1,0,0,0,0,0,0,0,0,1,0)
