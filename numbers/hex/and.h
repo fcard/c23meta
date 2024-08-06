@@ -1,7 +1,7 @@
 #ifndef C23META_HEX_AND
 #define C23META_HEX_AND
 
-#define HEXAND(A,B,...) HEXAND1(A,B) __VA_OPT__(,OBSTRUCT(HEXAND_I)()(__VA_ARGS__))
+#define HEXAND(A,B,...) HEXAND1(A,B) __VA_OPT__(,DEFER(HEXAND_I)()(__VA_ARGS__))
 #define HEXAND_I() HEXAND
 #define HEXAND1(A,B) HEXAND1_ ## A ## B
 #define HEXAND1_00 0

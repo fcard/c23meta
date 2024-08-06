@@ -17,6 +17,10 @@
 #define FP32_WITH_SIGN_DEBUG
 #define FP32_TRUNC_NEGATIVE_DEBUG
 #define FP32_POW_I_DEBUG
+#define FP32_POW_DEBUG
+#define FP32_EXP2_DEBUG
+#define FP32_LOG2_DEBUG
+#define FP32_ADD_SIGN_DEBUG
 #endif
 
 int main(void) {
@@ -551,6 +555,33 @@ int main(void) {
   printf("2 ^ 1.25: %f\n", FP32_CONVERT(FP32_POW(FP32_2, FP32_DIV(FP32_5, FP32_4))));
   printf("2 ^ 1.75: %f\n", FP32_CONVERT(FP32_POW(FP32_2, FP32_DIV(FP32_7, FP32_4))));
   printf("2 ^ 1.8: %f\n", FP32_CONVERT(FP32_POW(FP32_2, FP32_DIV(FP32_9, FP32_5))));
+#endif
+
+#ifdef FP32_EXP2_DEBUG
+  printf("exp2(1.5): %f\n", FP32_CONVERT(FP32_EXP2(FP32_DIV(FP32_3, FP32_2))));
+#endif
+
+#ifdef FP32_LOG2_DEBUG
+  printf("from_i32(-5): %f\n", FP32_CONVERT(FP32_FROM_I32(I32_N5)));
+  printf("log2i(2): %f\n", FP32_CONVERT(FP32_LOG2_I(FP32_DIV(FP32_1, FP32_20))));
+  printf("log2(2): %f\n", FP32_CONVERT(FP32_LOG2(FP32_DIV(FP32_1, FP32_20))));
+#endif
+
+#ifdef FP32_ADD_SIGN_DEBUG
+  printf("-5.0 + 0.5: %f\n", FP32_CONVERT(FP32_ADD(FP32_N5, FP32_1L2)));
+  printf("-5.0 + (-3): %f\n", FP32_CONVERT(FP32_ADD(FP32_N5, FP32_N3)));
+  printf("-5.0 + 6.0: %f\n", FP32_CONVERT(FP32_ADD(FP32_N5, FP32_6)));
+  printf("-5.0 + (-6.0): %f\n", FP32_CONVERT(FP32_ADD(FP32_N5, FP32_N6)));
+  printf("5.0 + 0.5: %f\n", FP32_CONVERT(FP32_ADD(FP32_5, FP32_1L2)));
+  printf("5.0 + (-3): %f\n", FP32_CONVERT(FP32_ADD(FP32_5, FP32_N3)));
+  printf("5.0 + 6.0: %f\n", FP32_CONVERT(FP32_ADD(FP32_5, FP32_6)));
+  printf("5.0 + (-6.0): %f\n", FP32_CONVERT(FP32_ADD(FP32_5, FP32_N6)));
+#endif
+
+#ifdef FP32__DEBUG
+  printf("from_i32(-5): %f\n", FP32_CONVERT(FP32_FROM_I32(I32_N5)));
+  printf("log2i(2): %f\n", FP32_CONVERT(FP32_LOG2_I(FP32_DIV(FP32_1, FP32_20))));
+  printf("log2(2): %f\n", FP32_CONVERT(FP32_LOG2(FP32_DIV(FP32_1, FP32_20))));
 #endif
 
 }

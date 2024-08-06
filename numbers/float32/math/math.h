@@ -9,8 +9,9 @@
 #include "max.h"
 #include "min.h"
 #include "pow.h"
-#include "exp.h"
 #include "neg.h"
+#include "exp.h"
+#include "exp2.h"
 #include "log.h"
 #include "log2.h"
 #include "ln.h"
@@ -19,6 +20,7 @@
 #include "trunc.h"
 #include "with_sign.h"
 #include "from_u32.h"
+#include "from_i32.h"
 #include "to_u32.h"
 /*
 #include "rem.h"
