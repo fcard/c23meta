@@ -361,8 +361,8 @@ int main(void) {
   printf("enumerate([a,b,c]): %s\n",             STRING(LIST_ENUMERATE(LIST(a,b,c))));
   printf("walk(F,[1,2,3]): %s\n",                STRING(LIST_WALK(F,LIST(1,2,3))));
   printf("walk(F,[[1,2],3]): %s\n",              STRING(LIST_WALK(F,LIST(LIST(1,2),3))));
-  printf("range(1,5): %s\n",                     STRING(LIST_MAP(U32_PRINT, LIST_RANGE(I32_1, I32_5))));
-  printf("range(5,1,-1): %s\n",                  STRING(LIST_MAP(U32_PRINT, LIST_RANGE(I32_5, I32_1, I32_N1))));
+  printf("range(1,5): %s\n",                     STRING(LIST_MAP(U32H_PRINT, LIST_RANGE(I32H_1, I32H_5))));
+  printf("range(5,1,-1): %s\n",                  STRING(LIST_MAP(U32H_PRINT, LIST_RANGE(I32H_5, I32H_1, I32H_N1))));
   printf("sort(u32_lt, [3,1,2]): %s\n",          STRING(LIST_MAP(U32H_PRINT, LIST_SORT(U32H_LT, LIST(U32H_3, U32H_1, U32H_2)))));
   printf("sort(u32_lt, [3,2,1]): %s\n",          STRING(LIST_MAP(U32H_PRINT, LIST_SORT(U32H_LT, LIST(U32H_3, U32H_2, U32H_1)))));
   printf("sort(u32_lt, [1,2,3]): %s\n",          STRING(LIST_MAP(U32H_PRINT, LIST_SORT(U32H_LT, LIST(U32H_1, U32H_2, U32H_3)))));
@@ -447,13 +447,13 @@ int main(void) {
   printf("find_first(neq0,(0,0,3,2,1)): %s\n", STRING(TUPLE_FIND_FIRST(NEQZ, (0,0,3,2,1))));
   printf("find_index(neq0,(0,0,3,2,1)): %d\n", U32H_CONVERT(TUPLE_FIND_INDEX(NEQZ,(0,0,3,2,1))));
   printf("mapcat(pair0,(1,2,3)): %s\n", STRING(TUPLE_MAPCAT(PAIR0, (1,2,3))));
-  printf("range(1,5): %s\n", STRING(TUPLE_MAP(U32_PRINT, TUPLE_RANGE(I32_1, I32_5))));
-  printf("range(5,1,-1): %s\n", STRING(TUPLE_MAP(U32_PRINT, TUPLE_RANGE(I32_5, U32_1, I32_N1))));
+  printf("range(1,5): %s\n", STRING(TUPLE_MAP(U32H_PRINT, TUPLE_RANGE(I32H_1, I32H_5))));
+  printf("range(5,1,-1): %s\n", STRING(TUPLE_MAP(U32H_PRINT, TUPLE_RANGE(I32H_5, U32H_1, I32H_N1))));
   printf("csum((1,2,3)): %d\n", TUPLE_CSUM((1,2,3)));
   printf("interpose((1,2,3),0): %s\n", STRING(TUPLE_INTERPOSE((1,2,3),0)));
   printf("split_at((1,0,1,1,1,0,1),3): %s\n", STRING(TUPLE_SPLIT_AT((1,0,1,1,1,0,1), U32H_3)));
 
-  printf("pair(1,2): %s\n", STRING(PAIR(1,2)).);
+  printf("pair(1,2): %s\n", STRING(PAIR(1,2)));
   printf("first((1,2)): %d\n", PAIR_FIRST(PAIR(1,2)));
   printf("second((1,2)): %d\n", PAIR_SECOND(PAIR(1,2)));
   printf("is_pair(0): %d\n", IS_PAIR(0));
