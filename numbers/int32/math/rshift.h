@@ -1,8 +1,5 @@
 #ifndef C23META_I32_RSH
 #define C23META_I32_RSH
-#include "../bits/sign.h"
-#include "../../uint32/math/lshift.h"
-
 
 #define I32_RSH1(X) _I32_RSH1_C(X)
 #define _I32_RSH1_C(X) I32_RSH_EVAL(_I32_RSH1(I32_SIGN_BIT(X),X))

@@ -1,7 +1,5 @@
 #ifndef C23META_I32_REM
 #define C23META_I32_REM
-#include "../bits/sign.h"
-#include "../../uint32/cmp/geq.h"
 
 #define I32_REM(X,Y) _I32_REM_C(X,Y)
 #define _I32_REM_C(X,Y) I32_REM_EVAL(_I32_REM(I32_CMP_SIGN(X,Y),X,Y))

@@ -1,8 +1,5 @@
 #ifndef C23META_I32_POW
 #define C23META_I32_POW
-#include "../bits/sign.h"
-#include "../../uint32/math/pow.h"
-
 
 #define I32_POW(X,N) _I32_POW_C(X,N)
 #define _I32_POW_C(X,N) I32_POW_EVAL(_I32_POW_PREAMBLE(I32_EQ(N,I32_0),X,N))

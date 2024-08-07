@@ -21,6 +21,15 @@
 #define FP32_EXP2_DEBUG
 #define FP32_LOG2_DEBUG
 #define FP32_ADD_SIGN_DEBUG
+#define SIGNED_HEX_DEBUG
+#define FP32H_DEBUG
+#define FP32H_EXTRA_DEBUG
+#endif
+
+#ifdef NUMBER_DEBUG
+#define UNSIGNED_DEBUG
+#define SIGNED_DEBUG
+#define FLOAT_DEBUG
 #endif
 
 int main(void) {
@@ -59,7 +68,9 @@ int main(void) {
   printf("min(32,16): %d\n", U32_CONVERT(U32_MIN(U32_32, U32_16)));
   printf("1024 + 2048: %d\n", U32_CONVERT(U32_ADD(U32P(1 0 2 4), U32P(2 0 4 8))));
   printf("print(4138): %s\n", STRING(U32_PRINT(U32P(4 1 3 8))));
+#endif
 
+#ifdef SIGNED_DEBUG
   printf("\nSIGNED 32\n\n");
 
   printf("is_odd(14): %d\n" , I32_IS_ODD(I32_14));
@@ -159,7 +170,9 @@ int main(void) {
   printf("100 & -32: %d\n", I32_CONVERT(I32_AND(I32_100, I32_N32)));
   printf("1 | 6: %d\n", I32_CONVERT(I32_OR(I32_1, I32_6)));
   printf("5 $ 7: %d\n", I32_CONVERT(I32_XOR(I32_5, I32_7)));
+#endif
 
+#ifdef FLOAT_DEBUG
   printf("\nFLOAT 32\n\n");
 
   printf("convert(FP32_0):   %.1f\n", FP32_CONVERT(FP32_0));
@@ -199,7 +212,7 @@ int main(void) {
   printf("40.0 + (-42.0): %.1f\n", FP32_CONVERT(FP32_ADD(FP32_40, FP32_N42)));
   printf("40.0 + (-112.0): %.1f\n", FP32_CONVERT(FP32_ADD(FP32_40, FP32_N112)));
   printf("(-28.0) + (-112.0): %.1f\n", FP32_CONVERT(FP32_ADD(FP32_N28, FP32_N112)));
-  printf("(-28.0) + 112.0: %.1f\n", FP32_CONVERT(FP32_ADD(FP32_28, FP32_N112)));
+  printf("(-28.0) + 112.0: %.1f\n", FP32_CONVERT(FP32_ADD(FP32_N28, FP32_112)));
   printf("0.5 + 0.25: %.2f\n", FP32_CONVERT(FP32_ADD(FP32_1L2, FP32_1L4)));
   printf("0.5 + 0.5: %.1f\n", FP32_CONVERT(FP32_ADD(FP32_1L2, FP32_1L2)));
   printf("1.0 + 0.5: %.1f\n", FP32_CONVERT(FP32_ADD(FP32_1, FP32_1L2)));
@@ -226,7 +239,6 @@ int main(void) {
   printf("trunc(sqrt(32)): %.4f\n", FP32_CONVERT(FP32_TRUNC(FP32_SQRT(FP32_32))));
   printf("powi(125.0, 0): %.4f\n", FP32_CONVERT(FP32_POW_I(FP32_125, U32_0)));
   printf("exp(1.5): %.4f\n", FP32_CONVERT(FP32_EXP(FP32_ADD(FP32_1, FP32_1L2))));
-
 #endif
 
 #ifdef NUMBER_SPECIAL_DEBUG
@@ -441,7 +453,7 @@ int main(void) {
   printf("interpose((1,2,3),0): %s\n", STRING(TUPLE_INTERPOSE((1,2,3),0)));
   printf("split_at((1,0,1,1,1,0,1),3): %s\n", STRING(TUPLE_SPLIT_AT((1,0,1,1,1,0,1), U32H_3)));
 
-  printf("pair(1,2): %s\n", STRING(PAIR(1,2)));
+  printf("pair(1,2): %s\n", STRING(PAIR(1,2)).);
   printf("first((1,2)): %d\n", PAIR_FIRST(PAIR(1,2)));
   printf("second((1,2)): %d\n", PAIR_SECOND(PAIR(1,2)));
   printf("is_pair(0): %d\n", IS_PAIR(0));
@@ -483,6 +495,8 @@ int main(void) {
   printf("23 %% 4: %d\n", U32H_CONVERT(U32H_REM(U32H_23, U32H_4)));
   printf("32 >> 1: %d\n", U32H_CONVERT(U32H_RSH1(U32H_32)));
   printf("32 << 1: %d\n", U32H_CONVERT(U32H_LSH1(U32H_32)));
+  printf("32 >> 2: %d\n", U32H_CONVERT(U32H_RSH(U32H_32, U32H_2)));
+  printf("32 << 2: %d\n", U32H_CONVERT(U32H_LSH1(U32H_32, U32H_2)));
   printf("32 ^ 4: %d\n", U32H_CONVERT(U32H_POW(U32H_32, U32H_4)));
   printf("9 ^ 9: %d\n", U32H_CONVERT(U32H_POW(U32H_9, U32H_9)));
   printf("sqrt(16): %d\n", U32H_CONVERT(U32H_SQRT(U32H_16)));
@@ -578,10 +592,222 @@ int main(void) {
   printf("5.0 + (-6.0): %f\n", FP32_CONVERT(FP32_ADD(FP32_5, FP32_N6)));
 #endif
 
-#ifdef FP32__DEBUG
-  printf("from_i32(-5): %f\n", FP32_CONVERT(FP32_FROM_I32(I32_N5)));
-  printf("log2i(2): %f\n", FP32_CONVERT(FP32_LOG2_I(FP32_DIV(FP32_1, FP32_20))));
-  printf("log2(2): %f\n", FP32_CONVERT(FP32_LOG2(FP32_DIV(FP32_1, FP32_20))));
+#ifdef SIGNED_HEX_DEBUG
+  printf("\nSIGNED HEX 32\n\n");
+
+  printf("is_odd(14): %d\n" , I32H_IS_ODD(I32H_14));
+  printf("is_even(14): %d\n", I32H_IS_EVEN(I32H_14));
+  printf("-13 > 12: %d\n" , I32H_GT(I32H_N13, I32H_12));
+  printf("-13 > -14: %d\n", I32H_GT(I32H_N13, I32H_N14));
+  printf("15 > 14: %d\n"  , I32H_GT(I32H_15, I32H_14));
+  printf("15 > -18: %d\n" , I32H_GT(I32H_15, I32H_N18));
+
+  printf("-13 < 12: %d\n" , I32H_LT(I32H_N13, I32H_12));
+  printf("-13 < -14: %d\n", I32H_LT(I32H_N13, I32H_N14));
+  printf("15 < 14: %d\n"  , I32H_LT(I32H_15, I32H_14));
+  printf("15 < -18: %d\n" , I32H_LT(I32H_15, I32H_N18));
+
+  printf("-13 >= 12: %d\n" , I32H_GEQ(I32H_N13, I32H_12));
+  printf("-13 >= -14: %d\n", I32H_GEQ(I32H_N13, I32H_N14));
+  printf("15 >= 14: %d\n"  , I32H_GEQ(I32H_15, I32H_14));
+  printf("15 >= -18: %d\n" , I32H_GEQ(I32H_15, I32H_N18));
+
+  printf("-13 <= 12: %d\n" , I32H_LEQ(I32H_N13, I32H_12));
+  printf("-13 <= -14: %d\n", I32H_LEQ(I32H_N13, I32H_N14));
+  printf("15 <= 14: %d\n"  , I32H_LEQ(I32H_15, I32H_14));
+  printf("15 <= -18: %d\n" , I32H_LEQ(I32H_15, I32H_N18));
+
+  printf("-13 == 13: %d\n" , I32H_EQ(I32H_N13, I32H_13));
+  printf("-13 == -13: %d\n", I32H_EQ(I32H_N13, I32H_N13));
+  printf("13 == 13: %d\n"  , I32H_LEQ(I32H_13, I32H_13));
+
+  printf("-13 != 13: %d\n" , I32H_NEQ(I32H_N13, I32H_13));
+  printf("-13 != -13: %d\n", I32H_NEQ(I32H_N13, I32H_N13));
+  printf("13 != 13: %d\n"  , I32H_NEQ(I32H_13, I32H_13));
+
+  printf("convert(I32H_100): %d\n", I32H_CONVERT(I32H_100));
+  printf("convert(I32H_N100): %d\n", I32H_CONVERT(I32H_N100));
+
+  printf("-(132): %d\n", I32H_CONVERT(I32H_NEG(I32H_132)));
+  printf("-(-132): %d\n", I32H_CONVERT(I32H_NEG(I32H_N132)));
+  printf("abs(132): %d\n", I32H_CONVERT(I32H_ABS(I32H_132)));
+  printf("abs(-132): %d\n", I32H_CONVERT(I32H_ABS(I32H_N132)));
+
+  printf("-(132): %d\n", I32H_CONVERT(I32H_NEG(I32H_132)));
+  printf("10 + (-5): %d\n", I32H_CONVERT(I32H_ADD(I32H_10, I32H_N5)));
+  printf("10 + (-15): %d\n", I32H_CONVERT(I32H_ADD(I32H_10, I32H_N15)));
+  printf("(-5) + (-15): %d\n", I32H_CONVERT(I32H_ADD(I32H_N5, I32H_N15)));
+
+  printf("(-3) * (-5): %d\n", I32H_CONVERT(I32H_MUL(I32H_N3, I32H_N5)));
+  printf("3 * (-5): %d\n", I32H_CONVERT(I32H_MUL(I32H_3, I32H_N5)));
+  printf("3 * 5: %d\n", I32H_CONVERT(I32H_MUL(I32H_3, I32H_5)));
+
+  printf("15 / (-5): %d\n", I32H_CONVERT(I32H_DIV(I32H_15, I32H_N5)));
+  printf("(-15) / (-5): %d\n", I32H_CONVERT(I32H_DIV(I32H_N15, I32H_N5)));
+  printf("(-15) / 5: %d\n", I32H_CONVERT(I32H_DIV(I32H_N15, I32H_5)));
+  printf("15 / 5: %d\n", I32H_CONVERT(I32H_DIV(I32H_15, I32H_5)));
+  printf("20 / 5: %d\n", I32H_CONVERT(I32H_DIV(I32H_20, I32H_5)));
+
+  printf("16 %% 7: %d\n", I32H_CONVERT(I32H_REM(I32H_16, I32H_7)));
+  printf("(-16) %% 7: %d\n", I32H_CONVERT(I32H_REM(I32H_N16, I32H_7)));
+  printf("16 %% (-7): %d\n", I32H_CONVERT(I32H_REM(I32H_16, I32H_N7)));
+  printf("(-16) %% (-7): %d\n", I32H_CONVERT(I32H_REM(I32H_N16, I32H_N7)));
+
+  printf("100 << 1:   %d\n", I32H_CONVERT(I32H_LSH(I32H_100, I32H_1)));
+  printf("100 << -1:  %d\n", I32H_CONVERT(I32H_LSH(I32H_100, I32H_N1)));
+  printf("-100 << 1:  %d\n", I32H_CONVERT(I32H_LSH(I32H_N100, I32H_1)));
+  printf("-100 << -1: %d\n", I32H_CONVERT(I32H_LSH(I32H_N100, I32H_N1)));
+
+  printf("100 >> 1:   %d\n", I32H_CONVERT(I32H_RSH(I32H_100, I32H_1)));
+  printf("100 >> -1:  %d\n", I32H_CONVERT(I32H_RSH(I32H_100, I32H_N1)));
+  printf("-100 >> 1:  %d\n", I32H_CONVERT(I32H_RSH(I32H_N100, I32H_1)));
+  printf("-100 >> -1: %d\n", I32H_CONVERT(I32H_RSH(I32H_N100, I32H_N1)));
+
+  printf("max(200,32):   %d\n", I32H_CONVERT(I32H_MAX(I32H_200,  I32H_32)));
+  printf("max(-200,32):  %d\n", I32H_CONVERT(I32H_MAX(I32H_N200, I32H_32)));
+  printf("max(200,-32):  %d\n", I32H_CONVERT(I32H_MAX(I32H_200, I32H_N32)));
+  printf("max(-200,-32): %d\n", I32H_CONVERT(I32H_MAX(I32H_N200, I32H_N32)));
+  
+  printf("min(200,32):   %d\n", I32H_CONVERT(I32H_MIN(I32H_200,  I32H_32)));
+  printf("min(-200,32):  %d\n", I32H_CONVERT(I32H_MIN(I32H_N200, I32H_32)));
+  printf("min(200,-32):  %d\n", I32H_CONVERT(I32H_MIN(I32H_200, I32H_N32)));
+  printf("min(-200,-32): %d\n", I32H_CONVERT(I32H_MIN(I32H_N200, I32H_N32)));
+
+  printf("10^3:       %d\n", I32H_CONVERT(I32H_POW(I32H_10,  I32H_3)));
+  printf("10^(-3):    %d\n", I32H_CONVERT(I32H_POW(I32H_10,  I32H_N3)));
+  printf("(-10)^3:    %d\n", I32H_CONVERT(I32H_POW(I32H_N10, I32H_3)));
+  printf("(-10)^(-3): %d\n", I32H_CONVERT(I32H_POW(I32H_N10, I32H_N3)));
+ 
+  printf("-2^0: %d\n", I32H_CONVERT(I32H_POW(I32H_N2,  I32H_0)));
+  printf("2^0: %d\n", I32H_CONVERT(I32H_POW(I32H_2,  I32H_0)));
+  printf("0^0: %d\n", I32H_CONVERT(I32H_POW(I32H_0,  I32H_0)));
+
+  printf("sqrt(0): %d\n", I32H_CONVERT(I32H_SQRT(I32H_0)));
+  printf("sqrt(16): %d\n", I32H_CONVERT(I32H_SQRT(I32H_16)));
+  printf("sqrt(intmax): %d\n", I32H_CONVERT(I32H_SQRT(I32H_MAXV)));
+
+  printf("log(81,3): %d\n", I32H_CONVERT(I32H_LOG(I32H_81, I32H_3)));
+  printf("log2(32): %d\n", I32H_CONVERT(I32H_LOG2(I32H_32)));
+
+  printf("100 & -32: %d\n", I32H_CONVERT(I32H_AND(I32H_100, I32H_N32)));
+  printf("1 | 6: %d\n", I32H_CONVERT(I32H_OR(I32H_1, I32H_6)));
+  printf("5 $ 7: %d\n", I32H_CONVERT(I32H_XOR(I32H_5, I32H_7)));
+#endif
+
+#ifdef FP32H_DEBUG
+
+  printf("convert(FP32H_0):   %.1f\n", FP32H_CONVERT(FP32H_0));
+  printf("convert(FP32H_1):   %.1f\n", FP32H_CONVERT(FP32H_1));
+  printf("convert(FP32H_150): %.1f\n", FP32H_CONVERT(FP32H_150));
+
+  printf("exponent(1.0): %d\n", I32H_CONVERT(FP32H_EXPONENT(FP32H_1)));
+  printf("exponent(2.0): %d\n", I32H_CONVERT(FP32H_EXPONENT(FP32H_2)));
+  printf("exponent(8.0): %d\n", I32H_CONVERT(FP32H_EXPONENT(FP32H_8)));
+
+  printf("mantissa(1.0): %d\n", U32H_CONVERT(FP32H_MANTISSA(FP32H_1)));
+  printf("mantissa(3.0): %d\n", U32H_CONVERT(FP32H_MANTISSA(FP32H_3)));
+  printf("mantissa(15.0): %d\n", U32H_CONVERT(FP32H_MANTISSA(FP32H_15)));
+  
+  printf("from_parts(0,0,0): %.1f\n", FP32H_CONVERT(FP32H_FROM_PARTS(0, U32H_0, U32H_0))); 
+  
+  printf("20.0 > 10.0: %d\n", FP32H_GT(FP32H_20, FP32H_10));
+  printf("32.0 > 42.0: %d\n", FP32H_GT(FP32H_32, FP32H_42));
+  printf("50.0 > 50.0: %d\n", FP32H_GT(FP32H_50, FP32H_50));
+
+  printf("20.0 < 10.0: %d\n", FP32H_LT(FP32H_20, FP32H_10));
+  printf("32.0 < 42.0: %d\n", FP32H_LT(FP32H_32, FP32H_42));
+  printf("50.0 < 50.0: %d\n", FP32H_LT(FP32H_50, FP32H_50));
+
+  printf("20.0 <= 10.0: %d\n", FP32H_LEQ(FP32H_20, FP32H_10));
+  printf("32.0 <= 42.0: %d\n", FP32H_LEQ(FP32H_32, FP32H_42));
+  printf("50.0 <= 50.0: %d\n", FP32H_LEQ(FP32H_50, FP32H_50));
+
+  printf("20.0 >= 10.0: %d\n", FP32H_GEQ(FP32H_20, FP32H_10));
+  printf("32.0 >= 42.0: %d\n", FP32H_GEQ(FP32H_32, FP32H_42));
+  printf("50.0 >= 50.0: %d\n", FP32H_GEQ(FP32H_50, FP32H_50));
+
+  printf("20.0 == 10.0: %d\n", FP32H_EQ(FP32H_20, FP32H_10));
+  printf("32.0 == 42.0: %d\n", FP32H_EQ(FP32H_32, FP32H_42));
+  printf("50.0 == 50.0: %d\n", FP32H_EQ(FP32H_50, FP32H_50)); 
+
+  printf("is_nan(0): %d\n", FP32H_IS_NAN(FP32H_0));
+  printf("is_nan(NaN): %d\n", FP32H_IS_NAN(FP32H_NAN));
+  printf("is_nan(Inf): %d\n", FP32H_IS_NAN(FP32H_INF));
+
+  printf("is_inf(0): %d\n", FP32H_IS_INF(FP32H_0));
+  printf("is_inf(NaN): %d\n", FP32H_IS_INF(FP32H_NAN));
+  printf("is_inf(Inf): %d\n", FP32H_IS_INF(FP32H_INF));
+
+  printf("is_zero(0): %d\n", FP32H_IS_ZERO(FP32H_0));
+  printf("is_zero(NaN): %d\n", FP32H_IS_ZERO(FP32H_NAN));
+  printf("is_zero(Inf): %d\n", FP32H_IS_ZERO(FP32H_INF));
+
+  printf("15.0 + 12.0: %.1f\n", FP32H_CONVERT(FP32H_ADD(FP32H_15, FP32H_12)));
+  printf("40.0 + (-12.0): %.1f\n", FP32H_CONVERT(FP32H_ADD(FP32H_40, FP32H_N12)));
+  printf("40.0 + (-42.0): %.1f\n", FP32H_CONVERT(FP32H_ADD(FP32H_40, FP32H_N42)));
+  printf("40.0 + (-112.0): %.1f\n", FP32H_CONVERT(FP32H_ADD(FP32H_40, FP32H_N112)));
+  printf("(-28.0) + (-112.0): %.1f\n", FP32H_CONVERT(FP32H_ADD(FP32H_N28, FP32H_N112)));
+  printf("(-28.0) + 112.0: %.1f\n", FP32H_CONVERT(FP32H_ADD(FP32H_N28, FP32H_112)));
+  printf("0.5 + 0.25: %.2f\n", FP32H_CONVERT(FP32H_ADD(FP32H_1L2, FP32H_1L4)));
+  printf("0.5 + 0.5: %.1f\n", FP32H_CONVERT(FP32H_ADD(FP32H_1L2, FP32H_1L2)));
+  printf("1.0 + 0.5: %.1f\n", FP32H_CONVERT(FP32H_ADD(FP32H_1, FP32H_1L2)));
+
+  printf("2.0 * 2.0: %.1f\n", FP32H_CONVERT(FP32H_MUL(FP32H_2, FP32H_2)));
+  printf("15.0 * 5.0: %.1f\n", FP32H_CONVERT(FP32H_MUL(FP32H_15, FP32H_5)));
+  printf("1024.0 * 2048.0: %.1f\n", FP32H_CONVERT(FP32H_MUL(FP32HP(1 0 2 4), FP32HP(2 0 4 8))));
+  printf("32.0 / 4.0: %.1f\n", FP32H_CONVERT(FP32H_DIV(FP32H_32, FP32H_4)));
+  printf("2.0 / 4.0: %.1f\n", FP32H_CONVERT(FP32H_DIV(FP32H_2, FP32H_4)));
+  printf("27.0 / 3.0: %.1f\n", FP32H_CONVERT(FP32H_DIV(FP32H_27, FP32H_3)));
+  printf("1.0 / 3.0: %.2f\n", FP32H_CONVERT(FP32H_DIV(FP32H_1, FP32H_3)));
+  printf("sqrt(32.0): %.2f\n", FP32H_CONVERT(FP32H_SQRT(FP32H_32)));
+  printf("fp32_from_u32(0): %.1f\n", FP32H_CONVERT(FP32H_FROM_U32H(U32H_0)));
+  printf("fp32_from_u32(10): %.1f\n", FP32H_CONVERT(FP32H_FROM_U32H(U32H_10)));
+  printf("fp32_from_u32(32): %.1f\n", FP32H_CONVERT(FP32H_FROM_U32H(U32H_32)));
+  printf("fp32_to_u32(0): %d\n", U32H_CONVERT(FP32H_TO_U32(FP32H_0)));
+  printf("fp32_to_u32(10): %d\n", U32H_CONVERT(FP32H_TO_U32(FP32H_10)));
+  printf("fp32_to_u32(32): %d\n", U32H_CONVERT(FP32H_TO_U32(FP32H_32)));
+  printf("log2(5.0): %.4f\n", FP32H_CONVERT(FP32H_LOG2(FP32H_5)));
+  printf("log2(32.0): %.4f\n", FP32H_CONVERT(FP32H_LOG2(FP32H_32)));
+  printf("log2(36.0): %.4f\n", FP32H_CONVERT(FP32H_LOG2(FP32H_36)));
+  printf("log(125.0, 5.0): %.4f\n", FP32H_CONVERT(FP32H_LOG(FP32H_125, FP32H_5)));
+  printf("fract(sqrt(32)): %.4f\n", FP32H_CONVERT(FP32H_FRACT(FP32H_SQRT(FP32H_32))));
+  printf("trunc(sqrt(32)): %.4f\n", FP32H_CONVERT(FP32H_TRUNC(FP32H_SQRT(FP32H_32))));
+  printf("powi(125.0, 0): %.4f\n", FP32H_CONVERT(FP32H_POW_I(FP32H_125, U32H_0)));
+  printf("exp(1.5): %.4f\n", FP32H_CONVERT(FP32H_EXP(FP32H_ADD(FP32H_1, FP32H_1L2))));
+#endif
+
+#ifdef FP32H_EXTRA_DEBUG
+  printf("with_sign(32,0): %f\n", FP32H_CONVERT(FP32H_WITH_SIGN(FP32H_32, 0)));
+  printf("with_sign(32,1): %f\n", FP32H_CONVERT(FP32H_WITH_SIGN(FP32H_32, 1)));
+
+  printf("trunc(-sqrt(32)): %f\n", FP32H_CONVERT(FP32H_TRUNC(FP32H_NEG(FP32H_SQRT(FP32H_32)))));
+
+  printf("3 ^ 3: %f\n", FP32H_CONVERT(FP32H_POW_I(FP32H_3, U32H_3)));
+  printf("e ^ 2: %f\n", FP32H_CONVERT(FP32H_POW_I(FP32H_EULER, U32H_2)));
+  printf("e ^ 5: %f\n", FP32H_CONVERT(FP32H_POW_I(FP32H_EULER, U32H_5)));
+  printf("exp(2.5): %f\n", FP32H_CONVERT(FP32H_EXP(FP32H_DIV(FP32H_5, FP32H_2))));
+
+  printf("2 ^ 1.5: %f\n", FP32H_CONVERT(FP32H_POW(FP32H_2, FP32H_DIV(FP32H_3, FP32H_2))));
+  printf("2 ^ 1.25: %f\n", FP32H_CONVERT(FP32H_POW(FP32H_2, FP32H_DIV(FP32H_5, FP32H_4))));
+  printf("2 ^ 1.75: %f\n", FP32H_CONVERT(FP32H_POW(FP32H_2, FP32H_DIV(FP32H_7, FP32H_4))));
+  printf("2 ^ 1.8: %f\n", FP32H_CONVERT(FP32H_POW(FP32H_2, FP32H_DIV(FP32H_9, FP32H_5))));
+
+  printf("exp2(1.5): %f\n", FP32H_CONVERT(FP32H_EXP2(FP32H_DIV(FP32H_3, FP32H_2))));
+
+  printf("from_i32(-5): %f\n", FP32H_CONVERT(FP32H_FROM_I32H(I32H_N5)));
+  printf("log2i(0.05): %f\n", FP32H_CONVERT(FP32H_LOG2_I(FP32H_DIV(FP32H_1, FP32H_20))));
+  printf("log2(0.05): %f\n", FP32H_CONVERT(FP32H_LOG2(FP32H_DIV(FP32H_1, FP32H_20))));
+#endif
+
+#ifdef FP32H_ADD_SIGNS_DEBUG
+  printf("-5.0 + 0.5: %f\n", FP32H_CONVERT(FP32H_ADD(FP32H_N5, FP32H_1L2)));
+  printf("-5.0 + (-3): %f\n", FP32H_CONVERT(FP32H_ADD(FP32H_N5, FP32H_N3)));
+  printf("-5.0 + 6.0: %f\n", FP32H_CONVERT(FP32H_ADD(FP32H_N5, FP32H_6)));
+  printf("-5.0 + (-6.0): %f\n", FP32H_CONVERT(FP32H_ADD(FP32H_N5, FP32H_N6)));
+  printf("5.0 + 0.5: %f\n", FP32H_CONVERT(FP32H_ADD(FP32H_5, FP32H_1L2)));
+  printf("5.0 + (-3): %f\n", FP32H_CONVERT(FP32H_ADD(FP32H_5, FP32H_N3)));
+  printf("5.0 + 6.0: %f\n", FP32H_CONVERT(FP32H_ADD(FP32H_5, FP32H_6)));
+  printf("5.0 + (-6.0): %f\n", FP32H_CONVERT(FP32H_ADD(FP32H_5, FP32H_N6)));
 #endif
 
 }

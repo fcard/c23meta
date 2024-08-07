@@ -8,4 +8,10 @@
         U128H_LSH46(U128H_FROM_BITS32(X)),\
         U128H_FROM_BITS32(Y))))
 
+#define U128H_DIVSHIFT32H(X,Y)\
+  U128H_TO_U32H(\
+    U128H_RSH23(\
+      U128H_DIV(\
+        U128H_LSH46(U128H_FROM_U32H(X)),\
+        U128H_FROM_U32H(Y))))
 #endif

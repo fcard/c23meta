@@ -1,0 +1,6 @@
+#ifndef C23META_I32H_IS_EVEN
+#define C23META_I32H_IS_EVEN
+
+#define I32H_IS_EVEN(X) U32H_IS_EVEN(X)
+
+#endif

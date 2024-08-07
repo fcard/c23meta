@@ -1,7 +1,5 @@
 #ifndef C23META_I32_GEQ
 #define C23META_I32_GEQ
-#include "../bits/sign.h"
-#include "../../uint32/cmp/geq.h"
 
 #define I32_GEQ(X,Y) _I32_GEQ_C(X,Y)
 #define _I32_GEQ_C(X,Y) I32_GEQ_EVAL(_I32_GEQ(I32_CMP_SIGN(X,Y),X,Y))

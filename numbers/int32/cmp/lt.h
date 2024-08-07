@@ -1,7 +1,5 @@
 #ifndef C23META_I32_LT
 #define C23META_I32_LT
-#include "../bits/sign.h"
-#include "../../uint32/cmp/lt.h"
 
 #define I32_LT(X,Y) _I32_LT_C(X,Y)
 #define _I32_LT_C(X,Y) I32_LT_EVAL(_I32_LT(I32_CMP_SIGN(X,Y),X,Y))

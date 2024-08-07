@@ -1,0 +1,6 @@
+#ifndef C23META_I32H_IS_ODD
+#define C23META_I32H_IS_ODD
+
+#define I32H_IS_ODD(X) U32H_IS_ODD(X)
+
+#endif

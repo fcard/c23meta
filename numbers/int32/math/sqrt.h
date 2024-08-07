@@ -1,8 +1,5 @@
 #ifndef C23META_I32_SQRT
 #define C23META_I32_SQRT
-#include "../bits/sign.h"
-#include "../../uint32/math/sqrt.h"
-
 
 #define I32_SQRT(X) _I32_SQRT_C(X)
 #define _I32_SQRT_C(X) I32_SQRT_EVAL(_I32_SQRT(I32_SIGN_BIT(X),X))

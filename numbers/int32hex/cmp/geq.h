@@ -1,0 +1,14 @@
+#ifndef C23META_I32H_GEQ
+#define C23META_I32H_GEQ
+
+#define I32H_GEQ(X,Y) _I32H_GEQ_C(X,Y)
+#define _I32H_GEQ_C(X,Y) I32H_GEQ_EVAL(_I32H_GEQ(I32H_CMP_SIGN(X,Y),X,Y))
+#define I32H_GEQ_EVAL(X) X
+
+#define _I32H_GEQ(S,X,Y) CAT(_I32H_GEQ_X_,S)(X,Y)
+#define _I32H_GEQ_X_POS_POS(X,Y) U32H_GEQ(X,Y)
+#define _I32H_GEQ_X_NEG_NEG(X,Y) U32H_GEQ(X,Y)
+#define _I32H_GEQ_X_POS_NEG(X,Y) 1
+#define _I32H_GEQ_X_NEG_POS(X,Y) 0
+
+#endif

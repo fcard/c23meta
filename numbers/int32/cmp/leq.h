@@ -1,7 +1,5 @@
 #ifndef C23META_I32_LEQ
 #define C23META_I32_LEQ
-#include "../bits/sign.h"
-#include "../../uint32/cmp/leq.h"
 
 #define I32_LEQ(X,Y) _I32_LEQ_C(X,Y)
 #define _I32_LEQ_C(X,Y) I32_LEQ_EVAL(_I32_LEQ(I32_CMP_SIGN(X,Y),X,Y))
