@@ -794,7 +794,7 @@ int main(void) {
 
   printf("exp2(1.5): %f\n", FP32H_CONVERT(FP32H_EXP2(FP32H_DIV(FP32H_3, FP32H_2))));
 
-  printf("from_i32(-5): %f\n", FP32H_CONVERT(FP32H_FROM_I32H(I32H_N5)));
+  printf("from_i32h(-5): %f\n", FP32H_CONVERT(FP32H_FROM_I32H(I32H_N5)));
   printf("log2i(0.05): %f\n", FP32H_CONVERT(FP32H_LOG2_I(FP32H_DIV(FP32H_1, FP32H_20))));
   printf("log2(0.05): %f\n", FP32H_CONVERT(FP32H_LOG2(FP32H_DIV(FP32H_1, FP32H_20))));
 #endif
@@ -810,4 +810,37 @@ int main(void) {
   printf("5.0 + (-6.0): %f\n", FP32H_CONVERT(FP32H_ADD(FP32H_5, FP32H_N6)));
 #endif
 
+#ifdef FP32_FLOOR_DEBUG
+  printf("trunc(1.0): %f\n", FP32_CONVERT(FP32_TRUNC(FP32_1)));
+  printf("trunc(1.5): %f\n", FP32_CONVERT(FP32_TRUNC(FP32_ADD(FP32_1,FP32_1L2))));
+  printf("trunc(-1.5): %f\n", FP32_CONVERT(FP32_TRUNC(FP32_NEG(FP32_ADD(FP32_1,FP32_1L2)))));
+  printf("trunc(-2.0): %f\n", FP32_CONVERT(FP32_TRUNC(FP32_N2)));
+  
+  printf("floor(1.0): %f\n", FP32_CONVERT(FP32_FLOOR(FP32_1)));
+  printf("floor(1.5): %f\n", FP32_CONVERT(FP32_FLOOR(FP32_ADD(FP32_1,FP32_1L2))));
+  printf("floor(-1.5): %f\n", FP32_CONVERT(FP32_FLOOR(FP32_NEG(FP32_ADD(FP32_1,FP32_1L2)))));
+  printf("floor(-2.0): %f\n", FP32_CONVERT(FP32_FLOOR(FP32_N2)));
+  
+  printf("ceil(1.0): %f\n", FP32_CONVERT(FP32_CEIL(FP32_1)));
+  printf("ceil(1.5): %f\n", FP32_CONVERT(FP32_CEIL(FP32_ADD(FP32_1,FP32_1L2))));
+  printf("ceil(-1.5): %f\n", FP32_CONVERT(FP32_CEIL(FP32_NEG(FP32_ADD(FP32_1,FP32_1L2)))));
+  printf("ceil(-2.0): %f\n", FP32_CONVERT(FP32_CEIL(FP32_N2)));
+#endif
+
+#ifdef FP32H_FLOOR_DEBUG
+  printf("trunc(1.0): %f\n", FP32H_CONVERT(FP32H_TRUNC(FP32H_1)));
+  printf("trunc(1.5): %f\n", FP32H_CONVERT(FP32H_TRUNC(FP32H_ADD(FP32H_1,FP32H_1L2))));
+  printf("trunc(-1.5): %f\n", FP32H_CONVERT(FP32H_TRUNC(FP32H_NEG(FP32H_ADD(FP32H_1,FP32H_1L2)))));
+  printf("trunc(-2.0): %f\n", FP32H_CONVERT(FP32H_TRUNC(FP32H_N2)));
+  
+  printf("floor(1.0): %f\n", FP32H_CONVERT(FP32H_FLOOR(FP32H_1)));
+  printf("floor(1.5): %f\n", FP32H_CONVERT(FP32H_FLOOR(FP32H_ADD(FP32H_1,FP32H_1L2))));
+  printf("floor(-1.5): %f\n", FP32H_CONVERT(FP32H_FLOOR(FP32H_NEG(FP32H_ADD(FP32H_1,FP32H_1L2)))));
+  printf("floor(-2.0): %f\n", FP32H_CONVERT(FP32H_FLOOR(FP32H_N2)));
+  
+  printf("ceil(1.0): %f\n", FP32H_CONVERT(FP32H_CEIL(FP32H_1)));
+  printf("ceil(1.5): %f\n", FP32H_CONVERT(FP32H_CEIL(FP32H_ADD(FP32H_1,FP32H_1L2))));
+  printf("ceil(-1.5): %f\n", FP32H_CONVERT(FP32H_CEIL(FP32H_NEG(FP32H_ADD(FP32H_1,FP32H_1L2)))));
+  printf("ceil(-2.0): %f\n", FP32H_CONVERT(FP32H_CEIL(FP32H_N2)));
+#endif
 }

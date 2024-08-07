@@ -22,17 +22,9 @@
 #include "from_u32.h"
 #include "from_i32.h"
 #include "to_u32.h"
-/*
-#include "rem.h"
-#include "lshift.h"
-#include "rshift.h"
-#include "log.h"
-#include "log2.h"
-#include "and.h"
-#include "or.h"
-#include "xor.h"
-*/
 #include "neg.h"
 #include "abs.h"
+#include "floor.h"
+#include "ceil.h"
 
 #endif
