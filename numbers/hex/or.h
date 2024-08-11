@@ -1,7 +1,7 @@
 #ifndef C23META_HEX_OR
 #define C23META_HEX_OR
 
-#define HEXOR(A,B,...) HEXOR1(A,B) __VA_OPT__(,OBSTRUCT(HEXOR_I)()(__VA_ARGS__))
+#define HEXOR(A,B,...) HEXOR1(A,B)__VA_OPT__(,OBSTRUCT(HEXOR_I)()(__VA_ARGS__))
 #define HEXOR_I() HEXOR
 #define HEXOR1(A,B) HEXOR1_ ## A ## B
 #define HEXOR1_00 0

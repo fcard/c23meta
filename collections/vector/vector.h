@@ -49,7 +49,7 @@
 #include "csum.h"
 
 #define VECTOR32_EMPTY (0,())
-#define VECTOR32(...) _VECTOR32(ARGCOUNT(__VA_ARGS__) __VA_OPT__(,) __VA_ARGS__)
+#define VECTOR32(...) _VECTOR32(ARGCOUNT(__VA_ARGS__)__VA_OPT__(,)__VA_ARGS__)
 
 #define VECTOR32_VALUES(X) _VECTOR32_VALUES X
 #define _VECTOR32_VALUES(L,V) V
@@ -60,23 +60,23 @@
 #define _VECTOR32(N,...) CAT(_VECTOR32_X,N)(__VA_ARGS__)
 #define _VECTOR32_X0() VECTOR32_EMPTY
 #define _VECTOR32_X1(X0)\
-  (1, (X0))
+  (1,(X0))
 #define _VECTOR32_X2(X0,X1)\
-  (2, (X0,X1))
+  (2,(X0,X1))
 #define _VECTOR32_X3(X0,X1,X2)\
-  (3, (X0,X1,X2))
+  (3,(X0,X1,X2))
 #define _VECTOR32_X4(X0,X1,X2,X3)\
-  (4, (X0,X1,X2,X3))
+  (4,(X0,X1,X2,X3))
 #define _VECTOR32_X5(X0,X1,X2,X3,X4)\
-  (5, (X0,X1,X2,X3,X4))
+  (5,(X0,X1,X2,X3,X4))
 #define _VECTOR32_X6(X0,X1,X2,X3,X4,X5)\
-  (6, (X0,X1,X2,X3,X4,X5))
+  (6,(X0,X1,X2,X3,X4,X5))
 #define _VECTOR32_X7(X0,X1,X2,X3,X4,X5,X6)\
-  (7, (X0,X1,X2,X3,X4,X5,X6))
+  (7,(X0,X1,X2,X3,X4,X5,X6))
 #define _VECTOR32_X8(X0,X1,X2,X3,X4,X5,X6,X7)\
-  (8, (X0,X1,X2,X3,X4,X5,X6,X7))
+  (8,(X0,X1,X2,X3,X4,X5,X6,X7))
 #define _VECTOR32_X9(X0,X1,X2,X3,X4,X5,X6,X7,X8)\
-  (9, (X0,X1,X2,X3,X4,X5,X6,X7,X8))
+  (9,(X0,X1,X2,X3,X4,X5,X6,X7,X8))
 #define _VECTOR32_X10(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9)\
   (10,(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9))
 #define _VECTOR32_X11(X0,X1,X2,X3,X4,X5,X6,X7,X8,X9,X10)\

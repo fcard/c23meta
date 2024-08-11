@@ -1,6 +1,6 @@
 #ifndef C23META_U8H_LOG2
 #define C23META_U8H_LOG2
 
-#define U8H_LOG2(X) U8H_SUB(U8H_7, U8H_CTZ(X))
+#define U8H_LOG2(X) U8H_SUB(U8H_7, U8H_CLZ(X))
 
 #endif

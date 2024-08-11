@@ -21,12 +21,4 @@
                              A24,B24,A25,B25,A26,B26,A27,B27,A28,B28,A29,B29,A30,B30,A31,B31)\
                     )
 
-#define BITAND(A,B,...) BITAND1(A,B) __VA_OPT__(,OBSTRUCT(BITAND_I)()(__VA_ARGS__))
-#define BITAND_I() BITAND
-#define BITAND1(A,B) BITAND1_ ## A ## B
-#define BITAND1_00 0
-#define BITAND1_01 0
-#define BITAND1_10 0
-#define BITAND1_11 1
-
 #endif

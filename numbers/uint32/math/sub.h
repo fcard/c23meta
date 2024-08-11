@@ -21,26 +21,4 @@
                              A24,B24,A25,B25,A26,B26,A27,B27,A28,B28,A29,B29,A30,B30,A31,B31)\
                     )
 
-#define BITSUB(CARRY,A,B,...) BITSUB1(CARRY,A,B) __VA_OPT__(,OBSTRUCT(BITSUB_I)()(BITSUBCARRY(CARRY,A,B),__VA_ARGS__))
-#define BITSUB_I() BITSUB
-#define BITSUB1(C,A,B) BITSUB1_ ## C ## A ## B
-#define BITSUB1_000 0
-#define BITSUB1_001 1
-#define BITSUB1_010 1
-#define BITSUB1_011 0
-#define BITSUB1_100 1
-#define BITSUB1_101 0
-#define BITSUB1_110 0
-#define BITSUB1_111 1
-
-#define BITSUBCARRY(C,A,B) BITSUBCARRY_ ## C ## A ## B
-#define BITSUBCARRY_000 0
-#define BITSUBCARRY_001 1
-#define BITSUBCARRY_010 0
-#define BITSUBCARRY_011 0
-#define BITSUBCARRY_100 1
-#define BITSUBCARRY_101 1
-#define BITSUBCARRY_110 0
-#define BITSUBCARRY_111 1
-
 #endif

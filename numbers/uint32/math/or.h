@@ -21,12 +21,4 @@
                              A24,B24,A25,B25,A26,B26,A27,B27,A28,B28,A29,B29,A30,B30,A31,B31)\
                     )
 
-#define BITOR(A,B,...) BITOR1(A,B) __VA_OPT__(,OBSTRUCT(BITOR_I)()(__VA_ARGS__))
-#define BITOR_I() BITOR
-#define BITOR1(A,B) BITOR1_ ## A ## B
-#define BITOR1_00 0
-#define BITOR1_01 1
-#define BITOR1_10 1
-#define BITOR1_11 1
-
 #endif

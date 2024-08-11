@@ -69,9 +69,9 @@
 #define _LIST_EVAL3(X) X
 
 #define _LIST LIST_NIL
-#define _LIST1(X,...) _LIST_X ## __VA_OPT__(CONS(X,__VA_ARGS__) IGNORE) (X)
-#define _LIST_X(X) (X, LIST_NIL)
-#define _LIST_XCONS(X,...) (X, DEFER(_LIST_I)()(__VA_ARGS__))
+#define _LIST1(X,...) _LIST_X ## __VA_OPT__(CONS(X,__VA_ARGS__)IGNORE) (X)
+#define _LIST_X(X) (X,LIST_NIL)
+#define _LIST_XCONS(X,...) (X,DEFER(_LIST_I)()(__VA_ARGS__))
 #define _LIST_I() _LIST1
 
 #endif

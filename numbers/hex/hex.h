@@ -11,5 +11,6 @@
 #include "lt.h"
 #include "lshift.h"
 #include "rshift.h"
+#include "to_bits.h"
 
 #endif

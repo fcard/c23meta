@@ -4,25 +4,25 @@
 #define FP32_LT(X,Y) _FP32_LT_C(X,Y)
 #define _FP32_LT_C(X,Y) CAT_ALL(_FP32_LT_CHECK_, FP32_CLASSIFY(X), _, FP32_CLASSIFY(Y))(X,Y)
 
-#define _FP32_LT_CHECK_NAN_NAN(X,Y) 0
-#define _FP32_LT_CHECK_OTHER_NAN(X,Y) 0
-#define _FP32_LT_CHECK_ZERO_NAN(X,Y) 0
-#define _FP32_LT_CHECK_INFINITY_NAN(X,Y) 0
-#define _FP32_LT_CHECK_NAN_OTHER(X,Y) 0
-#define _FP32_LT_CHECK_NAN_ZERO(X,Y) 0
-#define _FP32_LT_CHECK_NAN_INFINITY(X,Y) 0
+#define _FP32_LT_CHECK_nan_nan(X,Y) 0
+#define _FP32_LT_CHECK_other_nan(X,Y) 0
+#define _FP32_LT_CHECK_zero_nan(X,Y) 0
+#define _FP32_LT_CHECK_infinity_nan(X,Y) 0
+#define _FP32_LT_CHECK_nan_other(X,Y) 0
+#define _FP32_LT_CHECK_nan_zero(X,Y) 0
+#define _FP32_LT_CHECK_nan_infinity(X,Y) 0
 
-#define _FP32_LT_CHECK_INFINITY_INFINITY(X,Y) 0
-#define _FP32_LT_CHECK_INFINITY_OTHER(X,Y) 0
-#define _FP32_LT_CHECK_INFINITY_ZERO(X,Y) 0
-#define _FP32_LT_CHECK_OTHER_INFINITY(X,Y) 1
-#define _FP32_LT_CHECK_ZERO_INFINITY(X,Y) 1
+#define _FP32_LT_CHECK_infinity_infinity(X,Y) 0
+#define _FP32_LT_CHECK_infinity_other(X,Y) 0
+#define _FP32_LT_CHECK_infinity_zero(X,Y) 0
+#define _FP32_LT_CHECK_other_infinity(X,Y) 1
+#define _FP32_LT_CHECK_zero_infinity(X,Y) 1
 
-#define _FP32_LT_CHECK_OTHER_OTHER(X,Y) FP32_LT_UNCHECKED(X,Y)
-#define _FP32_LT_CHECK_OTHER_ZERO(X,Y) FP32_LT_UNCHECKED(X,Y)
-#define _FP32_LT_CHECK_ZERO_OTHER(X,Y) FP32_LT_UNCHECKED(X,Y)
+#define _FP32_LT_CHECK_other_other(X,Y) FP32_LT_UNCHECKED(X,Y)
+#define _FP32_LT_CHECK_other_zero(X,Y) FP32_LT_UNCHECKED(X,Y)
+#define _FP32_LT_CHECK_zero_other(X,Y) FP32_LT_UNCHECKED(X,Y)
 
-#define _FP32_LT_CHECK_ZERO_ZERO(X,Y) 0
+#define _FP32_LT_CHECK_zero_zero(X,Y) 0
 
 #define FP32_LT_UNCHECKED(X,Y) FP32_LT_EVAL(_FP32_LT(FP32_CMP_SIGN(X,Y),X,Y))
 #define FP32_LT_EVAL(X) FP32_LT_EVAL1(FP32_LT_EVAL1(X))
