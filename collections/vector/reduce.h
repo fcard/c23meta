@@ -1,0 +1,6 @@
+#ifndef C23META_VECTOR_REDUCE
+#define C23META_VECTOR_REDUCE
+
+#define VECTOR32_REDUCE(F,X,...) VECTOR32_FOLDL(F,X __VA_OPT__(,)__VA_ARGS__)
+
+#endif

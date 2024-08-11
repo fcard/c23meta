@@ -4,6 +4,8 @@
 #include "collections/list/list.h"
 #include "collections/tuple/tuple.h"
 #include "collections/pair/pair.h"
+#include "collections/vector/vector.h"
+#include "collections/atom/atom.h"
 
 #include <stdio.h>
 
@@ -24,12 +26,35 @@
 #define SIGNED_HEX_DEBUG
 #define FP32H_DEBUG
 #define FP32H_EXTRA_DEBUG
+#define ATOM_DEBUG
+#define VECTOR_DEBUG
+#define U8H_DEBUG
 #endif
 
 #ifdef NUMBER_DEBUG
 #define UNSIGNED_DEBUG
 #define SIGNED_DEBUG
 #define FLOAT_DEBUG
+#endif
+
+#ifdef ATOM_DEBUG
+#define CHECK_ZERO0 ATOM_CHECK
+
+#if ATOM_NEQ(CHECK_ZERO, 1)
+#  pragma message "1 is not 0"
+#endif
+
+#if !ATOM_NEQ(CHECK_ZERO, 0)
+#  pragma message "0 is 0"
+#endif
+
+#if IS_ATOM(0)
+#  pragma message "0 is an atom"
+#endif
+
+#if !IS_ATOM((1,2,3))
+#  pragma message "(1,2,3) is not an atom"
+#endif
 #endif
 
 int main(void) {
@@ -384,7 +409,7 @@ int main(void) {
   printf("as_data_value([1,2,3],int)->first: %d\n", list3->first);
   printf("as_data_value([4,5,6])->first: %d\n", list4->first);
 
-  LIST_AS_TUPLE(tuple, LIST(1,'a',(char*)"abc"));
+  LIST_AS_TUPLE_DATA(tuple, LIST(1,'a',(char*)"abc"));
   printf("as_tuple([1,'a',\"abc\"]): (%d, '%c', \"%s\")\n",
     TUPLE_GET(tuple,1), TUPLE_GET(tuple,2), TUPLE_GET(tuple,3));
 
@@ -496,7 +521,7 @@ int main(void) {
   printf("32 >> 1: %d\n", U32H_CONVERT(U32H_RSH1(U32H_32)));
   printf("32 << 1: %d\n", U32H_CONVERT(U32H_LSH1(U32H_32)));
   printf("32 >> 2: %d\n", U32H_CONVERT(U32H_RSH(U32H_32, U32H_2)));
-  printf("32 << 2: %d\n", U32H_CONVERT(U32H_LSH1(U32H_32, U32H_2)));
+  printf("32 << 2: %d\n", U32H_CONVERT(U32H_LSH(U32H_32, U32H_2)));
   printf("32 ^ 4: %d\n", U32H_CONVERT(U32H_POW(U32H_32, U32H_4)));
   printf("9 ^ 9: %d\n", U32H_CONVERT(U32H_POW(U32H_9, U32H_9)));
   printf("sqrt(16): %d\n", U32H_CONVERT(U32H_SQRT(U32H_16)));
@@ -695,7 +720,6 @@ int main(void) {
 #endif
 
 #ifdef FP32H_DEBUG
-
   printf("convert(FP32H_0):   %.1f\n", FP32H_CONVERT(FP32H_0));
   printf("convert(FP32H_1):   %.1f\n", FP32H_CONVERT(FP32H_1));
   printf("convert(FP32H_150): %.1f\n", FP32H_CONVERT(FP32H_150));
@@ -842,5 +866,110 @@ int main(void) {
   printf("ceil(1.5): %f\n", FP32H_CONVERT(FP32H_CEIL(FP32H_ADD(FP32H_1,FP32H_1L2))));
   printf("ceil(-1.5): %f\n", FP32H_CONVERT(FP32H_CEIL(FP32H_NEG(FP32H_ADD(FP32H_1,FP32H_1L2)))));
   printf("ceil(-2.0): %f\n", FP32H_CONVERT(FP32H_CEIL(FP32H_N2)));
+#endif
+
+#ifdef VECTOR_DEBUG
+  printf("vector(): %s\n", STRING(VECTOR32()));
+  printf("vector(1,2,3): %s\n", STRING(VECTOR32(1,2,3)));
+  printf("push(<1,2,3>,4): %s\n", STRING(VECTOR32_PUSH(VECTOR32(1,2,3),4)));
+  printf("nth(<1,2,3>,1): %s\n", STRING(VECTOR32_NTH(VECTOR32(1,2,3),1)));
+  printf("as_array(<1,2,3>): %s\n", STRING(VECTOR32_AS_ARRAY(VECTOR32(1,2,3))));
+  printf("map(F,<1,2,3>): %s\n", STRING(VECTOR32_MAP(F,VECTOR32(1,2,3))));
+  printf("concat(<1,2,3>,<4,5,6>): %s\n", STRING(VECTOR32_CONCAT(VECTOR32(1,2,3), VECTOR32(4,5,6))));
+  printf("contains(eq0, <1,2,3>): %d\n", VECTOR32_CONTAINS(EQZ, VECTOR32(1,2,3)));
+  printf("contains(eq0, <0,1,2>): %d\n", VECTOR32_CONTAINS(EQZ, VECTOR32(0,1,2)));
+  printf("as_list(<1,2,3>): %s\n", STRING(VECTOR32_AS_LIST(VECTOR32(1,2,3))));
+  printf("map(F, <1,2,3>): %s\n", STRING(VECTOR32_MAP(F, VECTOR32(1,2,3))));
+  printf("take(<1,2,3,4,5,6>,4): %s\n", STRING(VECTOR32_TAKE(VECTOR32(1,2,3,4,5,6), 4)));
+  printf("take_last(<1,2,3,4,5,6>,2): %s\n", STRING(VECTOR32_TAKE_LAST(VECTOR32(1,2,3,4,5,6), 2)));
+  printf("take_nth(<1,2,3,4,5,6>,2): %s\n", STRING(VECTOR32_TAKE_NTH(VECTOR32(1,2,3,4,5,6), 2)));
+  printf("take_while(diff0,<1,2,3,0,3,2,1>): %s\n", STRING(VECTOR32_TAKE_WHILE(NEQZ, VECTOR32(1,2,3,0,3,2,1))));
+  printf("drop(<1,2,3,4,5,6>,2): %s\n", STRING(VECTOR32_DROP(VECTOR32(1,2,3,4,5,6), 2)));
+  printf("drop_last(<1,2,3,4,5,6>,2): %s\n", STRING(VECTOR32_DROP_LAST(VECTOR32(1,2,3,4,5,6), 2)));
+  printf("drop_nth(<1,2,3,4,5,6>,2): %s\n", STRING(VECTOR32_DROP_NTH(VECTOR32(1,2,3,4,5,6), 2)));
+  printf("drop_while(diff0,<1,2,3,0,3,2,1>): %s\n", STRING(VECTOR32_DROP_WHILE(NEQZ, VECTOR32(1,2,3,0,3,2,1))));
+  printf("enumerate(<1,2,3>): %s\n", STRING(VECTOR32_ENUMERATE(VECTOR32(1,2,3))));
+  printf("every(neq0, <1,2,3>): %s\n", STRING(VECTOR32_EVERY(NEQZ, VECTOR32(1,2,3))));
+  printf("every(neq0, <1,2,0,3>): %s\n", STRING(VECTOR32_EVERY(NEQZ, VECTOR32(1,2,0,3))));
+  printf("none(eq0, <1,2,3>): %s\n", STRING(VECTOR32_NONE(EQZ, VECTOR32(1,2,3))));
+  printf("none(eq0, <1,2,0,3>): %s\n", STRING(VECTOR32_NONE(EQZ, VECTOR32(1,2,0,3))));
+  printf("filter(neq0, <1,0,2,0,3>): %s\n", STRING(VECTOR32_FILTER(NEQZ, VECTOR32(1,0,2,0,3))));
+  printf("filter(eq0, <1,0,2,0,3>): %s\n", STRING(VECTOR32_FILTER(EQZ, VECTOR32(1,0,2,0,3))));
+  printf("remove(eq0, <1,0,2,0,3>): %s\n", STRING(VECTOR32_REMOVE(EQZ, VECTOR32(1,0,2,0,3))));
+  printf("remove(neq0, <1,0,2,0,3>): %s\n", STRING(VECTOR32_REMOVE(NEQZ, VECTOR32(1,0,2,0,3))));
+  printf("first(<1,2,3>): %s\n", STRING(VECTOR32_FIRST(VECTOR32(1,2,3))));
+  printf("rest(<1,2,3>): %s\n", STRING(VECTOR32_REST(VECTOR32(1,2,3))));
+  printf("last(<1,2,3>): %s\n", STRING(VECTOR32_LAST(VECTOR32(1,2,3))));
+  printf("find_first(neq0, <0,0,3,2,1>): %s\n", STRING(VECTOR32_FIND_FIRST(NEQZ, VECTOR32(0,0,3,2,1))));
+  printf("find_index(neq0, <0,0,3,2,1>): %s\n", STRING(VECTOR32_FIND_INDEX(NEQZ, VECTOR32(0,0,3,2,1))));
+  printf("foldl(f, <1,2,3>): %s\n", STRING(VECTOR32_FOLDL(F, VECTOR32(1,2,3))));
+  printf("foldl(f, <1,2,3>, 0): %s\n", STRING(VECTOR32_FOLDL(F, VECTOR32(1,2,3), 0)));
+  printf("foldr(f, <1,2,3>): %s\n", STRING(VECTOR32_FOLDR(F, VECTOR32(1,2,3))));
+  printf("foldr(f, <1,2,3>, 0): %s\n", STRING(VECTOR32_FOLDR(F, VECTOR32(1,2,3), 0)));
+  printf("reduce(f, <1,2,3>): %s\n", STRING(VECTOR32_REDUCE(F, VECTOR32(1,2,3))));
+  printf("reduce(f, <1,2,3>, 0): %s\n", STRING(VECTOR32_REDUCE(F, VECTOR32(1,2,3), 0)));
+  printf("foreach(f, <1,2,3>): %s\n", STRING(VECTOR32_FOREACH(F, VECTOR32(1,2,3))));
+  printf("is_empty(<1,2,3>): %s\n", STRING(VECTOR32_IS_EMPTY(VECTOR32(1,2,3))));
+  printf("is_empty(<>): %s\n", STRING(VECTOR32_IS_EMPTY(VECTOR32())));
+  printf("is_vector(<1,2,3>): %s\n", STRING(IS_VECTOR32(VECTOR32(1,2,3))));
+  printf("is_vector(<>): %s\n", STRING(IS_VECTOR32(VECTOR32())));
+  printf("is_vector((0,1)): %s\n", STRING(IS_VECTOR32((0,1))));
+  printf("is_vector(0): %s\n", STRING(IS_VECTOR32(0)));
+  printf("is_vector((1,(1),2)): %s\n", STRING(IS_VECTOR32((1,(1),2))));
+  printf("is_vector([a,b,c]): %s\n", STRING(IS_VECTOR32(LIST(a,b,c))));
+  printf("insert(<1,2,4>,3,2): %s\n", STRING(VECTOR32_INSERT(VECTOR32(1,2,4),3,2)));
+  printf("insert(<1,2,3>,0,0): %s\n", STRING(VECTOR32_INSERT(VECTOR32(1,2,3),0,0)));
+  printf("insert(<1,2,3>,X,4): %s\n", STRING(VECTOR32_INSERT(VECTOR32(1,2,3),X,4)));
+  printf("interpose(<1,2,3>,0): %s\n", STRING(VECTOR32_INTERPOSE(VECTOR32(1,2,3),0)));
+  printf("map2(F,<1,2,3>,<4,5,6>): %s\n", STRING(VECTOR32_MAP2(F,VECTOR32(1,2,3),VECTOR32(4,5,6))));
+  printf("mapcat(ID,<<1,2>,<3,4,5>>): %s\n", STRING(VECTOR32_MAPCAT(ID,VECTOR32(VECTOR32(1,2),VECTOR32(3,4,5)))));
+  printf("push_first(<1,2,3>,0): %s\n", STRING(VECTOR32_PUSH_FIRST(VECTOR32(1,2,3),0)));
+  printf("range(2,5): %s\n", STRING(VECTOR32_RANGE(2,5)));
+  printf("range(2,10,2): %s\n", STRING(VECTOR32_RANGE(2,10,2)));
+  printf("range(2,10,3): %s\n", STRING(VECTOR32_RANGE(2,10,3)));
+  printf("reverse(<1,2,3>): %s\n", STRING(VECTOR32_REVERSE(VECTOR32(1,2,3))));
+  printf("sort(<1,2,3,4>): %s\n", STRING(VECTOR32_SORT(DEC5_LT, VECTOR32(1,2,3,4))));
+  printf("sort(<4,3,2,1>): %s\n", STRING(VECTOR32_SORT(DEC5_LT, VECTOR32(4,3,2,1))));
+  printf("sort(<2,3,4,1>): %s\n", STRING(VECTOR32_SORT(DEC5_LT, VECTOR32(2,3,4,1))));
+  printf("sort(<2,4,3,1>): %s\n", STRING(VECTOR32_SORT(DEC5_LT, VECTOR32(2,4,3,1))));
+  printf("sort(<1,3,5,2,4,6>): %s\n", STRING(VECTOR32_SORT(DEC5_LT, VECTOR32(1,3,5,2,4,6))));
+  printf("sort(<1,3,5,2,4,6,7,9,8,11,12,10>): %s\n", STRING(VECTOR32_SORT(DEC5_LT, VECTOR32(1,3,5,2,4,6,7,9,8,11,12,10))));
+  printf("flatten(<<1,2>,<3,4,5>>): %s\n", STRING(VECTOR32_FLATTEN(VECTOR32(VECTOR32(1,2),VECTOR32(3,4,5)))));
+  printf("split(eq0, <1,0,2,0,3>): %s\n", STRING(VECTOR32_SPLIT(EQZ, VECTOR32(1,0,2,0,3))));
+  printf("split_all(eq0, <1,0,2,0,3>): %s\n", STRING(VECTOR32_SPLIT_ALL(EQZ, VECTOR32(1,0,2,0,3))));
+  printf("walk(F,<<1,2>,<3,4,5>>): %s\n", STRING(VECTOR32_WALK(F,VECTOR32(VECTOR32(1,2),VECTOR32(3,4,5)))));
+  printf("csum(<1,2,3>): %d\n", VECTOR32_CSUM(VECTOR32(1,2,3)));
+#endif
+
+#ifdef U8H_DEBUG
+  printf("0xff: %d\n", U8H_CONVERT(U8H(F F)));
+  printf("144 + 100: %d\n", U8H_CONVERT(U8H_ADD(U8H_144, U8H_100)));
+  printf("244 - 100: %d\n", U8H_CONVERT(U8H_SUB(U8H_244, U8H_100)));
+  printf("7 * 20: %d\n", U8H_CONVERT(U8H_MUL(U8H_7, U8H_20)));
+  printf("244 == 100: %d\n", U8H_EQ(U8H_244, U8H_100));
+  printf("100 == 100: %d\n", U8H_EQ(U8H_100, U8H_100));
+  printf("100 < 100: %d\n", U8H_LT(U8H_100, U8H_100));
+  printf("100 < 101: %d\n", U8H_LT(U8H_100, U8H_101));
+  printf("101 < 100: %d\n", U8H_LT(U8H_101, U8H_100));
+  printf("100 >= 100: %d\n", U8H_GEQ(U8H_100, U8H_100));
+  printf("100 >= 101: %d\n", U8H_GEQ(U8H_100, U8H_101));
+  printf("101 >= 100: %d\n", U8H_GEQ(U8H_101, U8H_100));
+  printf("16 / 4: %d\n", U8H_CONVERT(U8H_DIV(U8H_16, U8H_4)));
+  printf("18 %% 4: %d\n", U8H_CONVERT(U8H_REM(U8H_18, U8H_4)));
+  printf("23 %% 4: %d\n", U8H_CONVERT(U8H_REM(U8H_23, U8H_4)));
+  printf("32 >> 1: %d\n", U8H_CONVERT(U8H_RSH1(U8H_32)));
+  printf("32 << 1: %d\n", U8H_CONVERT(U8H_LSH1(U8H_32)));
+  printf("32 >> 2: %d\n", U8H_CONVERT(U8H_RSH(U8H_32, U8H_2)));
+  printf("32 << 2: %d\n", U8H_CONVERT(U8H_LSH(U8H_32, U8H_2)));
+  printf("3 ^ 3: %d\n", U8H_CONVERT(U8H_POW(U8H_3, U8H_3)));
+  printf("9 ^ 2: %d\n", U8H_CONVERT(U8H_POW(U8H_9, U8H_2)));
+  printf("sqrt(16): %d\n", U8H_CONVERT(U8H_SQRT(U8H_16)));
+  printf("sqrt(28): %d\n", U8H_CONVERT(U8H_SQRT(U8H_28)));
+  printf("sqrt(0x80): %d\n", U8H_CONVERT(U8H_SQRT(U8H(8 0))));
+  printf("log2(32): %d\n", U8H_CONVERT(U8H_LOG2(U8H_32)));
+  printf("log(125,5): %d\n", U8H_CONVERT(U8H_LOG(U8H_125, U8H_5)));
+  printf("41 | 27: %d\n", U8H_CONVERT(U8H_OR(U8H_41, U8H_27)));
+  printf("41 & 27: %d\n", U8H_CONVERT(U8H_AND(U8H_41, U8H_27)));
+  printf("41 $ 27: %d\n", U8H_CONVERT(U8H_XOR(U8H_41, U8H_27)));
 #endif
 }

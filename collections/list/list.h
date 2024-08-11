@@ -57,6 +57,7 @@
 #include "as_data.h"
 #include "as_array.h"
 #include "as_tuple.h"
+#include "as_vector.h"
 #include "type.h"
 
 #define LIST_NIL ()

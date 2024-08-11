@@ -2,6 +2,7 @@
 #define C23META_UTIL
 
 #define UNWRAP(...) __VA_ARGS__
+#define UNWRAP2(...) UNWRAP __VA_ARGS__
 #define COMMA_IF(...) __VA_OPT__(,)
 #define CALL(F,...) F(__VA_ARGS__)
 #define UNWRAP_CALL(F,X) F X
@@ -16,24 +17,40 @@
 #define _COMMA_IF_BOTH_Z1 1
 #define _COMMA_IF_BOTH_Z  0
 
-#define ARGCOUNT(...) _ARGCOUNT ## __VA_OPT__(1(__VA_ARGS__) IGNORE) (0)
+#define ARGCOUNT(...) _ARGCOUNT ## __VA_OPT__(1(__VA_ARGS__)IGNORE) (0)
 #define _ARGCOUNT(N) N
-#define _ARGCOUNT1(X,...) _ARGCOUNT ## __VA_OPT__(2(__VA_ARGS__) IGNORE) (1)
-#define _ARGCOUNT2(X,...) _ARGCOUNT ## __VA_OPT__(3(__VA_ARGS__) IGNORE) (2)
-#define _ARGCOUNT3(X,...) _ARGCOUNT ## __VA_OPT__(4(__VA_ARGS__) IGNORE) (3)
-#define _ARGCOUNT4(X,...) _ARGCOUNT ## __VA_OPT__(5(__VA_ARGS__) IGNORE) (4)
-#define _ARGCOUNT5(X,...) _ARGCOUNT ## __VA_OPT__(6(__VA_ARGS__) IGNORE) (5)
-#define _ARGCOUNT6(X,...) _ARGCOUNT ## __VA_OPT__(7(__VA_ARGS__) IGNORE) (6)
-#define _ARGCOUNT7(X,...) _ARGCOUNT ## __VA_OPT__(8(__VA_ARGS__) IGNORE) (7)
-#define _ARGCOUNT8(X,...) _ARGCOUNT ## __VA_OPT__(9(__VA_ARGS__) IGNORE) (8)
-#define _ARGCOUNT9(X,...) _ARGCOUNT ## __VA_OPT__(10(__VA_ARGS__) IGNORE) (9)
-#define _ARGCOUNT10(X,...) _ARGCOUNT ## __VA_OPT__(11(__VA_ARGS__) IGNORE) (10)
-#define _ARGCOUNT11(X,...) _ARGCOUNT ## __VA_OPT__(12(__VA_ARGS__) IGNORE) (11)
-#define _ARGCOUNT12(X,...) _ARGCOUNT ## __VA_OPT__(13(__VA_ARGS__) IGNORE) (12)
-#define _ARGCOUNT13(X,...) _ARGCOUNT ## __VA_OPT__(14(__VA_ARGS__) IGNORE) (13)
-#define _ARGCOUNT14(X,...) _ARGCOUNT ## __VA_OPT__(15(__VA_ARGS__) IGNORE) (14)
-#define _ARGCOUNT15(X,...) _ARGCOUNT ## __VA_OPT__(16(__VA_ARGS__) IGNORE) (15)
-#define _ARGCOUNT16(X,...) 16
+#define _ARGCOUNT1(X,...) _ARGCOUNT ## __VA_OPT__(2(__VA_ARGS__)IGNORE) (1)
+#define _ARGCOUNT2(X,...) _ARGCOUNT ## __VA_OPT__(3(__VA_ARGS__)IGNORE) (2)
+#define _ARGCOUNT3(X,...) _ARGCOUNT ## __VA_OPT__(4(__VA_ARGS__)IGNORE) (3)
+#define _ARGCOUNT4(X,...) _ARGCOUNT ## __VA_OPT__(5(__VA_ARGS__)IGNORE) (4)
+#define _ARGCOUNT5(X,...) _ARGCOUNT ## __VA_OPT__(6(__VA_ARGS__)IGNORE) (5)
+#define _ARGCOUNT6(X,...) _ARGCOUNT ## __VA_OPT__(7(__VA_ARGS__)IGNORE) (6)
+#define _ARGCOUNT7(X,...) _ARGCOUNT ## __VA_OPT__(8(__VA_ARGS__)IGNORE) (7)
+#define _ARGCOUNT8(X,...) _ARGCOUNT ## __VA_OPT__(9(__VA_ARGS__)IGNORE) (8)
+#define _ARGCOUNT9(X,...) _ARGCOUNT ## __VA_OPT__(10(__VA_ARGS__)IGNORE) (9)
+#define _ARGCOUNT10(X,...) _ARGCOUNT ## __VA_OPT__(11(__VA_ARGS__)IGNORE) (10)
+#define _ARGCOUNT11(X,...) _ARGCOUNT ## __VA_OPT__(12(__VA_ARGS__)IGNORE) (11)
+#define _ARGCOUNT12(X,...) _ARGCOUNT ## __VA_OPT__(13(__VA_ARGS__)IGNORE) (12)
+#define _ARGCOUNT13(X,...) _ARGCOUNT ## __VA_OPT__(14(__VA_ARGS__)IGNORE) (13)
+#define _ARGCOUNT14(X,...) _ARGCOUNT ## __VA_OPT__(15(__VA_ARGS__)IGNORE) (14)
+#define _ARGCOUNT15(X,...) _ARGCOUNT ## __VA_OPT__(16(__VA_ARGS__)IGNORE) (15)
+#define _ARGCOUNT16(X,...) _ARGCOUNT ## __VA_OPT__(17(__VA_ARGS__)IGNORE) (16)
+#define _ARGCOUNT17(X,...) _ARGCOUNT ## __VA_OPT__(18(__VA_ARGS__)IGNORE) (17)
+#define _ARGCOUNT18(X,...) _ARGCOUNT ## __VA_OPT__(19(__VA_ARGS__)IGNORE) (18)
+#define _ARGCOUNT19(X,...) _ARGCOUNT ## __VA_OPT__(20(__VA_ARGS__)IGNORE) (19)
+#define _ARGCOUNT20(X,...) _ARGCOUNT ## __VA_OPT__(21(__VA_ARGS__)IGNORE) (20)
+#define _ARGCOUNT21(X,...) _ARGCOUNT ## __VA_OPT__(22(__VA_ARGS__)IGNORE) (21)
+#define _ARGCOUNT22(X,...) _ARGCOUNT ## __VA_OPT__(23(__VA_ARGS__)IGNORE) (22)
+#define _ARGCOUNT23(X,...) _ARGCOUNT ## __VA_OPT__(24(__VA_ARGS__)IGNORE) (23)
+#define _ARGCOUNT24(X,...) _ARGCOUNT ## __VA_OPT__(25(__VA_ARGS__)IGNORE) (24)
+#define _ARGCOUNT25(X,...) _ARGCOUNT ## __VA_OPT__(26(__VA_ARGS__)IGNORE) (25)
+#define _ARGCOUNT26(X,...) _ARGCOUNT ## __VA_OPT__(27(__VA_ARGS__)IGNORE) (26)
+#define _ARGCOUNT27(X,...) _ARGCOUNT ## __VA_OPT__(28(__VA_ARGS__)IGNORE) (27)
+#define _ARGCOUNT28(X,...) _ARGCOUNT ## __VA_OPT__(29(__VA_ARGS__)IGNORE) (28)
+#define _ARGCOUNT29(X,...) _ARGCOUNT ## __VA_OPT__(30(__VA_ARGS__)IGNORE) (29)
+#define _ARGCOUNT30(X,...) _ARGCOUNT ## __VA_OPT__(31(__VA_ARGS__)IGNORE) (30)
+#define _ARGCOUNT31(X,...) _ARGCOUNT ## __VA_OPT__(32(__VA_ARGS__)IGNORE) (31)
+#define _ARGCOUNT32(X,...) 32
 
 #define ID(...) __VA_ARGS__
 #define IGNORE(...)
@@ -66,8 +83,8 @@
 #define _REVX(X,...) __VA_OPT__(DEFER(_REVX_I)()(__VA_ARGS__),)X
 #define _REVX_I() _REVX
 
-#define STRING(X) _STR(X)
-#define _STR(X) #X
+#define STRING(...) _STR(__VA_ARGS__)
+#define _STR(...) #__VA_ARGS__
 
 #define STRING_CAT(X,Y) _STR_CAT(X,Y)
 #define _STR_CAT(X,Y) X Y

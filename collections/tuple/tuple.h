@@ -8,6 +8,8 @@
 
 #include "type.h"
 #include "as_data.h"
+#include "as_list.h"
+#include "as_vector.h"
 #include "get.h"
 
 #include "is_tuple.h"
@@ -21,6 +23,7 @@
 #include "push_first.h"
 #include "insert.h"
 #include "concat.h"
+#include "contains.h"
 #include "reverse.h"
 #include "map.h"
 #include "map2.h"

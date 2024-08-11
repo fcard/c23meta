@@ -1,0 +1,7 @@
+#ifndef C23META_TUPLE_AS_LIST
+#define C23META_TUPLE_AS_LIST
+
+#define TUPLE_AS_LIST(X) _TUPLE_AS_LIST_C(X)
+#define _TUPLE_AS_LIST_C(X) LIST X
+
+#endif
