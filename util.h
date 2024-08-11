@@ -121,6 +121,18 @@
 #define CAT_ALL5(X,...) CAT(X __VA_OPT__(, CAT_ALL6(__VA_ARGS__)))
 #define CAT_ALL6(X,...) CAT(X __VA_OPT__(, CAT_ALL7(__VA_ARGS__)))
 #define CAT_ALL7(X,...) CAT(X __VA_OPT__(, CAT_ALL8(__VA_ARGS__)))
-#define CAT_ALL8(X,...) X
+#define CAT_ALL8(X,...) CAT(X __VA_OPT__(, CAT_ALL9(__VA_ARGS__)))
+#define CAT_ALL9(X,...) CAT(X __VA_OPT__(, CAT_ALL10(__VA_ARGS__)))
+#define CAT_ALL10(X,...) CAT(X __VA_OPT__(, CAT_ALL11(__VA_ARGS__)))
+#define CAT_ALL11(X,...) CAT(X __VA_OPT__(, CAT_ALL12(__VA_ARGS__)))
+#define CAT_ALL12(X,...) CAT(X __VA_OPT__(, CAT_ALL13(__VA_ARGS__)))
+#define CAT_ALL13(X,...) CAT(X __VA_OPT__(, CAT_ALL14(__VA_ARGS__)))
+#define CAT_ALL14(X,...) CAT(X __VA_OPT__(, CAT_ALL15(__VA_ARGS__)))
+#define CAT_ALL15(X,...) CAT(X __VA_OPT__(, CAT_ALL16(__VA_ARGS__)))
+#define CAT_ALL16(X,...) CAT(X __VA_OPT__(, CAT_ALL17(__VA_ARGS__)))
+#define CAT_ALL17(X,...) CAT(X __VA_OPT__(, CAT_ALL18(__VA_ARGS__)))
+#define CAT_ALL18(X,...) CAT(X __VA_OPT__(, CAT_ALL19(__VA_ARGS__)))
+#define CAT_ALL19(X,...) CAT(X __VA_OPT__(, CAT_ALL20(__VA_ARGS__)))
+#define CAT_ALL20(X,...) X
 
 #endif
