@@ -1067,6 +1067,7 @@ int main(void) {
   printf("%s\n", S(FACTORIAL(U32H_10)));
   printf("%s\n", S(FACTORIAL(U32H_15)));
   printf("%s\n", S(FACTORIAL(U32H_20)));
+  printf("%s\n", S(FACTORIAL(U32H_30)));
 #endif
 
 }

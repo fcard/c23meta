@@ -133,6 +133,27 @@
 #define CAT_ALL17(X,...) CAT(X __VA_OPT__(, CAT_ALL18(__VA_ARGS__)))
 #define CAT_ALL18(X,...) CAT(X __VA_OPT__(, CAT_ALL19(__VA_ARGS__)))
 #define CAT_ALL19(X,...) CAT(X __VA_OPT__(, CAT_ALL20(__VA_ARGS__)))
-#define CAT_ALL20(X,...) X
+#define CAT_ALL20(X,...) CAT(X __VA_OPT__(, CAT_ALL21(__VA_ARGS__)))
+#define CAT_ALL21(X,...) CAT(X __VA_OPT__(, CAT_ALL22(__VA_ARGS__)))
+#define CAT_ALL22(X,...) CAT(X __VA_OPT__(, CAT_ALL23(__VA_ARGS__)))
+#define CAT_ALL23(X,...) CAT(X __VA_OPT__(, CAT_ALL24(__VA_ARGS__)))
+#define CAT_ALL24(X,...) CAT(X __VA_OPT__(, CAT_ALL25(__VA_ARGS__)))
+#define CAT_ALL25(X,...) CAT(X __VA_OPT__(, CAT_ALL26(__VA_ARGS__)))
+#define CAT_ALL26(X,...) CAT(X __VA_OPT__(, CAT_ALL27(__VA_ARGS__)))
+#define CAT_ALL27(X,...) CAT(X __VA_OPT__(, CAT_ALL28(__VA_ARGS__)))
+#define CAT_ALL28(X,...) CAT(X __VA_OPT__(, CAT_ALL29(__VA_ARGS__)))
+#define CAT_ALL29(X,...) CAT(X __VA_OPT__(, CAT_ALL30(__VA_ARGS__)))
+#define CAT_ALL30(X,...) CAT(X __VA_OPT__(, CAT_ALL31(__VA_ARGS__)))
+#define CAT_ALL31(X,...) CAT(X __VA_OPT__(, CAT_ALL32(__VA_ARGS__)))
+#define CAT_ALL32(X,...) CAT(X __VA_OPT__(, CAT_ALL33(__VA_ARGS__)))
+#define CAT_ALL33(X,...) CAT(X __VA_OPT__(, CAT_ALL34(__VA_ARGS__)))
+#define CAT_ALL34(X,...) CAT(X __VA_OPT__(, CAT_ALL35(__VA_ARGS__)))
+#define CAT_ALL35(X,...) CAT(X __VA_OPT__(, CAT_ALL36(__VA_ARGS__)))
+#define CAT_ALL36(X,...) CAT(X __VA_OPT__(, CAT_ALL37(__VA_ARGS__)))
+#define CAT_ALL37(X,...) CAT(X __VA_OPT__(, CAT_ALL38(__VA_ARGS__)))
+#define CAT_ALL38(X,...) CAT(X __VA_OPT__(, CAT_ALL39(__VA_ARGS__)))
+#define CAT_ALL39(X,...) CAT(X __VA_OPT__(, CAT_ALL40(__VA_ARGS__)))
+#define CAT_ALL40(X,...) CAT(X __VA_OPT__(, CAT_ALL41(__VA_ARGS__)))
+#define CAT_ALL41(X,...) X
 
 #endif
