@@ -1,0 +1,19 @@
+#ifndef C23META_I8H_POW
+#define C23META_I8H_POW
+
+#define I8H_POW(X,N) _I8H_POW_C(X,N)
+#define _I8H_POW_C(X,N) I8H_POW_EVAL(_I8H_POW_PREAMBLE(I8H_EQ(N,I8H_0),X,N))
+#define I8H_POW_EVAL(X) I8H_POW_EVAL1(X)
+#define I8H_POW_EVAL1(X) X
+
+#define _I8H_POW_PREAMBLE(G,X,N) CAT(_I8H_POW_P,G)(X,N)
+#define _I8H_POW_P0(X,N) _I8H_POW(I8H_CMP_SIGN(X,N),X,N)
+#define _I8H_POW_P1(X,N) I8H_1
+
+#define _I8H_POW(S,X,N) CAT(_I8H_POW_X_,S)(X,N)
+#define _I8H_POW_X_POS_POS(X,N) U8H_POW(X,N)
+#define _I8H_POW_X_NEG_POS(X,N) I8H_NEG(U8H_POW(I8H_NEG(X),N))
+#define _I8H_POW_X_POS_NEG(X,N) I8H_0
+#define _I8H_POW_X_NEG_NEG(X,N) I8H_0
+
+#endif

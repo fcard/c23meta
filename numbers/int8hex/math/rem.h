@@ -1,0 +1,14 @@
+#ifndef C23META_I8H_REM
+#define C23META_I8H_REM
+
+#define I8H_REM(X,Y) _I8H_REM_C(X,Y)
+#define _I8H_REM_C(X,Y) I8H_REM_EVAL(_I8H_REM(I8H_CMP_SIGN(X,Y),X,Y))
+#define I8H_REM_EVAL(X) X
+
+#define _I8H_REM(S,X,Y) CAT(_I8H_REM_X_,S)(X,Y)
+#define _I8H_REM_X_POS_POS(X,Y) U8H_REM(X,Y)
+#define _I8H_REM_X_NEG_NEG(X,Y) I8H_NEG(U8H_REM(I8H_NEG(X),I8H_NEG(Y)))
+#define _I8H_REM_X_POS_NEG(X,Y) U8H_REM(X,I8H_NEG(Y))
+#define _I8H_REM_X_NEG_POS(X,Y) I8H_NEG(U8H_REM(I8H_NEG(X),Y))
+
+#endif

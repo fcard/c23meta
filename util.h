@@ -156,4 +156,8 @@
 #define CAT_ALL40(X,...) CAT(X __VA_OPT__(, CAT_ALL41(__VA_ARGS__)))
 #define CAT_ALL41(X,...) X
 
+#define IF(C,X,Y) CAT(IFX, C)(X,Y)
+#define IFX1(X,Y) X
+#define IFX0(X,Y) Y
+
 #endif

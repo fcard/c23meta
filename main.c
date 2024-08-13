@@ -1070,4 +1070,105 @@ int main(void) {
   printf("%s\n", SF(FACTORIAL(U32H_30)));
 #endif
 
+#ifdef I8H_DEBUG
+  printf("\nSIGNED HEX 8\n\n");
+
+  TEST("is_odd(14): %d\n" , I8H_IS_ODD(I8H_14), 0);
+  TEST("is_even(14): %d\n", I8H_IS_EVEN(I8H_14), 1);
+  TEST("-13 > 12: %d\n" ,   I8H_GT(I8H_N13, I8H_12), 0);
+  TEST("-13 > -14: %d\n",   I8H_GT(I8H_N13, I8H_N14), 1);
+  TEST("15 > 14: %d\n",     I8H_GT(I8H_15, I8H_14), 1);
+  TEST("15 > -18: %d\n" ,   I8H_GT(I8H_15, I8H_N18), 1);
+
+  TEST("-13 < 12: %d\n" , I8H_LT(I8H_N13, I8H_12), 1);
+  TEST("-13 < -14: %d\n", I8H_LT(I8H_N13, I8H_N14), 0);
+  TEST("15 < 14: %d\n"  , I8H_LT(I8H_15, I8H_14), 0);
+  TEST("15 < -18: %d\n" , I8H_LT(I8H_15, I8H_N18), 0);
+
+  TEST("-13 >= 12: %d\n" , I8H_GEQ(I8H_N13, I8H_12), 0);
+  TEST("-13 >= -14: %d\n", I8H_GEQ(I8H_N13, I8H_N14), 1);
+  TEST("15 >= 14: %d\n"  , I8H_GEQ(I8H_15, I8H_14), 1);
+  TEST("15 >= -18: %d\n" , I8H_GEQ(I8H_15, I8H_N18), 1);
+
+  TEST("-13 <= 12: %d\n" , I8H_LEQ(I8H_N13, I8H_12), 1);
+  TEST("-13 <= -14: %d\n", I8H_LEQ(I8H_N13, I8H_N14), 0);
+  TEST("15 <= 14: %d\n"  , I8H_LEQ(I8H_15, I8H_14), 0);
+  TEST("15 <= -18: %d\n" , I8H_LEQ(I8H_15, I8H_N18), 0);
+
+  TEST("-13 == 13: %d\n" , I8H_EQ(I8H_N13, I8H_13), 0);
+  TEST("-13 == -13: %d\n", I8H_EQ(I8H_N13, I8H_N13), 1);
+  TEST("13 == 13: %d\n"  , I8H_LEQ(I8H_13, I8H_13), 1);
+
+  TEST("-13 != 13: %d\n" , I8H_NEQ(I8H_N13, I8H_13), 1);
+  TEST("-13 != -13: %d\n", I8H_NEQ(I8H_N13, I8H_N13), 0);
+  TEST("13 != 13: %d\n"  , I8H_NEQ(I8H_13, I8H_13), 0);
+
+  TEST("convert(I8H_100): %d\n", I8H_CONVERT(I8H_100), 100);
+  TEST("convert(I8H_N100): %d\n", I8H_CONVERT(I8H_N100), -100);
+
+  TEST("-(112): %d\n", I8H_CONVERT(I8H_NEG(I8H_112)), -112);
+  TEST("-(-112): %d\n", I8H_CONVERT(I8H_NEG(I8H_N112)), 112);
+  TEST("abs(112): %d\n", I8H_CONVERT(I8H_ABS(I8H_112)), 112);
+  TEST("abs(-112): %d\n", I8H_CONVERT(I8H_ABS(I8H_N112)), 112);
+
+  TEST("10 + (-5): %d\n", I8H_CONVERT(I8H_ADD(I8H_10, I8H_N5)), 5);
+  TEST("10 + (-15): %d\n", I8H_CONVERT(I8H_ADD(I8H_10, I8H_N15)), -5);
+  TEST("(-5) + (-15): %d\n", I8H_CONVERT(I8H_ADD(I8H_N5, I8H_N15)), -20);
+
+  TEST("(-3) * (-5): %d\n", I8H_CONVERT(I8H_MUL(I8H_N3, I8H_N5)), 15);
+  TEST("3 * (-5): %d\n", I8H_CONVERT(I8H_MUL(I8H_3, I8H_N5)), -15);
+  TEST("3 * 5: %d\n", I8H_CONVERT(I8H_MUL(I8H_3, I8H_5)), 15);
+
+  TEST("15 / (-5): %d\n", I8H_CONVERT(I8H_DIV(I8H_15, I8H_N5)), -3);
+  TEST("(-15) / (-5): %d\n", I8H_CONVERT(I8H_DIV(I8H_N15, I8H_N5)), 3);
+  TEST("(-15) / 5: %d\n", I8H_CONVERT(I8H_DIV(I8H_N15, I8H_5)), -3);
+  TEST("15 / 5: %d\n", I8H_CONVERT(I8H_DIV(I8H_15, I8H_5)), 3);
+  TEST("20 / 5: %d\n", I8H_CONVERT(I8H_DIV(I8H_20, I8H_5)), 4);
+
+  TEST("16 %% 7: %d\n", I8H_CONVERT(I8H_REM(I8H_16, I8H_7)), 2);
+  TEST("(-16) %% 7: %d\n", I8H_CONVERT(I8H_REM(I8H_N16, I8H_7)), -2);
+  TEST("16 %% (-7): %d\n", I8H_CONVERT(I8H_REM(I8H_16, I8H_N7)), 2);
+  TEST("(-16) %% (-7): %d\n", I8H_CONVERT(I8H_REM(I8H_N16, I8H_N7)), -2);
+
+  TEST("50 << 1:   %d\n", I8H_CONVERT(I8H_LSH(I8H_50, I8H_1)), 100);
+  TEST("50 << -1:  %d\n", I8H_CONVERT(I8H_LSH(I8H_50, I8H_N1)), 25);
+  TEST("-50 << 1:  %d\n", I8H_CONVERT(I8H_LSH(I8H_N50, I8H_1)), -100);
+  TEST("-50 << -1: %d\n", I8H_CONVERT(I8H_LSH(I8H_N50, I8H_N1)), -25);
+
+  TEST("50 >> 1:   %d\n", I8H_CONVERT(I8H_RSH(I8H_50, I8H_1)), 25);
+  TEST("50 >> -1:  %d\n", I8H_CONVERT(I8H_RSH(I8H_50, I8H_N1)), 100);
+  TEST("-50 >> 1:  %d\n", I8H_CONVERT(I8H_RSH(I8H_N50, I8H_1)), -25);
+  TEST("-50 >> -1: %d\n", I8H_CONVERT(I8H_RSH(I8H_N50, I8H_N1)), -100);
+  
+  TEST("max(100,32):   %d\n", I8H_CONVERT(I8H_MAX(I8H_100,  I8H_32)), 100);
+  TEST("max(-100,32):  %d\n", I8H_CONVERT(I8H_MAX(I8H_N100, I8H_32)), 32);
+  TEST("max(100,-32):  %d\n", I8H_CONVERT(I8H_MAX(I8H_100, I8H_N32)), 100);
+  TEST("max(-100,-32): %d\n", I8H_CONVERT(I8H_MAX(I8H_N100, I8H_N32)), -32);
+  
+  TEST("min(100,32):   %d\n", I8H_CONVERT(I8H_MIN(I8H_100,  I8H_32)), 32);
+  TEST("min(-100,32):  %d\n", I8H_CONVERT(I8H_MIN(I8H_N100, I8H_32)), -100);
+  TEST("min(100,-32):  %d\n", I8H_CONVERT(I8H_MIN(I8H_100, I8H_N32)), -32);
+  TEST("min(-100,-32): %d\n", I8H_CONVERT(I8H_MIN(I8H_N100, I8H_N32)), -100);
+
+  TEST("2^3:       %d\n", I8H_CONVERT(I8H_POW(I8H_2,  I8H_3)), 8);
+  TEST("2^(-3):    %d\n", I8H_CONVERT(I8H_POW(I8H_2,  I8H_N3)), 0);
+  TEST("(-2)^3:    %d\n", I8H_CONVERT(I8H_POW(I8H_N2, I8H_3)), -8);
+  TEST("(-2)^(-3): %d\n", I8H_CONVERT(I8H_POW(I8H_N2, I8H_N3)), 0);
+ 
+  TEST("-2^0: %d\n", I8H_CONVERT(I8H_POW(I8H_N2,  I8H_0)), 1);
+  TEST("2^0: %d\n", I8H_CONVERT(I8H_POW(I8H_2,  I8H_0)), 1);
+  TEST("0^0: %d\n", I8H_CONVERT(I8H_POW(I8H_0,  I8H_0)), 1);
+
+  TEST("sqrt(0): %d\n", I8H_CONVERT(I8H_SQRT(I8H_0)), 0);
+  TEST("sqrt(16): %d\n", I8H_CONVERT(I8H_SQRT(I8H_16)), 4);
+  TEST("sqrt(intmax): %d\n", I8H_CONVERT(I8H_SQRT(I8H_MAXV)), 11);
+
+  TEST("log(81,3): %d\n", I8H_CONVERT(I8H_LOG(I8H_81, I8H_3)), 4);
+  TEST("log2(32): %d\n", I8H_CONVERT(I8H_LOG2(I8H_32)), 5);
+
+  TEST("100 & -32: %d\n", I8H_CONVERT(I8H_AND(I8H_100, I8H_N32)), 96);
+  TEST("1 | 6: %d\n", I8H_CONVERT(I8H_OR(I8H_1, I8H_6)), 7);
+  TEST("5 $ 7: %d\n", I8H_CONVERT(I8H_XOR(I8H_5, I8H_7)), 2);
+#endif
+
 }

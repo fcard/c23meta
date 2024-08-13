@@ -1,0 +1,14 @@
+#ifndef C23META_I8H_DIV
+#define C23META_I8H_DIV
+
+#define I8H_DIV(X,Y) _I8H_DIV_C(X,Y)
+#define _I8H_DIV_C(X,Y) I8H_DIV_EVAL(_I8H_DIV(I8H_CMP_SIGN(X,Y),X,Y))
+#define I8H_DIV_EVAL(X) X
+
+#define _I8H_DIV(S,X,Y) CAT(_I8H_DIV_X_,S)(X,Y)
+#define _I8H_DIV_X_POS_POS(X,Y) U8H_DIV(X,Y)
+#define _I8H_DIV_X_NEG_NEG(X,Y) U8H_DIV(I8H_NEG(X),I8H_NEG(Y))
+#define _I8H_DIV_X_POS_NEG(X,Y) I8H_NEG(U8H_DIV(X,I8H_NEG(Y)))
+#define _I8H_DIV_X_NEG_POS(X,Y) I8H_NEG(U8H_DIV(I8H_NEG(X),Y))
+
+#endif
