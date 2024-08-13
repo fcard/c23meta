@@ -1054,20 +1054,20 @@ int main(void) {
   TEST("41 $ 27: %d\n", U8H_CONVERT(U8H_XOR(U8H_41, U8H_27)), 50);
 #endif
 
+#ifdef FACTORIAL_DEBUG
 #define FACTORIAL(N)\
   LIST_FOLDL(U128H_MUL,\
     LIST_MAP(U128H_FROM_U32H,\
       LIST_RANGE(U32H_1, N)), U128H_1)
 
-#define S(X) STRING(U128H_PRINT(X))
+#define SF(X) STRING(U128H_PRINT(X))
 
-#ifdef FACTORIAL_DEBUG
-  printf("%s\n", S(FACTORIAL(U32H_1)));
-  printf("%s\n", S(FACTORIAL(U32H_5)));
-  printf("%s\n", S(FACTORIAL(U32H_10)));
-  printf("%s\n", S(FACTORIAL(U32H_15)));
-  printf("%s\n", S(FACTORIAL(U32H_20)));
-  printf("%s\n", S(FACTORIAL(U32H_30)));
+  printf("%s\n", SF(FACTORIAL(U32H_1)));
+  printf("%s\n", SF(FACTORIAL(U32H_5)));
+  printf("%s\n", SF(FACTORIAL(U32H_10)));
+  printf("%s\n", SF(FACTORIAL(U32H_15)));
+  printf("%s\n", SF(FACTORIAL(U32H_20)));
+  printf("%s\n", SF(FACTORIAL(U32H_30)));
 #endif
 
 }
